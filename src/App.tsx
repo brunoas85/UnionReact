@@ -18,9 +18,10 @@ import {
   Twitter,
   ChevronDown,
   User,
+  Camera,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   CLUB_INFO,
   NEXT_MATCH,
@@ -30,13 +31,24 @@ import {
   FIXTURE,
   NEWS,
   SOCIAL_EVENT,
+  MATCH_IMAGES,
 } from './data';
 
-type Tab = 'inicio' | 'plantel' | 'tabla' | 'fixture' | 'social';
+type Tab = 'inicio' | 'plantel' | 'tabla' | 'fixture' | 'galeria' | 'social';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<Tab>('inicio');
   const [notifOpen, setNotifOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  // ESTO ES LO QUE BLOQUEA EL SCROLL DEL CELULAR
+  useEffect(() => {
+    if (notifOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [notifOpen]);
 
   return (
     <div className="min-h-screen bg-surface flex flex-col max-w-md mx-auto relative shadow-2xl">
@@ -46,11 +58,12 @@ export default function App() {
           <img
             src={CLUB_INFO.logo}
             alt="Logo"
-            className="w-full h-full object-cover"
+            /*className="w-full h-full object-cover*/
+            className="h-45 w-45 object-contain transform translate-y-3"
           />
         </div>
-        <h1 className="font-display font-extrabold text-sm text-zinc-900 leading-tight">
-          Unión - San Martín <br /> de los Andes
+        <h1 className="font-display font-extrabold text-sm text-zinc-100 leading-tight">
+          UNIÓN <br /> San Martín de los Andes
         </h1>
         <button
           onClick={() => setNotifOpen(!notifOpen)}
@@ -65,14 +78,23 @@ export default function App() {
       <AnimatePresence>
         {notifOpen && (
           <motion.div
+            key="overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-30"
+            onClick={() => setNotifOpen(false)}
+          />
+        )}
+        {notifOpen && (
+          <motion.div
+            key="panel"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             className="absolute top-16 right-0 w-full max-w-md bg-white border-b border-zinc-100 shadow-xl z-40"
           >
             <div className="p-4 border-b border-zinc-100 flex justify-between items-center">
-              <span className="font-display font-bold text-sm text-zinc-900">Notificaciones</span>
-              <button onClick={() => setNotifOpen(false)} className="text-xs text-zinc-400 hover:text-zinc-600">Cerrar</button>
             </div>
             <div className="divide-y divide-zinc-50">
               <div className="flex gap-3 p-4 hover:bg-zinc-50">
@@ -99,7 +121,7 @@ export default function App() {
                 </div>
                 <div>
                   <p className="text-xs font-bold text-primary">Importante</p>
-                  <p className="text-xs text-zinc-600 mt-0.5">Llevar camiseta alternativa blanca al próximo partido</p>
+                  <p className="text-xs text-zinc-600 mt-0.5">Llevar medias negras</p>
                 </div>
               </div>
             </div>
@@ -151,10 +173,10 @@ export default function App() {
                   <div className="flex items-center justify-between mb-6">
                     {/* Unión */}
                     <div className="flex flex-col items-center flex-1">
-                      <div className="w-16 h-16 mb-2 flex items-center justify-center p-2 bg-zinc-50 rounded-xl">
+                      <div className="w-[104px] h-[104px] mb-2 flex items-center justify-center p-2 bg-zinc-50 rounded-xl">
                         <img src={CLUB_INFO.logo} alt="Unión" className="w-full h-full object-contain" />
                       </div>
-                      <span className="text-xs font-bold text-zinc-900">UNIÓN</span>
+                      <span className="text-xs font-bold text-zinc-900">UNCIÓN</span>
                     </div>
 
                     <div className="flex flex-col items-center justify-center px-4">
@@ -185,6 +207,37 @@ export default function App() {
                       <MapPin className="w-4 h-4" />
                       <span>{NEXT_MATCH.stadium}</span>
                     </div>
+                  </div>
+                </div>
+              </section>
+
+              {/* Fotos Recientes - Carrusel */}
+              <section className="pl-4">
+                <div className="flex justify-between items-center mb-3 pr-4">
+                  <h3 className="font-display font-bold text-lg text-zinc-900">Imágenes del Partido</h3>
+                  <button 
+                    onClick={() => setActiveTab('galeria')}
+                    className="text-xs font-bold text-primary flex items-center gap-1"
+                  >
+                    Ver todas <ChevronRight className="w-3 h-3" />
+                  </button>
+                </div>
+                <div className="flex gap-3 overflow-x-auto pb-4 snap-x pr-4" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                  {MATCH_IMAGES.slice(0, 4).map((img, i) => (
+                    <div 
+                      key={i} 
+                      onClick={() => setSelectedImage(img)}
+                      className="min-w-[200px] h-[150px] rounded-2xl overflow-hidden shadow-sm flex-shrink-0 snap-center relative group cursor-pointer"
+                    >
+                      <img src={img} alt={`Partido ${i}`} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    </div>
+                  ))}
+                  <div 
+                    onClick={() => setActiveTab('galeria')}
+                    className="min-w-[120px] h-[150px] rounded-2xl bg-zinc-50 flex flex-col items-center justify-center flex-shrink-0 snap-center cursor-pointer border-2 border-dashed border-zinc-200 text-zinc-400 hover:text-primary hover:border-primary hover:bg-primary/5 transition-all"
+                  >
+                    <Camera className="w-6 h-6 mb-2" />
+                    <span className="text-xs font-bold text-center">Subir /<br/>Ver más</span>
                   </div>
                 </div>
               </section>
@@ -256,12 +309,16 @@ export default function App() {
               exit={{ opacity: 0, x: -20 }}
               className="p-4 space-y-6"
             >
-              <h2 className="font-display font-black text-2xl text-zinc-900">Nuestro Plantel</h2>
+              <h2 className="font-display font-black text-2xl text-zinc-900 text-right">Nuestro Plantel</h2>
               <div className="grid grid-cols-2 gap-4">
                 {PLAYERS.map((player, i) => (
                   <div key={i} className="bg-white border border-zinc-100 rounded-2xl p-4 shadow-sm flex flex-col items-center">
-                    <div className="w-20 h-20 bg-zinc-100 rounded-full mb-3 flex items-center justify-center text-zinc-300">
-                      <Users className="w-10 h-10" />
+                    <div className="w-20 h-20 bg-zinc-100 rounded-full mb-3 flex items-center justify-center text-zinc-300 overflow-hidden shadow-inner">
+                      {player.avatar ? (
+                        <img src={player.avatar} alt={player.name} className="w-full h-full object-cover" />
+                      ) : (
+                        <Users className="w-10 h-10" />
+                      )}
                     </div>
                     <span className="text-xs font-black text-primary mb-1">#{player.number}</span>
                     <h3 className="font-display font-bold text-sm text-zinc-900 text-center">{player.name}</h3>
@@ -281,8 +338,8 @@ export default function App() {
               exit={{ opacity: 0, scale: 0.95 }}
               className="p-4 space-y-6"
             >
-              <h2 className="font-display font-black text-2xl text-zinc-900">Tabla de Posiciones</h2>
-              <p className="text-xs text-zinc-400 -mt-4">Apertura 2026 — Categoría Seniors</p>
+              <h2 className="font-display font-black text-2xl text-zinc-900 text-right">Tabla de Posiciones</h2>
+              <p className="text-xs text-zinc-400 -mt-4 text-right">Apertura 2026 — Categoría Seniors</p>
 
               {/* Zona A */}
               <div>
@@ -315,10 +372,40 @@ export default function App() {
               exit={{ opacity: 0, y: -20 }}
               className="p-4 space-y-4"
             >
-              <h2 className="font-display font-black text-2xl text-zinc-900 mb-2">Fixture</h2>
+              <h2 className="font-display font-black text-2xl text-zinc-900 mb-2 text-right">Fixture</h2>
               {FIXTURE.map((match, i) => (
                 <FixtureItem key={i} match={match} index={i + 1} />
               ))}
+            </motion.div>
+          )}
+
+          {/* ── GALERÍA ── */}
+          {activeTab === 'galeria' && (
+            <motion.div
+              key="galeria"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="p-4 space-y-6"
+            >
+              <div className="flex justify-between items-end mb-2">
+                <button className="bg-primary text-white px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 shadow-lg shadow-primary/30 active:scale-95 transition-all">
+                  <Camera className="w-4 h-4" />
+                  Subir Foto
+                </button>
+                <div className="text-right">
+                  <h2 className="font-display font-black text-2xl text-zinc-900">Galería</h2>
+                  <p className="text-xs text-zinc-500 mt-1">Imágenes de los partidos</p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                {MATCH_IMAGES.map((img, i) => (
+                  <div key={i} className={`rounded-2xl overflow-hidden shadow-sm aspect-square ${i === 0 ? 'col-span-2 aspect-[2/1]' : ''}`}>
+                    <img src={img} alt={`Partido ${i}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                  </div>
+                ))}
+              </div>
             </motion.div>
           )}
 
@@ -334,7 +421,7 @@ export default function App() {
               <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-2">
                 <Beer className="w-12 h-12 text-primary" />
               </div>
-              <h2 className="font-display font-black text-2xl text-zinc-900">Vida Social</h2>
+              <h2 className="font-display font-black text-2xl text-zinc-900 text-right">Vida Social</h2>
               <p className="text-zinc-500 text-sm max-w-[250px] mx-auto">{SOCIAL_EVENT.description}</p>
               <div className="bg-primary text-white p-6 rounded-3xl shadow-xl shadow-primary/20 text-left relative overflow-hidden">
                 <div className="relative z-10">
@@ -363,12 +450,44 @@ export default function App() {
         </AnimatePresence>
       </main>
 
+      {/* Modal para imagen en grande */}
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            key="image-modal-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedImage(null)}
+            className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center"
+          />
+        )}
+        {selectedImage && (
+          <motion.div
+            key="image-modal"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4"
+            onClick={() => setSelectedImage(null)}
+          >
+            <motion.img
+              src={selectedImage}
+              alt="Imagen ampliada"
+              className="max-w-full max-h-full object-contain rounded-2xl shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Bottom Nav */}
       <nav className="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-white/95 backdrop-blur-md border-t border-zinc-100 flex justify-around items-center py-3 z-50 px-2 shadow-[0_-10px_20px_rgba(0,0,0,0.02)]">
         <NavItem active={activeTab === 'inicio'} icon={<Home />} label="Inicio" onClick={() => setActiveTab('inicio')} />
         <NavItem active={activeTab === 'plantel'} icon={<Users />} label="Plantel" onClick={() => setActiveTab('plantel')} />
         <NavItem active={activeTab === 'tabla'} icon={<Trophy />} label="Tabla" onClick={() => setActiveTab('tabla')} />
         <NavItem active={activeTab === 'fixture'} icon={<Calendar />} label="Fixture" onClick={() => setActiveTab('fixture')} />
+        <NavItem active={activeTab === 'galeria'} icon={<Camera />} label="Fotos" onClick={() => setActiveTab('galeria')} />
         <NavItem active={activeTab === 'social'} icon={<Beer />} label="Social" onClick={() => setActiveTab('social')} />
       </nav>
     </div>
