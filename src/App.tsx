@@ -21,7 +21,7 @@ import {
   Camera,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ReactNode } from 'react';
 import {
   CLUB_INFO,
   NEXT_MATCH,
@@ -33,6 +33,7 @@ import {
   SOCIAL_EVENT,
   MATCH_IMAGES,
 } from './data';
+import { supabase } from './supabaseClient';
 
 type Tab = 'inicio' | 'plantel' | 'tabla' | 'fixture' | 'galeria' | 'social';
 
@@ -40,6 +41,68 @@ export default function App() {
   const [activeTab, setActiveTab] = useState<Tab>('inicio');
   const [notifOpen, setNotifOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [playersList, setPlayersList] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [fixtureList, setFixtureList] = useState<any[]>([]);
+  const [loadingFixture, setLoadingFixture] = useState(true);
+
+  // Traer los jugadores desde Supabase al arrancar la app
+  useEffect(() => {
+    async function fetchPlayers() {
+      try {
+        setLoading(true);
+        const { data, error } = await supabase
+          .from('players')
+          .select('*');
+
+        if (error) throw error;
+        if (data) {
+          // Ordenar por número de camiseta de menor a mayor
+          const sorted = data.sort((a, b) => {
+            const numA = a.number === 'DT' ? Infinity : parseInt(a.number);
+            const numB = b.number === 'DT' ? Infinity : parseInt(b.number);
+            return numA - numB;
+          });
+          setPlayersList(sorted);
+        }
+      } catch (error) {
+        console.error('Error cargando el plantel:', error);
+        // Fallback a datos locales si falla Supabase
+        const sortedPlayers = [...PLAYERS].sort((a, b) => {
+          const numA = a.number === 'DT' ? Infinity : parseInt(a.number);
+          const numB = b.number === 'DT' ? Infinity : parseInt(b.number);
+          return numA - numB;
+        });
+        setPlayersList(sortedPlayers);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchPlayers();
+  }, []);
+
+  // Traer el fixture desde Supabase al arrancar la app
+  useEffect(() => {
+    async function fetchFixture() {
+      try {
+        setLoadingFixture(true);
+        const { data, error } = await supabase
+          .from('fixture')
+          .select('*')
+          .order('match_number', { ascending: true });
+
+        if (error) throw error;
+        if (data) setFixtureList(data);
+      } catch (error) {
+        console.error('Error cargando el fixture:', error);
+      } finally {
+        setLoadingFixture(false);
+      }
+    }
+
+    fetchFixture();
+  }, []);
 
   // ESTO ES LO QUE BLOQUEA EL SCROLL DEL CELULAR
   useEffect(() => {
@@ -52,17 +115,17 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-surface flex flex-col max-w-md mx-auto relative shadow-2xl">
+
       {/* Header */}
-      <header className="sticky top-4 bg-red-600/90 backdrop-blur-md border-b border-red-700 h-16 flex items-center justify-between px-4 z-50">
-        <div className="w-30 h-30 bg-transparent flex items-center justify-center overflow-hidden drop-shadow-lg">
+      <header className="sticky top-4 bg-red-600/90 backdrop-blur-md border-b border-red-700 h-16 flex items-center px-4 z-50 relative overflow-visible">
+        <div className="absolute left-[0px] w-48 h-48 bg-transparent flex items-center justify-center overflow-visible drop-shadow-lg mt-3">
           <img
             src={CLUB_INFO.logo}
             alt="Logo"
-            /*className="w-full h-full object-cover*/
-            className="h-45 w-45 object-contain transform translate-y-3"
+            className="h-44 w-44 object-contain"
           />
         </div>
-        <h1 className="font-display font-extrabold text-sm text-zinc-100 leading-tight">
+        <h1 className="flex-1 text-right font-display font-extrabold text-sm text-zinc-100 leading-tight">
           UNIÓN <br /> San Martín de los Andes
         </h1>
         <button
@@ -98,7 +161,7 @@ export default function App() {
             </div>
             <div className="divide-y divide-zinc-50">
               <div className="flex gap-3 p-4 hover:bg-zinc-50">
-                <div className="w-9 h-9 rounded-full bg-yellow-50 flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 rounded-full bg-yellow-50 flex items-center justify-center flex-shrink-0">
                   <Clock className="w-4 h-4 text-yellow-600" />
                 </div>
                 <div>
@@ -107,7 +170,7 @@ export default function App() {
                 </div>
               </div>
               <div className="flex gap-3 p-4 hover:bg-zinc-50">
-                <div className="w-9 h-9 rounded-full bg-green-50 flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 rounded-full bg-green-50 flex items-center justify-center flex-shrink-0">
                   <Trophy className="w-4 h-4 text-green-600" />
                 </div>
                 <div>
@@ -116,7 +179,7 @@ export default function App() {
                 </div>
               </div>
               <div className="flex gap-3 p-4 hover:bg-zinc-50">
-                <div className="w-9 h-9 rounded-full bg-red-50 flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center flex-shrink-0">
                   <Bell className="w-4 h-4 text-primary" />
                 </div>
                 <div>
@@ -176,7 +239,7 @@ export default function App() {
                       <div className="w-[104px] h-[104px] mb-2 flex items-center justify-center p-2 bg-zinc-50 rounded-xl">
                         <img src={CLUB_INFO.logo} alt="Unión" className="w-full h-full object-contain" />
                       </div>
-                      <span className="text-xs font-bold text-zinc-900">UNCIÓN</span>
+                      <span className="text-xs font-bold text-zinc-900">UNIÓN</span>
                     </div>
 
                     <div className="flex flex-col items-center justify-center px-4">
@@ -227,7 +290,7 @@ export default function App() {
                     <div 
                       key={i} 
                       onClick={() => setSelectedImage(img)}
-                      className="min-w-[200px] h-[150px] rounded-2xl overflow-hidden shadow-sm flex-shrink-0 snap-center relative group cursor-pointer"
+                      className="min-w-[200px] h-[150px] rounded-2xl overflow-hplayersList.length || idden shadow-sm flex-shrink-0 snap-center relative group cursor-pointer"
                     >
                       <img src={img} alt={`Partido ${i}`} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                     </div>
@@ -268,7 +331,7 @@ export default function App() {
                   </div>
                   <div className="flex items-end justify-between">
                     <span className="text-4xl font-display font-black text-zinc-900">7º</span>
-                    <span className="text-xs font-bold bg-zinc-100 text-zinc-500 px-2 py-1 rounded-full">Zona A</span>
+                    <span className="text-xs font-bold bg-zinc-100 text-zinc-50PLAYERS rounded-full">Zona A</span>
                   </div>
                 </div>
 
@@ -292,8 +355,9 @@ export default function App() {
                   <h3 className="font-display font-bold text-lg text-zinc-900">Últimas Noticias</h3>
                 </div>
                 <div className="space-y-3">
-                  {NEWS.map((item, i) => (
-                    <NewsCard key={i} {...item} />
+                  {NEWS.map(({ category, title, time, image }, i) => (
+                    // @ts-ignore - key es una propiedad especial de React, no se pasa en props
+                    <NewsCard key={i} category={category} title={title} time={time} image={image} />
                   ))}
                 </div>
               </section>
@@ -310,22 +374,39 @@ export default function App() {
               className="p-4 space-y-6"
             >
               <h2 className="font-display font-black text-2xl text-zinc-900 text-right">Nuestro Plantel</h2>
-              <div className="grid grid-cols-2 gap-4">
-                {PLAYERS.map((player, i) => (
-                  <div key={i} className="bg-white border border-zinc-100 rounded-2xl p-4 shadow-sm flex flex-col items-center">
-                    <div className="w-20 h-20 bg-zinc-100 rounded-full mb-3 flex items-center justify-center text-zinc-300 overflow-hidden shadow-inner">
-                      {player.avatar ? (
-                        <img src={player.avatar} alt={player.name} className="w-full h-full object-cover" />
-                      ) : (
-                        <Users className="w-10 h-10" />
-                      )}
-                    </div>
-                    <span className="text-xs font-black text-primary mb-1">#{player.number}</span>
-                    <h3 className="font-display font-bold text-sm text-zinc-900 text-center">{player.name}</h3>
-                    <p className="text-[10px] text-zinc-500 font-medium">{player.position}</p>
-                  </div>
-                ))}
-              </div>
+              
+              {loading ? (
+                <p className="text-sm text-zinc-400 text-center py-10 font-medium">Cargando el plantel...</p>
+              ) : (
+                <div className="grid grid-cols-2 gap-4">
+                    {playersList.map((player, i) => (
+                      <div 
+                        key={i} 
+                        className={`border rounded-2xl p-4 shadow-sm flex flex-col items-center transition-colors ${
+                          player.position === 'D.T.' || player.position === 'Director Técnico'
+                            ? 'bg-zinc-300 border-zinc-300' // Gris para el D.T.
+                            : 'bg-white border-zinc-100'    // Blanco para el resto
+                        }`}
+                      >
+                        <div className="w-20 h-20 bg-zinc-100 rounded-full mb-3 flex items-center justify-center overflow-hidden text-zinc-300">
+                          {player.avatar ? (
+                            <img src={player.avatar} alt={player.name} className="w-full h-full object-cover" />
+                          ) : (
+                            <Users className="w-10 h-10" />
+                          )}
+                        </div>
+      
+      {/* Oculta el #número si es el D.T. */}
+      {player.position !== 'D.T.' && player.position !== 'Director Técnico' && (
+        <span className="text-xs font-black text-primary mb-1">#{player.number}</span>
+      )}
+      
+      <h3 className="font-display font-bold text-sm text-zinc-900 text-center">{player.name}</h3>
+      <p className="text-[10px] text-zinc-500 font-medium uppercase mt-0.5">{player.position}</p>
+    </div>
+  ))}
+</div>
+              )}
             </motion.div>
           )}
 
@@ -367,15 +448,92 @@ export default function App() {
           {activeTab === 'fixture' && (
             <motion.div
               key="fixture"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
               className="p-4 space-y-4"
             >
-              <h2 className="font-display font-black text-2xl text-zinc-900 mb-2 text-right">Fixture</h2>
-              {FIXTURE.map((match, i) => (
-                <FixtureItem key={i} match={match} index={i + 1} />
-              ))}
+              <h2 className="font-display font-black text-2xl text-zinc-900 text-right">Fixture y Resultados</h2>
+              
+              {loadingFixture ? (
+                <p className="text-sm text-zinc-400 text-center py-10 font-medium">Cargando partidos desde Supabase...</p>
+              ) : (() => {
+                // Función para parsear fechas en español
+                const parseDate = (dateStr: string): Date => {
+                  const meses: { [key: string]: number } = {
+                    enero: 0, febrero: 1, marzo: 2, abril: 3, mayo: 4, junio: 5,
+                    julio: 6, agosto: 7, septiembre: 8, octubre: 9, noviembre: 10, diciembre: 11
+                  };
+                  
+                  const parts = dateStr.toLowerCase().split(' de ');
+                  if (parts.length >= 2) {
+                    const dia = parseInt(parts[0].split(' ')[1]);
+                    const mes = meses[parts[1].trim()];
+                    return new Date(2026, mes, dia);
+                  }
+                  return new Date(0);
+                };
+
+                // Procesar y ordenar fixtures
+                const processedFixtures = fixtureList.map(p => ({
+                  ...p,
+                  hasResult: p.resultado && p.resultado.trim() !== '' || p.result && p.result.trim() !== '',
+                  resultadoFinal: p.resultado || p.result || '',
+                  parsedDate: parseDate(p.date)
+                }));
+
+                // Separar jugados y no jugados
+                const jugados = processedFixtures.filter(p => p.hasResult);
+                const noJugados = processedFixtures.filter(p => !p.hasResult);
+
+                // Ordenar cada grupo cronológicamente
+                const sortByDate = (fixtures: typeof processedFixtures) => {
+                  return fixtures.sort((a, b) => a.parsedDate.getTime() - b.parsedDate.getTime());
+                };
+
+                const jugadosOrdenados = sortByDate(jugados);
+                const noJugadosOrdenados = sortByDate(noJugados);
+                const todosOrdenados = [...jugadosOrdenados, ...noJugadosOrdenados];
+
+                return (
+                  <div className="space-y-3">
+                    {todosOrdenados.map((partido, i) => (
+                      <div key={i} className={`rounded-2xl p-4 shadow-sm flex justify-between items-center border transition-all ${
+                        partido.hasResult 
+                          ? 'bg-green-50 border-green-200' 
+                          : 'bg-white border-zinc-100'
+                      }`}>
+                        <div className="space-y-1">
+                          <div className="flex items-center gap-2 mb-1">
+  <span className="bg-zinc-100 text-zinc-700 text-[10px] font-black px-2 py-0.5 rounded-md uppercase">
+    Fecha {partido.match_number}
+  </span>
+  <span className="text-xs font-bold text-zinc-400">• {partido.date} - {partido.time}</span>
+</div>
+                          <h3 className={`font-display font-bold text-base ${partido.hasResult ? 'text-green-900' : 'text-zinc-900'}`}>
+                            Unión <span className={`${partido.hasResult ? 'text-green-600' : 'text-zinc-400'} font-normal`}>vs</span> {partido.rival}
+                          </h3>
+                          <p className={`text-xs font-medium ${partido.hasResult ? 'text-green-600' : 'text-zinc-500'}`}>
+                            📍 {partido.stadium}
+                          </p>
+                        </div>
+                        
+                        <div className={`px-3 py-2 rounded-xl border min-w-[60px] text-center ${
+                          partido.hasResult
+                            ? 'bg-green-200 border-green-300'
+                            : 'bg-zinc-50 border-zinc-100'
+                        }`}>
+                          <span className={`font-display font-black text-sm ${
+                            partido.hasResult ? 'text-green-900' : 'text-zinc-800'
+                          }`}>
+                            {partido.resultadoFinal || 'vs'}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                );
+              })()}
             </motion.div>
           )}
 
@@ -388,20 +546,25 @@ export default function App() {
               exit={{ opacity: 0, scale: 0.95 }}
               className="p-4 space-y-6"
             >
-              <div className="flex justify-between items-end mb-2">
-                <button className="bg-primary text-white px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 shadow-lg shadow-primary/30 active:scale-95 transition-all">
-                  <Camera className="w-4 h-4" />
-                  Subir Foto
-                </button>
-                <div className="text-right">
-                  <h2 className="font-display font-black text-2xl text-zinc-900">Galería</h2>
-                  <p className="text-xs text-zinc-500 mt-1">Imágenes de los partidos</p>
-                </div>
+              <div className="flex justify-between items-end mb-2 w-full">
+                {/* El texto va primero para que se posicione a la izquierda */}
+                <p className="text-xs text-zinc-500 font-medium mt-8">
+                  Algunos de los partidos
+                </p>
+                
+                {/* El título va segundo para que justify-between lo empuje a la derecha */}
+                <h2 className="font-display font-black text-2xl text-zinc-900 text-right">
+                  Galería
+                </h2>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 {MATCH_IMAGES.map((img, i) => (
-                  <div key={i} className={`rounded-2xl overflow-hidden shadow-sm aspect-square ${i === 0 ? 'col-span-2 aspect-[2/1]' : ''}`}>
+                  <div 
+                    key={i} 
+                    onClick={() => setSelectedImage(img)}
+                    className={`rounded-2xl overflow-hidden shadow-sm aspect-square ${i === 0 ? 'col-span-2 aspect-[2/1]' : ''} cursor-pointer group`}
+                  >
                     <img src={img} alt={`Partido ${i}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
                   </div>
                 ))}
@@ -611,7 +774,7 @@ function FixtureItem({ match, index }: { match: any; index: number }) {
   );
 }
 
-function SocialButton({ icon, color, label }: { icon: React.ReactNode; color: string; label: string }) {
+function SocialButton({ icon, color, label }: { icon: ReactNode; color: string; label: string }) {
   return (
     <a
       href="#"
@@ -623,7 +786,7 @@ function SocialButton({ icon, color, label }: { icon: React.ReactNode; color: st
   );
 }
 
-function NavItem({ active, icon, label, onClick }: { active: boolean; icon: React.ReactNode; label: string; onClick: () => void }) {
+function NavItem({ active, icon, label, onClick }: { active: boolean; icon: ReactNode; label: string; onClick: () => void }) {
   return (
     <button
       onClick={onClick}

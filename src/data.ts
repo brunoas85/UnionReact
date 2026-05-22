@@ -7,7 +7,7 @@ export const CLUB_INFO = {
   name: "Unión",
   location: "San Martín de los Andes",
   logo: "/UnionEscudo.png",
-  heroImage: "/UnionPlantel.png",
+  heroImage: "/UnionPlantel-5.png",
 };
 
 export const NEXT_MATCH = {
@@ -39,7 +39,7 @@ export const PLAYERS = [
   { name: "Flores, Maximiliano Ricardo", position: "Mediocampista", number: "16", avatar: "avatar-16.png" },
   { name: "Villegas, Cesar Oscar", position: "Defensor", number: "17", avatar: "avatar-17.png" },
   { name: "Vilchez, Jorge Luis", position: "Mediocampista", number: "18", avatar: "avatar-18.png" },
-  { name: "Di Sciascio, Darien Emanuel", position: "Mediocampista", number: "20", avatar: "avatar-19.png" },
+  { name: "Di Sciascio, Darien Emanuel", position: "Mediocampista", number: "19", avatar: "avatar-19.png" },
   { name: "Oliva, Horacio Sebastian", position: "Arquero", number: "21", avatar: "avatar-20.png" },
   { name: "Flores, Facundo Emilio", position: "Director Técnico", number: "DT", avatar: "avatar-21.png" },
 ];
