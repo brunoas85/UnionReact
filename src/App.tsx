@@ -584,14 +584,14 @@ export default function App() {
               <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-2">
                 <Beer className="w-12 h-12 text-primary" />
               </div>
-              <h2 className="font-display font-black text-2xl text-zinc-900 text-right">Vida Social</h2>
+              <h2 className="font-display font-black text-2xl text-zinc-900 text-right">3er Tiempo</h2>
               <p className="text-zinc-500 text-sm max-w-[250px] mx-auto">{SOCIAL_EVENT.description}</p>
               <div className="bg-primary text-white p-6 rounded-3xl shadow-xl shadow-primary/20 text-left relative overflow-hidden">
                 <div className="relative z-10">
-                  <h4 className="font-display font-black text-xl mb-1">{SOCIAL_EVENT.title}</h4>
-                  <p className="text-white/80 text-xs mb-4">{SOCIAL_EVENT.date} — {SOCIAL_EVENT.time}</p>
-                  <button className="bg-white text-primary px-4 py-2 rounded-full font-bold text-xs uppercase tracking-wider">
-                    Confirmar Asistencia
+                  <h4 className="font-display font-black text-xl mb-1">En construcción</h4>
+                  <p className="text-white/80 text-xs mb-4">Pronto más detalles</p>
+                  <button className="bg-white text-primary px-4 py-2 rounded-full font-bold text-xs uppercase tracking-wider" disabled>
+                    Próximamente
                   </button>
                 </div>
                 <div className="absolute -right-8 -bottom-8 opacity-20">
@@ -645,14 +645,18 @@ export default function App() {
       </AnimatePresence>
 
       {/* Bottom Nav */}
-      <nav className="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-white/95 backdrop-blur-md border-t border-zinc-100 flex justify-around items-center py-3 z-50 px-2 shadow-[0_-10px_20px_rgba(0,0,0,0.02)]">
+      <nav className="fixed bottom-12 left-0 right-0 max-w-md mx-auto bg-white/95 backdrop-blur-md border-t border-zinc-100 flex justify-around items-center py-3 z-50 px-2 shadow-[0_-10px_20px_rgba(0,0,0,0.02)]">
         <NavItem active={activeTab === 'inicio'} icon={<Home />} label="Inicio" onClick={() => setActiveTab('inicio')} />
         <NavItem active={activeTab === 'plantel'} icon={<Users />} label="Plantel" onClick={() => setActiveTab('plantel')} />
         <NavItem active={activeTab === 'tabla'} icon={<Trophy />} label="Tabla" onClick={() => setActiveTab('tabla')} />
         <NavItem active={activeTab === 'fixture'} icon={<Calendar />} label="Fixture" onClick={() => setActiveTab('fixture')} />
         <NavItem active={activeTab === 'galeria'} icon={<Camera />} label="Fotos" onClick={() => setActiveTab('galeria')} />
-        <NavItem active={activeTab === 'social'} icon={<Beer />} label="Social" onClick={() => setActiveTab('social')} />
+        <NavItem active={activeTab === 'social'} icon={<Beer />} label="3er Tiempo" onClick={() => setActiveTab('social')} />
       </nav>
+      {/* Footer */}
+      <footer className="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-zinc-50 border-t border-zinc-100 py-3 px-4 text-center z-50">
+        <p className="text-[10px] text-zinc-500">Desarrollado por bRuno`s</p>
+      </footer>
     </div>
   );
 }
