@@ -11,12 +11,12 @@ export const CLUB_INFO = {
 };
 
 export const NEXT_MATCH = {
-  opponent: "Comunicaciones",
+  opponent: "Dinamo",
   opponentLogo: "",
-  date: "Dom 24 de Mayo",
-  time: "18:45 HS",
-  stadium: "San Martín de los Andes",
-  round: "FECHA 13",
+  date: "Dom 31 de Mayo",
+  time: "11:45 HS",
+  stadium: "Albino Stadium",
+  round: "FECHA 14",
   isLocal: true,
 };
 
@@ -125,22 +125,21 @@ export const FIXTURE = [
 
 export const NEWS = [
   {
-    category: "Cuota Social",
-    title: "Recuerden pagar la cuota social a la Liga de Veteranos, sino no pueden jugar la fecha",
-    time: "Hace 2 horas",
-    image: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=200&auto=format&fit=crop"
+    category: "Refuerzo",
+    title: "¡Bienvenido, Facu Quiroga! Nuevo refuerzo de Unión, a seguir sumando!.",
+    time: "Hace 1 hora",
+    image: "https://images.unsplash.com/photo-1551958219-acbc608c6377?q=80&w=200&auto=format&fit=crop",
+    isFeatured: true,
   },
   {
-    category: "Equipo",
-    title: "Por cuestiones climáticas el encuentro de la fecha queda suspendido para el próximo fin de semana",
-    time: "Hace 1 día",
-    image: "https://images.unsplash.com/photo-1551958219-acbc608c6377?q=80&w=200&auto=format&fit=crop"
-  }
+    category: "Cuota Social",
+    title: "Recuerden pagar la cuota social a la Liga de Veteranos, sino no pueden jugar la fecha",
+    image: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=200&auto=format&fit=crop"
+  },
 ];
 
 export const SOCIAL_EVENT = {
-  title: "Asado Senior",
-  date: "Viernes 15 de mayo",
+  title: "En construcción",
   time: "20:30hs",
   description: "Unión no es solo fútbol. Enterate de los próximos asados, eventos y reuniones."
 };

@@ -193,7 +193,7 @@ export default function App() {
       </AnimatePresence>
 
       {/* Main Content */}
-      <main className="flex-1 pb-24 overflow-y-auto">
+      <main className="flex-1 pb-40 overflow-y-auto">
         <AnimatePresence mode="wait">
 
           {/* ── INICIO ── */}
@@ -274,6 +274,19 @@ export default function App() {
                 </div>
               </section>
 
+              {/* Noticias */}
+              <section className="px-4 pb-4">
+                <div className="flex justify-between items-center mb-4">
+                  <h3 className="font-display font-bold text-lg text-zinc-900">Últimas Noticias</h3>
+                </div>
+                <div className="space-y-3">
+                  {NEWS.map(({ category, title, time, image, isFeatured }, i) => (
+                    // @ts-ignore - key es una propiedad especial de React, no se pasa en props
+                    <NewsCard key={i} category={category} title={title} time={time} image={image} isFeatured={isFeatured} />
+                  ))}
+                </div>
+              </section>
+
               {/* Fotos Recientes - Carrusel */}
               <section className="pl-4">
                 <div className="flex justify-between items-center mb-3 pr-4">
@@ -333,32 +346,6 @@ export default function App() {
                     <span className="text-4xl font-display font-black text-zinc-900">7º</span>
                     <span className="text-xs font-bold bg-zinc-100 text-zinc-50PLAYERS rounded-full">Zona A</span>
                   </div>
-                </div>
-
-                <div className="col-span-2 bg-primary/5 border border-primary/10 rounded-2xl p-4 flex items-center gap-4 group cursor-pointer"
-                  onClick={() => setActiveTab('social')}
-                >
-                  <div className="bg-white p-3 rounded-xl shadow-sm">
-                    <Beer className="w-7 h-7 text-primary" />
-                  </div>
-                  <div>
-                    <h4 className="font-display font-bold text-zinc-900">Tercer Tiempo</h4>
-                    <p className="text-zinc-500 text-xs mt-0.5">{SOCIAL_EVENT.title} — {SOCIAL_EVENT.date} {SOCIAL_EVENT.time}</p>
-                  </div>
-                  <ChevronRight className="ml-auto w-5 h-5 text-zinc-400 group-hover:translate-x-1 transition-transform" />
-                </div>
-              </section>
-
-              {/* Noticias */}
-              <section className="px-4 pb-4">
-                <div className="flex justify-between items-center mb-4">
-                  <h3 className="font-display font-bold text-lg text-zinc-900">Últimas Noticias</h3>
-                </div>
-                <div className="space-y-3">
-                  {NEWS.map(({ category, title, time, image }, i) => (
-                    // @ts-ignore - key es una propiedad especial de React, no se pasa en props
-                    <NewsCard key={i} category={category} title={title} time={time} image={image} />
-                  ))}
                 </div>
               </section>
             </motion.div>
@@ -581,30 +568,12 @@ export default function App() {
               exit={{ opacity: 0, scale: 1.1 }}
               className="p-4 space-y-6 text-center"
             >
-              <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-2">
-                <Beer className="w-12 h-12 text-primary" />
-              </div>
               <h2 className="font-display font-black text-2xl text-zinc-900 text-right">3er Tiempo</h2>
               <p className="text-zinc-500 text-sm max-w-[250px] mx-auto">{SOCIAL_EVENT.description}</p>
-              <div className="bg-primary text-white p-6 rounded-3xl shadow-xl shadow-primary/20 text-left relative overflow-hidden">
-                <div className="relative z-10">
-                  <h4 className="font-display font-black text-xl mb-1">En construcción</h4>
-                  <p className="text-white/80 text-xs mb-4">Pronto más detalles</p>
-                  <button className="bg-white text-primary px-4 py-2 rounded-full font-bold text-xs uppercase tracking-wider" disabled>
-                    Próximamente
-                  </button>
-                </div>
-                <div className="absolute -right-8 -bottom-8 opacity-20">
-                  <Beer className="w-32 h-32" />
-                </div>
-              </div>
-
-              <div className="pt-4">
-                <h3 className="font-display font-bold text-xs text-zinc-400 mb-4 uppercase tracking-[0.2em]">Nuestra Comunidad</h3>
-                <div className="flex justify-center gap-4">
-                  <SocialButton icon={<Facebook className="w-6 h-6" />} color="hover:text-[#1877F2] hover:bg-[#1877F2]/5" label="Facebook" />
-                  <SocialButton icon={<Instagram className="w-6 h-6" />} color="hover:text-[#E4405F] hover:bg-[#E4405F]/5" label="Instagram" />
-                  <SocialButton icon={<Twitter className="w-6 h-6" />} color="hover:text-[#1DA1F2] hover:bg-[#1DA1F2]/5" label="Twitter" />
+              <div className="rounded-3xl overflow-hidden shadow-xl">
+                <img src="/tercerTiempo.png" alt="Asado" className="w-full h-auto object-cover" />
+                <div className="bg-white p-4 text-center">
+                  <p className="font-display font-bold text-sm text-zinc-900">Asado 24 de mayo '26</p>
                 </div>
               </div>
             </motion.div>
@@ -645,7 +614,7 @@ export default function App() {
       </AnimatePresence>
 
       {/* Bottom Nav */}
-      <nav className="fixed bottom-12 left-0 right-0 max-w-md mx-auto bg-white/95 backdrop-blur-md border-t border-zinc-100 flex justify-around items-center py-3 z-50 px-2 shadow-[0_-10px_20px_rgba(0,0,0,0.02)]">
+      <nav className="fixed bottom-14 left-0 right-0 max-w-md mx-auto bg-white/95 backdrop-blur-md border-t border-zinc-100 flex justify-around items-center py-3 z-50 px-2 shadow-[0_-10px_20px_rgba(0,0,0,0.02)]">
         <NavItem active={activeTab === 'inicio'} icon={<Home />} label="Inicio" onClick={() => setActiveTab('inicio')} />
         <NavItem active={activeTab === 'plantel'} icon={<Users />} label="Plantel" onClick={() => setActiveTab('plantel')} />
         <NavItem active={activeTab === 'tabla'} icon={<Trophy />} label="Tabla" onClick={() => setActiveTab('tabla')} />
@@ -698,7 +667,33 @@ function StandingsTable({ rows }: { rows: any[] }) {
   );
 }
 
-function NewsCard({ category, title, time, image }: { category: string; title: string; time: string; image: string }) {
+function NewsCard({ category, title, time, image, isFeatured }: { category: string; title: string; time: string; image: string; isFeatured?: boolean }) {
+  if (isFeatured) {
+    return (
+      <div className="rounded-2xl overflow-hidden shadow-md border border-red-100 bg-gradient-to-r from-red-600/10 via-red-500/5 to-white hover:shadow-lg transition-shadow">
+        <div className="flex gap-0">
+          {/* Imagen lateral con overlay */}
+          <div className="w-28 h-28 flex-shrink-0 relative">
+            <img src={image} alt="Refuerzo" className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent to-white/20" />
+          </div>
+          {/* Contenido */}
+          <div className="flex flex-col justify-center px-3 py-3 flex-1 gap-1">
+            {/* Badge */}
+            <span className="inline-flex items-center gap-1 bg-red-600 text-white text-[9px] font-black px-2 py-0.5 rounded-full uppercase tracking-widest w-fit">
+              <span>⚡</span> Refuerzo
+            </span>
+            <h5 className="font-display font-bold text-sm text-zinc-900 leading-snug line-clamp-3 mt-0.5">{title}</h5>
+            <div className="flex items-center gap-1.5 text-[10px] text-zinc-400 mt-1">
+              <Clock className="w-3 h-3" />
+              <span>{time}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="bg-white border border-zinc-100 rounded-2xl p-3 flex gap-4 shadow-sm hover:shadow-md transition-shadow">
       <div className="w-20 h-20 rounded-xl overflow-hidden flex-shrink-0">
