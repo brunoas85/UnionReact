@@ -46,25 +46,25 @@ export const PLAYERS = [
 
 // Tabla real — Apertura 2026 — Categoría Seniors
 export const STANDINGS_ZONA_A = [
-  { pos: 1, name: "Frontera", pts: 22, pj: 9, g: 7, e: 1, p: 1, gf: 33, gc: 8, dif: 25 },
-  { pos: 2, name: "Las Rosas", pts: 19, pj: 10, g: 5, e: 4, p: 1, gf: 23, gc: 12, dif: 11 },
-  { pos: 3, name: "Comunicaciones", pts: 18, pj: 10, g: 6, e: 0, p: 4, gf: 30, gc: 18, dif: 12 },
-  { pos: 4, name: "Arenal", pts: 18, pj: 10, g: 6, e: 0, p: 4, gf: 26, gc: 27, dif: -1 },
-  { pos: 5, name: "Sarmiento", pts: 15, pj: 9, g: 4, e: 3, p: 2, gf: 20, gc: 12, dif: 8 },
-  { pos: 6, name: "Velez", pts: 12, pj: 10, g: 3, e: 3, p: 4, gf: 20, gc: 27, dif: -7 },
-  { pos: 7, name: "Unión", pts: 8, pj: 10, g: 2, e: 2, p: 6, gf: 21, gc: 33, dif: -12, isUserTeam: true },
-  { pos: 8, name: "Dinamo", pts: 0, pj: 10, g: 0, e: 0, p: 10, gf: 9, gc: 45, dif: -36 },
+  { pos: 1, name: "Frontera", pts: 29, pj: 12, g: 9, e: 2, p: 1, gf: 45, gc: 10, dif: 35, hasPendingMatches: true },
+  { pos: 2, name: "Comunicaciones", pts: 24, pj: 13, g: 8, e: 0, p: 5, gf: 35, gc: 22, dif: 13 },
+  { pos: 3, name: "Arenal", pts: 23, pj: 13, g: 7, e: 2, p: 4, gf: 32, gc: 31, dif: 1 },
+  { pos: 4, name: "Sarmiento", pts: 21, pj: 12, g: 6, e: 3, p: 3, gf: 32, gc: 17, dif: 15, hasPendingMatches: true },
+  { pos: 5, name: "Las Rosas", pts: 21, pj: 13, g: 5, e: 6, p: 2, gf: 28, gc: 19, dif: 9 },
+  { pos: 6, name: "Velez", pts: 18, pj: 13, g: 5, e: 3, p: 5, gf: 25, gc: 37, dif: -12 },
+  { pos: 7, name: "Unión", pts: 8, pj: 13, g: 2, e: 2, p: 9, gf: 24, gc: 40, dif: -16, isUserTeam: true },
+  { pos: 8, name: "Dinamo", pts: 0, pj: 13, g: 0, e: 0, p: 13, gf: 10, gc: 55, dif: -45 },
 ];
 
 export const STANDINGS_ZONA_B = [
-  { pos: 1, name: "Lacar", pts: 20, pj: 9, g: 6, e: 2, p: 1, gf: 19, gc: 10, dif: 9 },
-  { pos: 2, name: "Chapelco", pts: 18, pj: 9, g: 5, e: 3, p: 1, gf: 27, gc: 3, dif: 24 },
-  { pos: 3, name: "Embajadores", pts: 18, pj: 9, g: 5, e: 3, p: 1, gf: 21, gc: 8, dif: 13 },
-  { pos: 4, name: "Patagonia", pts: 18, pj: 9, g: 5, e: 3, p: 1, gf: 19, gc: 6, dif: 13 },
-  { pos: 5, name: "El Barrio", pts: 12, pj: 9, g: 4, e: 0, p: 5, gf: 13, gc: 12, dif: 1 },
-  { pos: 6, name: "Old Boys", pts: 7, pj: 9, g: 1, e: 4, p: 4, gf: 11, gc: 19, dif: -8 },
-  { pos: 7, name: "Dinosaurios", pts: 3, pj: 9, g: 0, e: 3, p: 6, gf: 3, gc: 28, dif: -25 },
-  { pos: 8, name: "Belgrano", pts: 2, pj: 9, g: 0, e: 2, p: 7, gf: 5, gc: 32, dif: -27 },
+  { pos: 1, name: "Chapelco", pts: 28, pj: 13, g: 8, e: 4, p: 1, gf: 36, gc: 6, dif: 30 },
+  { pos: 2, name: "Embajadores", pts: 25, pj: 12, g: 7, e: 4, p: 1, gf: 30, gc: 11, dif: 19, hasPendingMatches: true },
+  { pos: 3, name: "Lacar", pts: 25, pj: 13, g: 7, e: 4, p: 2, gf: 23, gc: 14, dif: 9 },
+  { pos: 4, name: "Patagonia", pts: 24, pj: 13, g: 6, e: 6, p: 1, gf: 27, gc: 11, dif: 16 },
+  { pos: 5, name: "El Barrio", pts: 16, pj: 13, g: 5, e: 1, p: 7, gf: 23, gc: 23, dif: 0 },
+  { pos: 6, name: "Old Boys", pts: 10, pj: 12, g: 2, e: 4, p: 6, gf: 19, gc: 28, dif: -9, hasPendingMatches: true },
+  { pos: 7, name: "Belgrano", pts: 8, pj: 13, g: 2, e: 2, p: 9, gf: 12, gc: 43, dif: -31 },
+  { pos: 8, name: "Dinosaurios", pts: 3, pj: 13, g: 0, e: 3, p: 10, gf: 3, gc: 37, dif: -34 },
 ];
 
 // Mantenemos STANDINGS para compatibilidad con el componente original
@@ -75,50 +75,99 @@ export const FIXTURE = [
     rival: "Frontera",
     date: "Dom 08 de Marzo",
     time: "10:00",
-    stadium: "San Martín de los Andes",
-    resultado: "2-1",
+    stadium: "Albino Stadium",
+    resultado: "1 - 2",
   },
   {
     rival: "Las Rosas",
-    date: "Lun 10 de Marzo",
+    date: "Mar 10 de Marzo",
     time: "21:30",
-    stadium: "San Martín de los Andes",
-    resultado: "1-0",
+    stadium: "Albino Stadium",
+    resultado: "1 - 1",
   },
   {
     rival: "Sarmiento",
-    date: "Sáb 15 de Marzo",
+    date: "Dom 15 de Marzo",
     time: "13:30",
-    stadium: "San Martín de los Andes",
-    resultado: "3-2",
+    stadium: "Albino Stadium",
+    resultado: "2 - 3",
   },
   {
     rival: "Velez",
-    date: "Dom 23 de Marzo",
+    date: "Lun 23 de Marzo",
     time: "21:30",
-    stadium: "San Martín de los Andes",
-    resultado: "0-0",
+    stadium: "Albino Stadium",
+    resultado: "1 - 1",
   },
-  // Próximos — sin resultado
+  {
+    rival: "Arenal",
+    date: "Dom 29 de Marzo",
+    time: "13:30",
+    stadium: "Albino Stadium",
+    resultado: "1 - 4",
+  },
+  {
+    rival: "Comunicaciones",
+    date: "Dom 12 de Abril",
+    time: "19:45",
+    stadium: "Albino Stadium",
+    resultado: "3 - 2",
+  },
+  {
+    rival: "Dinamo",
+    date: "Dom 19 de Abril",
+    time: "11:45",
+    stadium: "Albino Stadium",
+    resultado: "8 - 6",
+  },
+  {
+    rival: "Frontera",
+    date: "Dom 26 de Abril",
+    time: "17:00",
+    stadium: "Albino Stadium",
+    resultado: "1 - 7",
+  },
+  {
+    rival: "Sarmiento",
+    date: "Vie 01 de Mayo",
+    time: "21:30",
+    stadium: "Albino Stadium",
+    resultado: "1 - 4",
+  },
+  {
+    rival: "Velez",
+    date: "Vie 08 de Mayo",
+    time: "21:30",
+    stadium: "Albino Stadium",
+    resultado: "0 - 1",
+  },
   {
     rival: "Arenal",
     date: "Dom 17 de Mayo",
     time: "13:30",
-    stadium: "San Martín de los Andes",
-    resultado: "",
+    stadium: "Albino Stadium",
+    resultado: "1 - 3",
   },
+  {
+    rival: "Las Rosas",
+    date: "Mié 08 de Abril",
+    time: "21:30",
+    stadium: "Albino Stadium",
+    resultado: "2 - 3",
+  },
+  // Próximos — sin resultado
   {
     rival: "Comunicaciones",
     date: "Dom 24 de Mayo",
     time: "18:45",
-    stadium: "San Martín de los Andes",
+    stadium: "Albino Stadium",
     resultado: "",
   },
   {
     rival: "Dinamo",
     date: "Dom 31 de Mayo",
     time: "11:45",
-    stadium: "San Martín de los Andes",
+    stadium: "Albino Stadium",
     resultado: "",
   },
 ];
@@ -129,7 +178,12 @@ export const NEWS = [
     title: "¡Bienvenido, Facu Quiroga! Nuevo refuerzo de Unión, a seguir sumando!.",
     time: "Hace 1 hora",
     image: "https://images.unsplash.com/photo-1551958219-acbc608c6377?q=80&w=200&auto=format&fit=crop",
-    isFeatured: true,
+  },
+  {
+    category: "Entrenamiento",
+    title: "Entrenamientos todos los jueves de 20hs a 21hs en todas las categorías de Unión.",
+    location: "Cancha Nº 2 de veteranos",
+    image: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?q=80&w=200&auto=format&fit=crop"
   },
   {
     category: "Cuota Social",
@@ -139,9 +193,9 @@ export const NEWS = [
 ];
 
 export const SOCIAL_EVENT = {
-  title: "En construcción",
-  time: "20:30hs",
-  description: "Unión no es solo fútbol. Enterate de los próximos asados, eventos y reuniones."
+  title: "Asado después del partido",
+  time: "Sábado",
+  description: "Después del partido de los máximos, hay asado. ¡Todos invitados a compartir!"
 };
 
 export const MATCH_IMAGES = [

@@ -187,6 +187,15 @@ export default function App() {
                   <p className="text-xs text-zinc-600 mt-0.5">Llevar medias negras</p>
                 </div>
               </div>
+              <div className="flex gap-3 p-4 hover:bg-zinc-50">
+                <div className="w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center flex-shrink-0">
+                  <Beer className="w-4 h-4 text-orange-600" />
+                </div>
+                <div>
+                  <p className="text-xs font-bold text-orange-600">Tercer Tiempo</p>
+                  <p className="text-xs text-zinc-600 mt-0.5">Asado después del partido de los máximos</p>
+                </div>
+              </div>
             </div>
           </motion.div>
         )}
@@ -280,9 +289,9 @@ export default function App() {
                   <h3 className="font-display font-bold text-lg text-zinc-900">Últimas Noticias</h3>
                 </div>
                 <div className="space-y-3">
-                  {NEWS.map(({ category, title, time, image, isFeatured }, i) => (
+                  {NEWS.map(({ category, title, time, image, isFeatured, location }, i) => (
                     // @ts-ignore - key es una propiedad especial de React, no se pasa en props
-                    <NewsCard key={i} category={category} title={title} time={time} image={image} isFeatured={isFeatured} />
+                    <NewsCard key={i} category={category} title={title} time={time} image={image} isFeatured={isFeatured} location={location} />
                   ))}
                 </div>
               </section>
@@ -649,11 +658,36 @@ function StandingsTable({ rows }: { rows: any[] }) {
       </thead>
       <tbody className="text-sm">
         {rows.map((row, i) => (
-          <tr key={i} className={`border-t border-zinc-50 ${row.isUserTeam ? 'bg-primary/5' : ''}`}>
-            <td className="px-3 py-3 font-black text-zinc-500">{row.pos}</td>
-            <td className={`px-3 py-3 font-bold ${row.isUserTeam ? 'text-primary' : 'text-zinc-700'}`}>{row.name}</td>
-            <td className="px-3 py-3 font-black text-center">{row.pts}</td>
-            <td className="px-3 py-3 text-center text-zinc-500">{row.pj}</td>
+          <tr 
+            key={i} 
+            className={`border-t border-zinc-50 ${
+              row.pos <= 4 ? 'bg-emerald-100' : row.isUserTeam ? 'bg-primary/5' : ''
+            }`}
+          >
+            <td className={`px-3 py-3 font-black ${
+              row.hasPendingMatches ? 'text-red-600' : 'text-zinc-500'
+            }`}>
+              {row.pos}
+            </td>
+            <td className={`px-3 py-3 font-bold ${
+              row.hasPendingMatches 
+                ? 'text-red-600' 
+                : row.isUserTeam 
+                ? 'text-primary' 
+                : 'text-zinc-700'
+            }`}>
+              {row.name}
+            </td>
+            <td className={`px-3 py-3 font-black text-center ${
+              row.hasPendingMatches ? 'text-red-600' : ''
+            }`}>
+              {row.pts}
+            </td>
+            <td className={`px-3 py-3 text-center ${
+              row.hasPendingMatches ? 'text-red-600' : 'text-zinc-500'
+            }`}>
+              {row.pj}
+            </td>
             <td className="px-3 py-3 text-center text-zinc-500">{row.g}</td>
             <td className="px-3 py-3 text-center text-zinc-500">{row.e}</td>
             <td className="px-3 py-3 text-center text-zinc-500">{row.p}</td>
@@ -667,7 +701,7 @@ function StandingsTable({ rows }: { rows: any[] }) {
   );
 }
 
-function NewsCard({ category, title, time, image, isFeatured }: { category: string; title: string; time: string; image: string; isFeatured?: boolean }) {
+function NewsCard({ category, title, time, image, isFeatured, location }: { category: string; title: string; time?: string; image: string; isFeatured?: boolean; location?: string }) {
   if (isFeatured) {
     return (
       <div className="rounded-2xl overflow-hidden shadow-md border border-red-100 bg-gradient-to-r from-red-600/10 via-red-500/5 to-white hover:shadow-lg transition-shadow">
@@ -702,9 +736,19 @@ function NewsCard({ category, title, time, image, isFeatured }: { category: stri
       <div className="flex flex-col justify-center">
         <span className="text-[9px] font-black text-primary uppercase tracking-widest mb-1">{category}</span>
         <h5 className="font-display font-bold text-sm text-zinc-900 line-clamp-2">{title}</h5>
-        <div className="flex items-center gap-2 mt-2 text-[10px] text-zinc-400">
-          <Clock className="w-3 h-3" />
-          <span>{time}</span>
+        <div className="flex flex-col gap-1 mt-2">
+          {time && (
+            <div className="flex items-center gap-2 text-[10px] text-zinc-400">
+              <Clock className="w-3 h-3" />
+              <span>{time}</span>
+            </div>
+          )}
+          {location && (
+            <div className="flex items-center gap-2 text-[10px] text-zinc-400">
+              <MapPin className="w-3 h-3" />
+              <span>{location}</span>
+            </div>
+          )}
         </div>
       </div>
     </div>
