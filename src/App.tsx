@@ -669,12 +669,12 @@ function StandingsTable({ rows }: { rows: any[] }) {
             }`}>
               {row.pos}
             </td>
-            <td className={`px-3 py-3 font-bold ${
+            <td className={`px-3 py-3 ${
               row.hasPendingMatches 
-                ? 'text-red-600' 
+                ? 'text-red-600 font-bold' 
                 : row.isUserTeam 
-                ? 'text-primary' 
-                : 'text-zinc-700'
+                ? 'text-zinc-900 font-black' 
+                : 'text-zinc-700 font-bold'
             }`}>
               {row.name}
             </td>
@@ -719,7 +719,7 @@ function NewsCard({ category, title, time, image, isFeatured, location }: { cate
             </span>
             <h5 className="font-display font-bold text-sm text-zinc-900 leading-snug line-clamp-3 mt-0.5">{title}</h5>
             <div className="flex items-center gap-1.5 text-[10px] text-zinc-400 mt-1">
-              <Clock className="w-3 h-3" />
+              <Calendar className="w-3 h-3" />
               <span>{time}</span>
             </div>
           </div>
@@ -739,7 +739,7 @@ function NewsCard({ category, title, time, image, isFeatured, location }: { cate
         <div className="flex flex-col gap-1 mt-2">
           {time && (
             <div className="flex items-center gap-2 text-[10px] text-zinc-400">
-              <Clock className="w-3 h-3" />
+              <Calendar className="w-3 h-3" />
               <span>{time}</span>
             </div>
           )}

@@ -174,21 +174,22 @@ export const FIXTURE = [
 
 export const NEWS = [
   {
-    category: "Refuerzo",
-    title: "¡Bienvenido, Facu Quiroga! Nuevo refuerzo de Unión, a seguir sumando!.",
-    time: "Hace 1 hora",
-    image: "https://images.unsplash.com/photo-1551958219-acbc608c6377?q=80&w=200&auto=format&fit=crop",
-  },
-  {
     category: "Entrenamiento",
     title: "Entrenamientos todos los jueves de 20hs a 21hs en todas las categorías de Unión.",
     location: "Cancha Nº 2 de veteranos",
     image: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?q=80&w=200&auto=format&fit=crop"
   },
   {
-    category: "Cuota Social",
-    title: "Recuerden pagar la cuota social a la Liga de Veteranos, sino no pueden jugar la fecha",
-    image: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=200&auto=format&fit=crop"
+    category: "Refuerzo",
+    title: "¡Bienvenido, Facu Quiroga! Nuevo refuerzo de Unión, a seguir sumando!.",
+    time: "Lunes 25 de mayo de 2026",
+    image: "https://images.unsplash.com/photo-1551958219-acbc608c6377?q=80&w=200&auto=format&fit=crop",
+  },
+  {
+    category: "Refuerzo",
+    title: "Jhona Mendez se suma al plantel! ¡Bienvenido!",
+    time: "Jueves 28 de mayo de 2026",
+    image: "https://images.unsplash.com/photo-1551958219-acbc608c6377?q=80&w=200&auto=format&fit=crop"
   },
 ];
 
