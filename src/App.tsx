@@ -32,6 +32,8 @@ import {
   NEWS,
   SOCIAL_EVENT,
   MATCH_IMAGES,
+  CLASIFICADOS,
+  MATCH_VIDEOS,
 } from './data';
 import { supabase } from './supabaseClient';
 
@@ -214,9 +216,9 @@ export default function App() {
               exit={{ opacity: 0, y: -10 }}
               className="space-y-6 pt-4"
             >
-              {/* Hero */}
+              {/* Hero y Titular */}
               <section className="px-4">
-                <div className="relative rounded-2xl overflow-hidden aspect-[16/9] shadow-lg group">
+                <div className="relative rounded-2xl overflow-hidden aspect-[16/9] shadow-lg group mb-4">
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10" />
                   <img
                     src={CLUB_INFO.heroImage}
@@ -233,52 +235,19 @@ export default function App() {
                     <p className="text-white/80 text-sm mt-1">Pasión y tradición.</p>
                   </div>
                 </div>
-              </section>
-
-              {/* Próximo Encuentro */}
-              <section className="px-4">
-                <div className="mb-2 flex justify-between items-end">
-                  <h3 className="font-display font-bold text-lg text-zinc-900">Próximo Encuentro</h3>
-                  <span className="text-[10px] text-primary font-black tracking-widest">{NEXT_MATCH.round}</span>
-                </div>
-                <div className="bg-white border border-zinc-100 rounded-2xl p-5 shadow-sm">
-                  <div className="flex items-center justify-between mb-6">
-                    {/* Unión */}
-                    <div className="flex flex-col items-center flex-1">
-                      <div className="w-[104px] h-[104px] mb-2 flex items-center justify-center p-2 bg-zinc-50 rounded-xl">
-                        <img src={CLUB_INFO.logo} alt="Unión" className="w-full h-full object-contain" />
-                      </div>
-                      <span className="text-xs font-bold text-zinc-900">UNIÓN</span>
-                    </div>
-
-                    <div className="flex flex-col items-center justify-center px-4">
-                      <div className="font-display font-black text-3xl text-primary italic">VS</div>
-                      <div className="bg-zinc-100 px-3 py-1 rounded-full text-[10px] font-bold text-zinc-600 mt-2">
-                        {NEXT_MATCH.time}
-                      </div>
-                    </div>
-
-                    {/* Rival */}
-                    <div className="flex flex-col items-center flex-1">
-                      <div className="w-16 h-16 mb-2 flex items-center justify-center p-2 bg-zinc-50 rounded-xl">
-                        {NEXT_MATCH.opponentLogo
-                          ? <img src={NEXT_MATCH.opponentLogo} alt={NEXT_MATCH.opponent} className="w-full h-full object-contain" />
-                          : <Trophy className="w-8 h-8 text-zinc-300" />
-                        }
-                      </div>
-                      <span className="text-xs font-bold text-zinc-900">{NEXT_MATCH.opponent}</span>
-                    </div>
-                  </div>
-
-                  <div className="space-y-2 pt-4 border-t border-zinc-50">
-                    <div className="flex items-center gap-3 text-sm text-zinc-500">
-                      <Calendar className="w-4 h-4" />
-                      <span>{NEXT_MATCH.date}</span>
-                    </div>
-                    <div className="flex items-center gap-3 text-sm text-zinc-500">
-                      <MapPin className="w-4 h-4" />
-                      <span>{NEXT_MATCH.stadium}</span>
-                    </div>
+                {/* Titular Deportivo */}
+                <div className="bg-primary/10 border-l-4 border-primary rounded-lg p-4 space-y-3">
+                  <p className="text-xs font-bold text-primary uppercase tracking-widest">Apertura 2026</p>
+                  <h2 className="font-display font-bold text-lg text-zinc-900">
+                    Unión completa un gran torneo en su debut
+                  </h2>
+                  <div className="space-y-2 text-xs text-zinc-600">
+                    <p>
+                      Con un equipo compuesto por jugadores de calidad y buena gente, el club sumó experiencia en su primer torneo en categoría senior.
+                    </p>
+                    <p className="pt-2 border-t border-primary/20">
+                      Un especial agradecimiento a los jugadores de la máxi que a lo largo del torneo siempre nos han hecho el aguante. Gracias por su colaboración ¡vamos Unión!
+                    </p>
                   </div>
                 </div>
               </section>
@@ -292,6 +261,36 @@ export default function App() {
                   {NEWS.map(({ category, title, time, image, isFeatured, location }, i) => (
                     // @ts-ignore - key es una propiedad especial de React, no se pasa en props
                     <NewsCard key={i} category={category} title={title} time={time} image={image} isFeatured={isFeatured} location={location} />
+                  ))}
+                </div>
+              </section>
+
+              {/* Clasificados */}
+              <section className="px-4 pb-4">
+                <h3 className="font-display font-bold text-lg text-zinc-900 mb-4">{CLASIFICADOS.title}</h3>
+                <div className="space-y-3">
+                  {CLASIFICADOS.matches.map((match, i) => (
+                    <div key={i} className="bg-gradient-to-r from-primary/10 to-primary/5 border border-primary/20 rounded-xl p-4">
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="flex-1">
+                          <p className="text-xs font-bold text-zinc-900">{match.team1}</p>
+                        </div>
+                        <span className="text-[10px] font-bold text-zinc-500 px-2">VS</span>
+                        <div className="flex-1 text-right">
+                          <p className="text-xs font-bold text-zinc-900">{match.team2}</p>
+                        </div>
+                      </div>
+                      <div className="space-y-1 text-[10px] text-zinc-600 font-medium">
+                        <span className="flex items-center gap-1">
+                          <Calendar className="w-3 h-3" />
+                          {match.date} - {match.time}
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <MapPin className="w-3 h-3" />
+                          {match.stadium}
+                        </span>
+                      </div>
+                    </div>
                   ))}
                 </div>
               </section>
@@ -374,34 +373,45 @@ export default function App() {
               {loading ? (
                 <p className="text-sm text-zinc-400 text-center py-10 font-medium">Cargando el plantel...</p>
               ) : (
-                <div className="grid grid-cols-2 gap-4">
-                    {playersList.map((player, i) => (
-                      <div 
-                        key={i} 
-                        className={`border rounded-2xl p-4 shadow-sm flex flex-col items-center transition-colors ${
-                          player.position === 'D.T.' || player.position === 'Director Técnico'
-                            ? 'bg-zinc-300 border-zinc-300' // Gris para el D.T.
-                            : 'bg-white border-zinc-100'    // Blanco para el resto
-                        }`}
-                      >
-                        <div className="w-20 h-20 bg-zinc-100 rounded-full mb-3 flex items-center justify-center overflow-hidden text-zinc-300">
-                          {player.avatar ? (
-                            <img src={player.avatar} alt={player.name} className="w-full h-full object-cover" />
-                          ) : (
-                            <Users className="w-10 h-10" />
+                <div className="space-y-2">
+                  {playersList.map((player, i) => (
+                    <div 
+                      key={i} 
+                      className={`flex items-center gap-4 border rounded-xl p-3 shadow-sm transition-all hover:shadow-md ${
+                        player.position === 'D.T.' || player.position === 'Director Técnico'
+                          ? 'bg-gradient-to-r from-zinc-200 to-zinc-100 border-zinc-300'
+                          : 'bg-white border-zinc-100 hover:bg-zinc-50'
+                      }`}
+                    >
+                      {/* Avatar */}
+                      <div className="w-16 h-16 flex-shrink-0 bg-zinc-100 rounded-lg overflow-hidden flex items-center justify-center">
+                        {player.avatar ? (
+                          <img src={player.avatar} alt={player.name} className="w-full h-full object-cover" />
+                        ) : (
+                          <Users className="w-8 h-8 text-zinc-300" />
+                        )}
+                      </div>
+
+                      {/* Info del jugador */}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2">
+                          {player.position !== 'D.T.' && player.position !== 'Director Técnico' && (
+                            <span className="bg-primary text-white text-xs font-black px-2 py-0.5 rounded-md">{player.number}</span>
                           )}
+                          <h3 className="font-display font-bold text-sm text-zinc-900 truncate">{player.name}</h3>
                         </div>
-      
-      {/* Oculta el #número si es el D.T. */}
-      {player.position !== 'D.T.' && player.position !== 'Director Técnico' && (
-        <span className="text-xs font-black text-primary mb-1">#{player.number}</span>
-      )}
-      
-      <h3 className="font-display font-bold text-sm text-zinc-900 text-center">{player.name}</h3>
-      <p className="text-[10px] text-zinc-500 font-medium uppercase mt-0.5">{player.position}</p>
-    </div>
-  ))}
-</div>
+                        <p className="text-xs text-zinc-500 font-semibold uppercase mt-1 tracking-wide">{player.position}</p>
+                      </div>
+
+                      {/* Badge opcional */}
+                      {player.position === 'D.T.' || player.position === 'Director Técnico' && (
+                        <span className="bg-yellow-100 text-yellow-800 text-[10px] font-bold px-2 py-1 rounded-full whitespace-nowrap">
+                          D.T.
+                        </span>
+                      )}
+                    </div>
+                  ))}
+                </div>
               )}
             </motion.div>
           )}
@@ -555,13 +565,35 @@ export default function App() {
               </div>
 
               <div className="grid grid-cols-2 gap-3">
+                {/* Imágenes */}
                 {MATCH_IMAGES.map((img, i) => (
                   <div 
-                    key={i} 
+                    key={`img-${i}`} 
                     onClick={() => setSelectedImage(img)}
                     className={`rounded-2xl overflow-hidden shadow-sm aspect-square ${i === 0 ? 'col-span-2 aspect-[2/1]' : ''} cursor-pointer group`}
                   >
                     <img src={img} alt={`Partido ${i}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                  </div>
+                ))}
+
+                {/* Videos */}
+                {MATCH_VIDEOS.map((video, i) => (
+                  <div 
+                    key={`video-${i}`} 
+                    className="rounded-2xl overflow-hidden shadow-sm aspect-square cursor-pointer group relative"
+                  >
+                    <video 
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" 
+                      controls
+                    >
+                      <source src={video} type="video/mp4" />
+                      Tu navegador no soporta videos.
+                    </video>
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors pointer-events-none">
+                      <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
+                        <span className="text-white text-2xl">▶</span>
+                      </div>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -628,7 +660,7 @@ export default function App() {
         <NavItem active={activeTab === 'plantel'} icon={<Users />} label="Plantel" onClick={() => setActiveTab('plantel')} />
         <NavItem active={activeTab === 'tabla'} icon={<Trophy />} label="Tabla" onClick={() => setActiveTab('tabla')} />
         <NavItem active={activeTab === 'fixture'} icon={<Calendar />} label="Fixture" onClick={() => setActiveTab('fixture')} />
-        <NavItem active={activeTab === 'galeria'} icon={<Camera />} label="Fotos" onClick={() => setActiveTab('galeria')} />
+        <NavItem active={activeTab === 'galeria'} icon={<Camera />} label="Galería" onClick={() => setActiveTab('galeria')} />
         <NavItem active={activeTab === 'social'} icon={<Beer />} label="3er Tiempo" onClick={() => setActiveTab('social')} />
       </nav>
       {/* Footer */}

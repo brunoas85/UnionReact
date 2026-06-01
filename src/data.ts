@@ -52,8 +52,8 @@ export const STANDINGS_ZONA_A = [
   { pos: 4, name: "Sarmiento", pts: 21, pj: 12, g: 6, e: 3, p: 3, gf: 32, gc: 17, dif: 15, hasPendingMatches: true },
   { pos: 5, name: "Las Rosas", pts: 21, pj: 13, g: 5, e: 6, p: 2, gf: 28, gc: 19, dif: 9 },
   { pos: 6, name: "Velez", pts: 18, pj: 13, g: 5, e: 3, p: 5, gf: 25, gc: 37, dif: -12 },
-  { pos: 7, name: "Unión", pts: 8, pj: 13, g: 2, e: 2, p: 9, gf: 24, gc: 40, dif: -16, isUserTeam: true },
-  { pos: 8, name: "Dinamo", pts: 0, pj: 13, g: 0, e: 0, p: 13, gf: 10, gc: 55, dif: -45 },
+  { pos: 7, name: "Unión", pts: 11, pj: 14, g: 3, e: 2, p: 9, gf: 27, gc: 42, dif: -15, isUserTeam: true },
+  { pos: 8, name: "Dinamo", pts: 0, pj: 14, g: 0, e: 0, p: 14, gf: 12, gc: 58, dif: -46 },
 ];
 
 export const STANDINGS_ZONA_B = [
@@ -168,28 +168,22 @@ export const FIXTURE = [
     date: "Dom 31 de Mayo",
     time: "11:45",
     stadium: "Albino Stadium",
-    resultado: "",
+    resultado: "3 - 2",
   },
 ];
 
 export const NEWS = [
   {
+    category: "Campeonato",
+    title: "¡Excelente desempeño! Ganamos 3-2 a Dinamo en la última fecha. Primer torneo como equipo, ¡vamos bien! 🔴⚪",
+    time: "Domingo 1 de junio de 2026",
+    image: "/news.png"
+  },
+  {
     category: "Entrenamiento",
     title: "Entrenamientos todos los jueves de 20hs a 21hs en todas las categorías de Unión.",
     location: "Cancha Nº 2 de veteranos",
-    image: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?q=80&w=200&auto=format&fit=crop"
-  },
-  {
-    category: "Refuerzo",
-    title: "¡Bienvenido, Facu Quiroga! Nuevo refuerzo de Unión, a seguir sumando!.",
-    time: "Lunes 25 de mayo de 2026",
-    image: "https://images.unsplash.com/photo-1551958219-acbc608c6377?q=80&w=200&auto=format&fit=crop",
-  },
-  {
-    category: "Refuerzo",
-    title: "Jhona Mendez se suma al plantel! ¡Bienvenido!",
-    time: "Jueves 28 de mayo de 2026",
-    image: "https://images.unsplash.com/photo-1551958219-acbc608c6377?q=80&w=200&auto=format&fit=crop"
+    image: "/Entrenamiento.png"
   },
 ];
 
@@ -198,6 +192,50 @@ export const SOCIAL_EVENT = {
   time: "Sábado",
   description: "Después del partido de los máximos, hay asado. ¡Todos invitados a compartir!"
 };
+
+export const CLASIFICADOS = {
+  title: "Cuartos de Finales",
+  matches: [
+    {
+      id: 1,
+      team1: "Frontera",
+      team2: "Chapelco",
+      date: "Sábado 14 de Junio",
+      time: "15:00",
+      stadium: "Estadio Central"
+    },
+    {
+      id: 2,
+      team1: "Comunicaciones",
+      team2: "Embajadores",
+      date: "Sábado 14 de Junio",
+      time: "17:00",
+      stadium: "Estadio Central"
+    },
+    {
+      id: 3,
+      team1: "Lacar",
+      team2: "Patagonia",
+      date: "Domingo 15 de Junio",
+      time: "15:00",
+      stadium: "Estadio Central"
+    },
+    {
+      id: 4,
+      team1: "Arenal",
+      team2: "Las Rosas",
+      date: "Domingo 15 de Junio",
+      time: "17:00",
+      stadium: "Estadio Central"
+    },
+  ]
+};
+
+export const MATCH_VIDEOS = [
+  "1.mp4",
+  "2.mp4",
+  "3.mp4",
+];
 
 export const MATCH_IMAGES = [
   "UnionPlantel.png",
