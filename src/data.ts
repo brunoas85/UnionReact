@@ -11,7 +11,7 @@ export const CLUB_INFO = {
 };
 
 export const NEXT_MATCH = {
-  opponent: "Dinamo",
+  opponent: "Dínamo",
   opponentLogo: "",
   date: "Dom 31 de Mayo",
   time: "11:45 HS",
@@ -187,6 +187,12 @@ export const NEWS = [
   },
 ];
 
+export const SOCIAL_EVENT = {
+  title: "Asado después del partido",
+  time: "Sábado",
+  description: "Después del partido de los máximos, hay asado. ¡Todos invitados a compartir!"
+};
+
 export const CLASIFICADOS = {
   title: "Cuartos de Finales",
   matches: [
@@ -208,7 +214,7 @@ export const CLASIFICADOS = {
     },
     {
       id: 3,
-      team1: "Lacar",
+      team1: "Lácar",
       team2: "Patagonia",
       date: "Domingo 15 de Junio",
       time: "15:00",
