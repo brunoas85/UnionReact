@@ -555,7 +555,7 @@ export default function App() {
               <div className="flex justify-between items-end mb-2 w-full">
                 {/* El texto va primero para que se posicione a la izquierda */}
                 <p className="text-xs text-zinc-500 font-medium mt-8">
-                  Algunos de los partidos
+                  Algunas de los partidos
                 </p>
                 
                 {/* El título va segundo para que justify-between lo empuje a la derecha */}
@@ -678,14 +678,14 @@ function StandingsTable({ rows }: { rows: any[] }) {
     <table className="w-full text-left">
       <thead className="bg-zinc-50 text-[10px] font-black uppercase tracking-wider text-zinc-400">
         <tr>
-          <th className="px-3 py-3">Pos</th>
-          <th className="px-3 py-3">Equipo</th>
-          <th className="px-3 py-3 text-center">Pts</th>
-          <th className="px-3 py-3 text-center">PJ</th>
-          <th className="px-3 py-3 text-center">G</th>
-          <th className="px-3 py-3 text-center">E</th>
-          <th className="px-3 py-3 text-center">P</th>
-          <th className="px-3 py-3 text-center">Dif</th>
+          <th className="px-2 py-3 w-8">Pos</th>
+          <th className="px-3 py-3 flex-1">Equipo</th>
+          <th className="px-2 py-3 text-center w-10">Pts</th>
+          <th className="px-2 py-3 text-center w-10">PJ</th>
+          <th className="px-2 py-3 text-center w-8">G</th>
+          <th className="px-2 py-3 text-center w-8">E</th>
+          <th className="px-2 py-3 text-center w-8">P</th>
+          <th className="px-2 py-3 text-center w-10">Dif</th>
         </tr>
       </thead>
       <tbody className="text-sm">
@@ -696,34 +696,32 @@ function StandingsTable({ rows }: { rows: any[] }) {
               row.pos <= 4 ? 'bg-emerald-100' : row.isUserTeam ? 'bg-primary/5' : ''
             }`}
           >
-            <td className={`px-3 py-3 font-black ${
-              row.hasPendingMatches ? 'text-red-600' : 'text-zinc-500'
+            <td className={`px-2 py-3 font-black w-8 ${
+              row.hasPendingMatches && !row.isUserTeam ? 'text-red-600' : 'text-zinc-500'
             }`}>
               {row.pos}
             </td>
-            <td className={`px-3 py-3 ${
-              row.hasPendingMatches 
-                ? 'text-red-600 font-bold' 
-                : row.isUserTeam 
+            <td className={`px-3 py-3 flex-1 ${
+              row.isUserTeam 
                 ? 'text-zinc-900 font-black' 
                 : 'text-zinc-700 font-bold'
             }`}>
               {row.name}
             </td>
-            <td className={`px-3 py-3 font-black text-center ${
-              row.hasPendingMatches ? 'text-red-600' : ''
+            <td className={`px-2 py-3 font-black text-center w-10 ${
+              row.hasPendingMatches && !row.isUserTeam ? 'text-red-600' : ''
             }`}>
               {row.pts}
             </td>
-            <td className={`px-3 py-3 text-center ${
-              row.hasPendingMatches ? 'text-red-600' : 'text-zinc-500'
+            <td className={`px-2 py-3 text-center w-10 ${
+              row.hasPendingMatches && !row.isUserTeam ? 'text-red-600' : 'text-zinc-500'
             }`}>
               {row.pj}
             </td>
-            <td className="px-3 py-3 text-center text-zinc-500">{row.g}</td>
-            <td className="px-3 py-3 text-center text-zinc-500">{row.e}</td>
-            <td className="px-3 py-3 text-center text-zinc-500">{row.p}</td>
-            <td className={`px-3 py-3 text-center font-bold ${row.dif > 0 ? 'text-green-600' : row.dif < 0 ? 'text-red-500' : 'text-zinc-400'}`}>
+            <td className="px-2 py-3 text-center w-8 text-zinc-500">{row.g}</td>
+            <td className="px-2 py-3 text-center w-8 text-zinc-500">{row.e}</td>
+            <td className="px-2 py-3 text-center w-8 text-zinc-500">{row.p}</td>
+            <td className={`px-2 py-3 text-center w-10 font-bold ${row.dif > 0 ? 'text-green-600' : row.dif < 0 ? 'text-red-500' : 'text-zinc-400'}`}>
               {row.dif > 0 ? `+${row.dif}` : row.dif}
             </td>
           </tr>

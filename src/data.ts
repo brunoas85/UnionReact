@@ -46,25 +46,25 @@ export const PLAYERS = [
 
 // Tabla real — Apertura 2026 — Categoría Seniors
 export const STANDINGS_ZONA_A = [
-  { pos: 1, name: "Frontera", pts: 29, pj: 12, g: 9, e: 2, p: 1, gf: 45, gc: 10, dif: 35, hasPendingMatches: true },
-  { pos: 2, name: "Comunicaciones", pts: 24, pj: 13, g: 8, e: 0, p: 5, gf: 35, gc: 22, dif: 13 },
-  { pos: 3, name: "Arenal", pts: 23, pj: 13, g: 7, e: 2, p: 4, gf: 32, gc: 31, dif: 1 },
-  { pos: 4, name: "Sarmiento", pts: 21, pj: 12, g: 6, e: 3, p: 3, gf: 32, gc: 17, dif: 15, hasPendingMatches: true },
-  { pos: 5, name: "Las Rosas", pts: 21, pj: 13, g: 5, e: 6, p: 2, gf: 28, gc: 19, dif: 9 },
-  { pos: 6, name: "Velez", pts: 18, pj: 13, g: 5, e: 3, p: 5, gf: 25, gc: 37, dif: -12 },
+  { pos: 1, name: "Frontera", pts: 33, pj: 14, g: 10, e: 3, p: 1, gf: 46, gc: 10, dif: 36 },
+  { pos: 2, name: "Comunicaciones", pts: 27, pj: 14, g: 9, e: 0, p: 5, gf: 40, gc: 23, dif: 17 },
+  { pos: 3, name: "Las Rosas", pts: 24, pj: 14, g: 6, e: 6, p: 2, gf: 33, gc:  20, dif: 13 },
+  { pos: 4, name: "Arenal", pts: 24, pj: 14, g: 7, e: 2, p: 5, gf: 33, gc: 36, dif: -3 },
+  { pos: 5, name: "Sarmiento", pts: 22, pj: 14, g: 6, e: 4, p: 4, gf: 32, gc: 18, dif: 14 },
+  { pos: 6, name: "Vélez", pts: 18, pj: 14, g: 5, e: 3, p: 5, gf: 26, gc: 42, dif: -16 },
   { pos: 7, name: "Unión", pts: 11, pj: 14, g: 3, e: 2, p: 9, gf: 27, gc: 42, dif: -15, isUserTeam: true },
   { pos: 8, name: "Dinamo", pts: 0, pj: 14, g: 0, e: 0, p: 14, gf: 12, gc: 58, dif: -46 },
 ];
 
 export const STANDINGS_ZONA_B = [
-  { pos: 1, name: "Chapelco", pts: 28, pj: 13, g: 8, e: 4, p: 1, gf: 36, gc: 6, dif: 30 },
-  { pos: 2, name: "Embajadores", pts: 25, pj: 12, g: 7, e: 4, p: 1, gf: 30, gc: 11, dif: 19, hasPendingMatches: true },
-  { pos: 3, name: "Lacar", pts: 25, pj: 13, g: 7, e: 4, p: 2, gf: 23, gc: 14, dif: 9 },
-  { pos: 4, name: "Patagonia", pts: 24, pj: 13, g: 6, e: 6, p: 1, gf: 27, gc: 11, dif: 16 },
-  { pos: 5, name: "El Barrio", pts: 16, pj: 13, g: 5, e: 1, p: 7, gf: 23, gc: 23, dif: 0 },
-  { pos: 6, name: "Old Boys", pts: 10, pj: 12, g: 2, e: 4, p: 6, gf: 19, gc: 28, dif: -9, hasPendingMatches: true },
-  { pos: 7, name: "Belgrano", pts: 8, pj: 13, g: 2, e: 2, p: 9, gf: 12, gc: 43, dif: -31 },
-  { pos: 8, name: "Dinosaurios", pts: 3, pj: 13, g: 0, e: 3, p: 10, gf: 3, gc: 37, dif: -34 },
+  { pos: 1, name: "Embajadores", pts: 31, pj: 14, g: 9, e: 4, p: 1, gf: 36, gc: 12, dif: 24 },
+  { pos: 2, name: "Chapelco", pts: 28, pj: 14, g: 8, e: 4, p: 2, gf: 37, gc: 8, dif: 29 },
+  { pos: 3, name: "Lácar", pts: 28, pj: 14, g: 8, e: 4, p: 2, gf: 25, gc: 15, dif: 10 },
+  { pos: 4, name: "Patagonia", pts: 24, pj: 14, g: 6, e: 1, p: 2, gf: 27, gc: 13, dif: 14 },
+  { pos: 5, name: "El Barrio", pts: 19, pj: 14, g: 6, e: 1, p: 7, gf: 26, gc: 23, dif: 3 },
+  { pos: 6, name: "Old Boys", pts: 10, pj: 14, g: 2, e: 4, p: 8, gf: 20, gc: 33, dif: -13 },
+  { pos: 7, name: "Belgrano", pts: 8, pj: 14, g: 2, e: 2, p: 10, gf: 12, gc: 46, dif: -34 },
+  { pos: 8, name: "Dinosaurios", pts: 6, pj: 14, g: 1, e: 3, p: 10, gf: 4, gc: 37, dif: -33 },
 ];
 
 // Mantenemos STANDINGS para compatibilidad con el componente original
@@ -93,7 +93,7 @@ export const FIXTURE = [
     resultado: "2 - 3",
   },
   {
-    rival: "Velez",
+    rival: "Vélez",
     date: "Lun 23 de Marzo",
     time: "21:30",
     stadium: "Albino Stadium",
@@ -114,7 +114,7 @@ export const FIXTURE = [
     resultado: "3 - 2",
   },
   {
-    rival: "Dinamo",
+    rival: "Dínamo",
     date: "Dom 19 de Abril",
     time: "11:45",
     stadium: "Albino Stadium",
@@ -135,7 +135,7 @@ export const FIXTURE = [
     resultado: "1 - 4",
   },
   {
-    rival: "Velez",
+    rival: "Vélez",
     date: "Vie 08 de Mayo",
     time: "21:30",
     stadium: "Albino Stadium",
@@ -164,7 +164,7 @@ export const FIXTURE = [
     resultado: "",
   },
   {
-    rival: "Dinamo",
+    rival: "Dínamo",
     date: "Dom 31 de Mayo",
     time: "11:45",
     stadium: "Albino Stadium",
@@ -175,7 +175,7 @@ export const FIXTURE = [
 export const NEWS = [
   {
     category: "Campeonato",
-    title: "¡Excelente desempeño! Ganamos 3-2 a Dinamo en la última fecha. Primer torneo como equipo, ¡vamos bien! 🔴⚪",
+    title: "¡Excelente desempeño! Ganamos 3-2 a Dínamo en la última fecha. Primer torneo como equipo, ¡vamos bien! 🔴⚪",
     time: "Domingo 1 de junio de 2026",
     image: "/news.png"
   },
@@ -186,12 +186,6 @@ export const NEWS = [
     image: "/Entrenamiento.png"
   },
 ];
-
-export const SOCIAL_EVENT = {
-  title: "Asado después del partido",
-  time: "Sábado",
-  description: "Después del partido de los máximos, hay asado. ¡Todos invitados a compartir!"
-};
 
 export const CLASIFICADOS = {
   title: "Cuartos de Finales",
