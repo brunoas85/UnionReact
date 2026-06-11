@@ -3,6 +3,26 @@
  * Imágenes: copiá UnionEscudo.png y UnionPlantel.png a la carpeta /public del proyecto
  */
 
+// Mapeo de nombres de equipos a logos
+const TEAM_LOGOS: Record<string, string> = {
+  "Frontera": "/escudo-frontera.png",
+  "Comunicaciones": "/escudo-comunicaciones.png",
+  "Las Rosas": "/escudo-lasrosas.png",
+  "Arenal": "/escudo-arenal.png",
+  "Sarmiento": "/escudo-sarmiento.png",
+  "Vélez": "/escudo-vélez.png",
+  "Unión": "/UnionEscudo.png",
+  "Dinamo": "/escudo-dinamo.png",
+  "Embajadores": "/escudo-embajadores.png",
+  "Chapelco": "/escudo-chapelco.png",
+  "Lácar": "/escudo-lácar.png",
+  "Patagonia": "/escudo-patagonia.png",
+  "El Barrio": "/escudo-elbarrio.png",
+  "Old Boys": "/escudo-oldboys.png",
+  "Belgrano": "/escudo-belgrano.png",
+  "Dinosaurios": "/escudo-dinosaurios.png",
+};
+
 export const CLUB_INFO = {
   name: "Unión",
   location: "San Martín de los Andes",
@@ -12,7 +32,7 @@ export const CLUB_INFO = {
 
 export const NEXT_MATCH = {
   opponent: "Dínamo",
-  opponentLogo: "",
+  opponentLogo: TEAM_LOGOS["Dínamo"],
   date: "Dom 31 de Mayo",
   time: "11:45 HS",
   stadium: "Albino Stadium",
@@ -46,25 +66,25 @@ export const PLAYERS = [
 
 // Tabla real — Apertura 2026 — Categoría Seniors
 export const STANDINGS_ZONA_A = [
-  { pos: 1, name: "Frontera", pts: 33, pj: 14, g: 10, e: 3, p: 1, gf: 46, gc: 10, dif: 36 },
-  { pos: 2, name: "Comunicaciones", pts: 27, pj: 14, g: 9, e: 0, p: 5, gf: 40, gc: 23, dif: 17 },
-  { pos: 3, name: "Las Rosas", pts: 24, pj: 14, g: 6, e: 6, p: 2, gf: 33, gc:  20, dif: 13 },
-  { pos: 4, name: "Arenal", pts: 24, pj: 14, g: 7, e: 2, p: 5, gf: 33, gc: 36, dif: -3 },
-  { pos: 5, name: "Sarmiento", pts: 22, pj: 14, g: 6, e: 4, p: 4, gf: 32, gc: 18, dif: 14 },
-  { pos: 6, name: "Vélez", pts: 18, pj: 14, g: 5, e: 3, p: 5, gf: 26, gc: 42, dif: -16 },
-  { pos: 7, name: "Unión", pts: 11, pj: 14, g: 3, e: 2, p: 9, gf: 27, gc: 42, dif: -15, isUserTeam: true },
-  { pos: 8, name: "Dinamo", pts: 0, pj: 14, g: 0, e: 0, p: 14, gf: 12, gc: 58, dif: -46 },
+  { pos: 1, name: "Frontera", pts: 33, pj: 14, g: 10, e: 3, p: 1, gf: 46, gc: 10, dif: 36, logo: "/escudo-frontera.png" },
+  { pos: 2, name: "Comunicaciones", pts: 27, pj: 14, g: 9, e: 0, p: 5, gf: 40, gc: 23, dif: 17, logo: "/escudo-comunicaciones.png" },
+  { pos: 3, name: "Las Rosas", pts: 24, pj: 14, g: 6, e: 6, p: 2, gf: 33, gc:  20, dif: 13, logo: "/escudo-lasrosas.png" },
+  { pos: 4, name: "Arenal", pts: 24, pj: 14, g: 7, e: 2, p: 5, gf: 33, gc: 36, dif: -3, logo: "/escudo-arenal.png" },
+  { pos: 5, name: "Sarmiento", pts: 22, pj: 14, g: 6, e: 4, p: 4, gf: 32, gc: 18, dif: 14, logo: "/escudo-sarmiento.png" },
+  { pos: 6, name: "Vélez", pts: 18, pj: 14, g: 5, e: 3, p: 5, gf: 26, gc: 42, dif: -16, logo: "/escudo-vélez.png" },
+  { pos: 7, name: "Unión", pts: 11, pj: 14, g: 3, e: 2, p: 9, gf: 27, gc: 42, dif: -15, isUserTeam: true, logo: "/UnionEscudo.png" },
+  { pos: 8, name: "Dinamo", pts: 0, pj: 14, g: 0, e: 0, p: 14, gf: 12, gc: 58, dif: -46, logo: "/escudo-dinamo.png" },
 ];
 
 export const STANDINGS_ZONA_B = [
-  { pos: 1, name: "Embajadores", pts: 31, pj: 14, g: 9, e: 4, p: 1, gf: 36, gc: 12, dif: 24 },
-  { pos: 2, name: "Chapelco", pts: 28, pj: 14, g: 8, e: 4, p: 2, gf: 37, gc: 8, dif: 29 },
-  { pos: 3, name: "Lácar", pts: 28, pj: 14, g: 8, e: 4, p: 2, gf: 25, gc: 15, dif: 10 },
-  { pos: 4, name: "Patagonia", pts: 24, pj: 14, g: 6, e: 1, p: 2, gf: 27, gc: 13, dif: 14 },
-  { pos: 5, name: "El Barrio", pts: 19, pj: 14, g: 6, e: 1, p: 7, gf: 26, gc: 23, dif: 3 },
-  { pos: 6, name: "Old Boys", pts: 10, pj: 14, g: 2, e: 4, p: 8, gf: 20, gc: 33, dif: -13 },
-  { pos: 7, name: "Belgrano", pts: 8, pj: 14, g: 2, e: 2, p: 10, gf: 12, gc: 46, dif: -34 },
-  { pos: 8, name: "Dinosaurios", pts: 6, pj: 14, g: 1, e: 3, p: 10, gf: 4, gc: 37, dif: -33 },
+  { pos: 1, name: "Embajadores", pts: 31, pj: 14, g: 9, e: 4, p: 1, gf: 36, gc: 12, dif: 24, logo: "/escudo-embajadores.png" },
+  { pos: 2, name: "Chapelco", pts: 28, pj: 14, g: 8, e: 4, p: 2, gf: 37, gc: 8, dif: 29, logo: "/escudo-chapelco.png" },
+  { pos: 3, name: "Lácar", pts: 28, pj: 14, g: 8, e: 4, p: 2, gf: 25, gc: 15, dif: 10, logo: "/escudo-lácar.png" },
+  { pos: 4, name: "Patagonia", pts: 24, pj: 14, g: 6, e: 1, p: 2, gf: 27, gc: 13, dif: 14, logo: "/escudo-patagonia.png" },
+  { pos: 5, name: "El Barrio", pts: 19, pj: 14, g: 6, e: 1, p: 7, gf: 26, gc: 23, dif: 3, logo: "/escudo-elbarrio.png" },
+  { pos: 6, name: "Old Boys", pts: 10, pj: 14, g: 2, e: 4, p: 8, gf: 20, gc: 33, dif: -13, logo: "/escudo-oldboys.png" },
+  { pos: 7, name: "Belgrano", pts: 8, pj: 14, g: 2, e: 2, p: 10, gf: 12, gc: 46, dif: -34, logo: "/escudo-belgrano.png" },
+  { pos: 8, name: "Dinosaurios", pts: 6, pj: 14, g: 1, e: 3, p: 10, gf: 4, gc: 37, dif: -33, logo: "/escudo-dinosaurios.png" },
 ];
 
 // Mantenemos STANDINGS para compatibilidad con el componente original
@@ -77,6 +97,7 @@ export const FIXTURE = [
     time: "10:00",
     stadium: "Albino Stadium",
     resultado: "1 - 2",
+    logo: TEAM_LOGOS["Frontera"],
   },
   {
     rival: "Las Rosas",
@@ -84,6 +105,7 @@ export const FIXTURE = [
     time: "21:30",
     stadium: "Albino Stadium",
     resultado: "1 - 1",
+    logo: TEAM_LOGOS["Las Rosas"],
   },
   {
     rival: "Sarmiento",
@@ -91,6 +113,7 @@ export const FIXTURE = [
     time: "13:30",
     stadium: "Albino Stadium",
     resultado: "2 - 3",
+    logo: TEAM_LOGOS["Sarmiento"],
   },
   {
     rival: "Vélez",
@@ -98,6 +121,7 @@ export const FIXTURE = [
     time: "21:30",
     stadium: "Albino Stadium",
     resultado: "1 - 1",
+    logo: TEAM_LOGOS["Vélez"],
   },
   {
     rival: "Arenal",
@@ -105,6 +129,7 @@ export const FIXTURE = [
     time: "13:30",
     stadium: "Albino Stadium",
     resultado: "1 - 4",
+    logo: TEAM_LOGOS["Arenal"],
   },
   {
     rival: "Comunicaciones",
@@ -112,6 +137,7 @@ export const FIXTURE = [
     time: "19:45",
     stadium: "Albino Stadium",
     resultado: "3 - 2",
+    logo: TEAM_LOGOS["Comunicaciones"],
   },
   {
     rival: "Dínamo",
@@ -119,6 +145,7 @@ export const FIXTURE = [
     time: "11:45",
     stadium: "Albino Stadium",
     resultado: "8 - 6",
+    logo: TEAM_LOGOS["Dínamo"],
   },
   {
     rival: "Frontera",
@@ -126,6 +153,7 @@ export const FIXTURE = [
     time: "17:00",
     stadium: "Albino Stadium",
     resultado: "1 - 7",
+    logo: TEAM_LOGOS["Frontera"],
   },
   {
     rival: "Sarmiento",
@@ -133,6 +161,7 @@ export const FIXTURE = [
     time: "21:30",
     stadium: "Albino Stadium",
     resultado: "1 - 4",
+    logo: TEAM_LOGOS["Sarmiento"],
   },
   {
     rival: "Vélez",
@@ -140,6 +169,7 @@ export const FIXTURE = [
     time: "21:30",
     stadium: "Albino Stadium",
     resultado: "0 - 1",
+    logo: TEAM_LOGOS["Vélez"],
   },
   {
     rival: "Arenal",
@@ -147,6 +177,7 @@ export const FIXTURE = [
     time: "13:30",
     stadium: "Albino Stadium",
     resultado: "1 - 3",
+    logo: TEAM_LOGOS["Arenal"],
   },
   {
     rival: "Las Rosas",
@@ -154,6 +185,7 @@ export const FIXTURE = [
     time: "21:30",
     stadium: "Albino Stadium",
     resultado: "2 - 3",
+    logo: TEAM_LOGOS["Las Rosas"],
   },
   // Próximos — sin resultado
   {
@@ -162,6 +194,7 @@ export const FIXTURE = [
     time: "18:45",
     stadium: "Albino Stadium",
     resultado: "",
+    logo: TEAM_LOGOS["Comunicaciones"],
   },
   {
     rival: "Dínamo",
@@ -169,19 +202,14 @@ export const FIXTURE = [
     time: "11:45",
     stadium: "Albino Stadium",
     resultado: "3 - 2",
+    logo: TEAM_LOGOS["Dínamo"],
   },
 ];
 
 export const NEWS = [
   {
-    category: "Campeonato",
-    title: "¡Excelente desempeño! Ganamos 3-2 a Dínamo en la última fecha. Primer torneo como equipo, ¡vamos bien! 🔴⚪",
-    time: "Domingo 1 de junio de 2026",
-    image: "/news.png"
-  },
-  {
-    category: "Entrenamiento",
-    title: "Entrenamientos todos los jueves de 20hs a 21hs en todas las categorías de Unión.",
+    category: "Entrenamiento - NUEVO DÍA Y HORARIO!",
+    title: "Entrenamientos todos los viernes de 21hs a 22hs en todas las categorías de Unión.",
     location: "Cancha Nº 2 de veteranos",
     image: "/Entrenamiento.png"
   },
@@ -194,39 +222,27 @@ export const SOCIAL_EVENT = {
 };
 
 export const CLASIFICADOS = {
-  title: "Cuartos de Finales",
+  title: "Semifinales",
   matches: [
     {
       id: 1,
       team1: "Frontera",
       team2: "Chapelco",
-      date: "Sábado 14 de Junio",
-      time: "15:00",
-      stadium: "Estadio Central"
+      logo1: TEAM_LOGOS["Frontera"],
+      logo2: TEAM_LOGOS["Chapelco"],
+      date: "Domingo 14 de Junio",
+      time: "14:00",
+      stadium: "Albino Stadium"
     },
     {
       id: 2,
       team1: "Comunicaciones",
-      team2: "Embajadores",
-      date: "Sábado 14 de Junio",
-      time: "17:00",
-      stadium: "Estadio Central"
-    },
-    {
-      id: 3,
-      team1: "Lácar",
-      team2: "Patagonia",
-      date: "Domingo 15 de Junio",
-      time: "15:00",
-      stadium: "Estadio Central"
-    },
-    {
-      id: 4,
-      team1: "Arenal",
-      team2: "Las Rosas",
-      date: "Domingo 15 de Junio",
-      time: "17:00",
-      stadium: "Estadio Central"
+      team2: "Arenal",
+      logo1: TEAM_LOGOS["Comunicaciones"],
+      logo2: TEAM_LOGOS["Arenal"],
+      date: "Domingo 14 de Junio",
+      time: "16:00",
+      stadium: "Albino Stadium"
     },
   ]
 };

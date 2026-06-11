@@ -255,7 +255,7 @@ export default function App() {
               {/* Noticias */}
               <section className="px-4 pb-4">
                 <div className="flex justify-between items-center mb-4">
-                  <h3 className="font-display font-bold text-lg text-zinc-900">Últimas Noticias</h3>
+                  <h3 className="font-display font-bold text-lg text-zinc-900">Noticias</h3>
                 </div>
                 <div className="space-y-3">
                   {NEWS.map(({ category, title, time, image, isFeatured, location }, i) => (
@@ -272,12 +272,18 @@ export default function App() {
                   {CLASIFICADOS.matches.map((match, i) => (
                     <div key={i} className="bg-gradient-to-r from-primary/10 to-primary/5 border border-primary/20 rounded-xl p-4">
                       <div className="flex items-center justify-between mb-3">
-                        <div className="flex-1">
+                        <div className="flex-1 flex items-center gap-2">
+                          {match.logo1 && (
+                            <img src={match.logo1} alt={match.team1} className="w-6 h-6 object-contain" />
+                          )}
                           <p className="text-xs font-bold text-zinc-900">{match.team1}</p>
                         </div>
                         <span className="text-[10px] font-bold text-zinc-500 px-2">VS</span>
-                        <div className="flex-1 text-right">
+                        <div className="flex-1 text-right flex items-center gap-2 justify-end">
                           <p className="text-xs font-bold text-zinc-900">{match.team2}</p>
+                          {match.logo2 && (
+                            <img src={match.logo2} alt={match.team2} className="w-6 h-6 object-contain" />
+                          )}
                         </div>
                       </div>
                       <div className="space-y-1 text-[10px] text-zinc-600 font-medium">
@@ -679,6 +685,7 @@ function StandingsTable({ rows }: { rows: any[] }) {
       <thead className="bg-zinc-50 text-[10px] font-black uppercase tracking-wider text-zinc-400">
         <tr>
           <th className="px-2 py-3 w-8">Pos</th>
+          <th className="px-1 py-3 w-8"></th>
           <th className="px-3 py-3 flex-1">Equipo</th>
           <th className="px-2 py-3 text-center w-10">Pts</th>
           <th className="px-2 py-3 text-center w-10">PJ</th>
@@ -700,6 +707,11 @@ function StandingsTable({ rows }: { rows: any[] }) {
               row.hasPendingMatches && !row.isUserTeam ? 'text-red-600' : 'text-zinc-500'
             }`}>
               {row.pos}
+            </td>
+            <td className="px-1 py-3 w-8 flex items-center justify-center">
+              {row.logo && (
+                <img src={row.logo} alt={row.name} className="w-6 h-6 object-contain" />
+              )}
             </td>
             <td className={`px-3 py-3 flex-1 ${
               row.isUserTeam 
@@ -795,10 +807,25 @@ function FixtureItem({ match, index }: { match: any; index: number }) {
         onClick={() => setIsExpanded(!isExpanded)}
         className="w-full p-4 flex items-center justify-between text-left"
       >
-        <div>
+        <div className="flex-1">
           <span className="text-[10px] font-black text-primary uppercase tracking-widest">Fecha {index}</span>
-          <h3 className="font-display font-bold text-lg text-zinc-900">{match.rival}</h3>
-          <div className="flex items-center gap-2 text-xs text-zinc-500 mt-1">
+          
+          {/* Vs match display */}
+          <div className="flex items-center justify-between gap-2 my-2">
+            <div className="flex items-center gap-2 flex-1">
+              <img src="/UnionEscudo.png" alt="Unión" className="w-8 h-8 object-contain" />
+              <span className="font-display font-bold text-sm text-zinc-900">Unión</span>
+            </div>
+            <span className="text-xs font-black text-zinc-400 px-2">vs</span>
+            <div className="flex items-center gap-2 flex-1 justify-end">
+              <span className="font-display font-bold text-sm text-zinc-900">{match.rival}</span>
+              {match.logo && (
+                <img src={match.logo} alt={match.rival} className="w-8 h-8 object-contain" />
+              )}
+            </div>
+          </div>
+          
+          <div className="flex items-center gap-2 text-xs text-zinc-500">
             <Calendar className="w-3 h-3" />
             <span>{match.date} — {match.time}hs</span>
           </div>
