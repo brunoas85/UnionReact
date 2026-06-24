@@ -210,7 +210,6 @@ export const NEWS = [
   {
     category: "Campeón - Apertura 2026",
     title: "¡Felicitaciones a Comunicaciones, nuevo campeón del Apertura 2026!",
-    location: "Albino Stadium",
     image: TEAM_LOGOS["Comunicaciones"]
   },
   {
