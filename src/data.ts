@@ -18,7 +18,7 @@ const TEAM_LOGOS: Record<string, string> = {
   "Lácar": "/escudo-lácar.png",
   "Patagonia": "/escudo-patagonia.png",
   "El Barrio": "/escudo-elbarrio.png",
-  "Old Boys": "/escudo-oldboys.png",
+  "All Boys": "/escudo-allBoys.png",
   "Belgrano": "/escudo-belgrano.png",
   "Dinosaurios": "/escudo-dinosaurios.png",
 };
@@ -82,7 +82,7 @@ export const STANDINGS_ZONA_B = [
   { pos: 3, name: "Lácar", pts: 28, pj: 14, g: 8, e: 4, p: 2, gf: 25, gc: 15, dif: 10, logo: "/escudo-lácar.png" },
   { pos: 4, name: "Patagonia", pts: 24, pj: 14, g: 6, e: 1, p: 2, gf: 27, gc: 13, dif: 14, logo: "/escudo-patagonia.png" },
   { pos: 5, name: "El Barrio", pts: 19, pj: 14, g: 6, e: 1, p: 7, gf: 26, gc: 23, dif: 3, logo: "/escudo-elbarrio.png" },
-  { pos: 6, name: "Old Boys", pts: 10, pj: 14, g: 2, e: 4, p: 8, gf: 20, gc: 33, dif: -13, logo: "/escudo-oldboys.png" },
+  { pos: 6, name: "All Boys", pts: 10, pj: 14, g: 2, e: 4, p: 8, gf: 20, gc: 33, dif: -13, logo: "/escudo-allBoys.png" },
   { pos: 7, name: "Belgrano", pts: 8, pj: 14, g: 2, e: 2, p: 10, gf: 12, gc: 46, dif: -34, logo: "/escudo-belgrano.png" },
   { pos: 8, name: "Dinosaurios", pts: 6, pj: 14, g: 1, e: 3, p: 10, gf: 4, gc: 37, dif: -33, logo: "/escudo-dinosaurios.png" },
 ];
@@ -208,6 +208,12 @@ export const FIXTURE = [
 
 export const NEWS = [
   {
+    category: "Campeón - Apertura 2026",
+    title: "¡Felicitaciones a Comunicaciones, nuevo campeón del Apertura 2026!",
+    location: "Albino Stadium",
+    image: TEAM_LOGOS["Comunicaciones"]
+  },
+  {
     category: "Entrenamiento - NUEVO DÍA Y HORARIO!",
     title: "Entrenamientos todos los viernes de 21hs a 22hs en todas las categorías de Unión.",
     location: "Cancha Nº 2 de veteranos",
@@ -219,32 +225,6 @@ export const SOCIAL_EVENT = {
   title: "Asado después del partido",
   time: "Sábado",
   description: "Después del partido de los máximos, hay asado. ¡Todos invitados a compartir!"
-};
-
-export const CLASIFICADOS = {
-  title: "Semifinales",
-  matches: [
-    {
-      id: 1,
-      team1: "Frontera",
-      team2: "Chapelco",
-      logo1: TEAM_LOGOS["Frontera"],
-      logo2: TEAM_LOGOS["Chapelco"],
-      date: "Domingo 14 de Junio",
-      time: "14:00",
-      stadium: "Albino Stadium"
-    },
-    {
-      id: 2,
-      team1: "Comunicaciones",
-      team2: "Arenal",
-      logo1: TEAM_LOGOS["Comunicaciones"],
-      logo2: TEAM_LOGOS["Arenal"],
-      date: "Domingo 14 de Junio",
-      time: "16:00",
-      stadium: "Albino Stadium"
-    },
-  ]
 };
 
 export const MATCH_VIDEOS = [

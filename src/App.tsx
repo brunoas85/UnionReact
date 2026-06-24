@@ -11,6 +11,7 @@ import {
   Calendar,
   Beer,
   ChevronRight,
+  ChevronLeft,
   MapPin,
   Clock,
   Facebook,
@@ -32,7 +33,6 @@ import {
   NEWS,
   SOCIAL_EVENT,
   MATCH_IMAGES,
-  CLASIFICADOS,
   MATCH_VIDEOS,
 } from './data';
 import { supabase } from './supabaseClient';
@@ -47,6 +47,7 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [fixtureList, setFixtureList] = useState<any[]>([]);
   const [loadingFixture, setLoadingFixture] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState<'maxi' | 'supermaxi' | 'master' | null>(null);
 
   // Traer los jugadores desde Supabase al arrancar la app
   useEffect(() => {
@@ -114,6 +115,10 @@ export default function App() {
       document.body.style.overflow = 'unset';
     }
   }, [notifOpen]);
+
+  useEffect(() => {
+    if (activeTab !== 'inicio') setSelectedCategory(null);
+  }, [activeTab]);
 
   return (
     <div className="min-h-screen bg-surface flex flex-col max-w-md mx-auto relative shadow-2xl">
@@ -208,7 +213,7 @@ export default function App() {
         <AnimatePresence mode="wait">
 
           {/* ── INICIO ── */}
-          {activeTab === 'inicio' && (
+          {activeTab === 'inicio' && !selectedCategory && (
             <motion.div
               key="inicio"
               initial={{ opacity: 0, y: 10 }}
@@ -258,45 +263,9 @@ export default function App() {
                   <h3 className="font-display font-bold text-lg text-zinc-900">Noticias</h3>
                 </div>
                 <div className="space-y-3">
-                  {NEWS.map(({ category, title, time, image, isFeatured, location }, i) => (
+                  {NEWS.map(({ category, title, image, location }, i) => (
                     // @ts-ignore - key es una propiedad especial de React, no se pasa en props
-                    <NewsCard key={i} category={category} title={title} time={time} image={image} isFeatured={isFeatured} location={location} />
-                  ))}
-                </div>
-              </section>
-
-              {/* Clasificados */}
-              <section className="px-4 pb-4">
-                <h3 className="font-display font-bold text-lg text-zinc-900 mb-4">{CLASIFICADOS.title}</h3>
-                <div className="space-y-3">
-                  {CLASIFICADOS.matches.map((match, i) => (
-                    <div key={i} className="bg-gradient-to-r from-primary/10 to-primary/5 border border-primary/20 rounded-xl p-4">
-                      <div className="flex items-center justify-between mb-3">
-                        <div className="flex-1 flex items-center gap-2">
-                          {match.logo1 && (
-                            <img src={match.logo1} alt={match.team1} className="w-6 h-6 object-contain" />
-                          )}
-                          <p className="text-xs font-bold text-zinc-900">{match.team1}</p>
-                        </div>
-                        <span className="text-[10px] font-bold text-zinc-500 px-2">VS</span>
-                        <div className="flex-1 text-right flex items-center gap-2 justify-end">
-                          <p className="text-xs font-bold text-zinc-900">{match.team2}</p>
-                          {match.logo2 && (
-                            <img src={match.logo2} alt={match.team2} className="w-6 h-6 object-contain" />
-                          )}
-                        </div>
-                      </div>
-                      <div className="space-y-1 text-[10px] text-zinc-600 font-medium">
-                        <span className="flex items-center gap-1">
-                          <Calendar className="w-3 h-3" />
-                          {match.date} - {match.time}
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <MapPin className="w-3 h-3" />
-                          {match.stadium}
-                        </span>
-                      </div>
-                    </div>
+                    <NewsCard key={i} category={category} title={title} image={image} location={location} />
                   ))}
                 </div>
               </section>
@@ -362,6 +331,54 @@ export default function App() {
                   </div>
                 </div>
               </section>
+
+              {/* Otras Categorías */}
+              <section className="px-4 pb-6">
+                <h3 className="font-display font-bold text-lg text-zinc-900 mb-4">Otras Categorías</h3>
+                <div className="grid grid-cols-3 gap-3">
+                  {[
+                    { key: 'maxi' as const, label: 'Maxi', color: 'from-orange-500 to-orange-400' },
+                    { key: 'supermaxi' as const, label: 'Súper Maxi', color: 'from-blue-600 to-blue-500' },
+                    { key: 'master' as const, label: 'Master', color: 'from-emerald-600 to-emerald-500' },
+                  ].map(cat => (
+                    <button
+                      key={cat.key}
+                      onClick={() => setSelectedCategory(cat.key)}
+                      className={`bg-gradient-to-br ${cat.color} rounded-2xl p-4 text-white text-left flex flex-col gap-2 shadow-md active:scale-95 transition-transform`}
+                    >
+                      <Trophy className="w-5 h-5 opacity-80" />
+                      <span className="font-display font-bold text-xs leading-tight">{cat.label}</span>
+                      <span className="text-[9px] bg-white/20 px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider w-fit">Ver más</span>
+                    </button>
+                  ))}
+                </div>
+              </section>
+            </motion.div>
+          )}
+
+          {/* ── CATEGORÍA ── */}
+          {activeTab === 'inicio' && selectedCategory && (
+            <motion.div
+              key={`cat-${selectedCategory}`}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              className="p-4 space-y-6"
+            >
+              <button
+                onClick={() => setSelectedCategory(null)}
+                className="flex items-center gap-2 text-primary font-bold text-sm mt-2"
+              >
+                <ChevronLeft className="w-4 h-4" /> Volver al inicio
+              </button>
+              <h2 className="font-display font-black text-2xl text-zinc-900">
+                {selectedCategory === 'maxi' ? 'Categoría Maxi' : selectedCategory === 'supermaxi' ? 'Categoría Súper Maxi' : 'Categoría Master'}
+              </h2>
+              <div className="bg-zinc-50 border-2 border-dashed border-zinc-200 rounded-2xl p-10 text-center space-y-4">
+                <Trophy className="w-16 h-16 text-zinc-200 mx-auto" />
+                <p className="font-display font-bold text-lg text-zinc-400">Próximamente</p>
+                <p className="text-xs text-zinc-400">La información de esta categoría estará disponible pronto.</p>
+              </div>
             </motion.div>
           )}
 
