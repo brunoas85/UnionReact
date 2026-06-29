@@ -64,6 +64,92 @@ export const PLAYERS = [
   { name: "Flores, Facundo Emilio", position: "Director Técnico", number: "DT", avatar: "avatar-21.png" },
 ];
 
+// Plantel — Categoría Maxi (UNION EQUIPOS 2026.xlsx)
+export const PLAYERS_MAXI = [
+  { name: "Mamuchi, Dario Raul", position: "Director Técnico", number: "DT" },
+  { name: "Brocardo, Martin Alberto", position: "Jugador", number: "2" },
+  { name: "Rodriguez Basso, Emiliano Alberto", position: "Jugador", number: "3" },
+  { name: "Gasparro, Diego Gabriel", position: "Jugador", number: "4" },
+  { name: "Barruti, Facundo Esequiel", position: "Jugador", number: "5" },
+  { name: "Brizuela, Juan Ignacio", position: "Jugador", number: "6" },
+  { name: "Pissaco, Carlos Nicolas", position: "Jugador", number: "7" },
+  { name: "Baron, Alejandro David", position: "Jugador", number: "8" },
+  { name: "Sierra, Lucas Marcelo", position: "Jugador", number: "9" },
+  { name: "Alvarez, Lucas Santiago", position: "Jugador", number: "10" },
+  { name: "Lagrost, Roberto Esteban", position: "Jugador", number: "11" },
+  { name: "Bagnat, Maximiliano", position: "Jugador", number: "12" },
+  { name: "De Miguel, Fernando Agustin", position: "Jugador", number: "13" },
+  { name: "Carrizo, Sebastian Fernando", position: "Jugador", number: "14" },
+  { name: "Andreu, Gustavo Rene", position: "Jugador", number: "15" },
+  { name: "Garcia Lemos, Carlos Alberto", position: "Jugador", number: "16" },
+  { name: "Caldentey, Ernesto", position: "Jugador", number: "17" },
+  { name: "Berretta, Fernando", position: "Jugador", number: "18" },
+  { name: "Jara, Cristian", position: "Jugador", number: "19" },
+  { name: "Romero, Pablo Gaston", position: "Jugador", number: "20" },
+  { name: "Altube, Mauro Gastos", position: "Jugador", number: "21" },
+  { name: "Prieto, Marcelo", position: "Jugador", number: "22" },
+  { name: "Ordoñez, Augusto", position: "Jugador", number: "23" },
+  { name: "Morate, Christian Alejandro", position: "Jugador", number: "24" },
+];
+
+// Plantel — Categoría Súper Maxi (UNION EQUIPOS 2026.xlsx)
+export const PLAYERS_SUPERMAXI = [
+  { name: "Muñoz, Eliseo Moises", position: "Ayudante de Campo", number: "AC" },
+  { name: "Dutto, Pablo Fernando", position: "Jugador", number: "2" },
+  { name: "Almada, Gustavo Daniel", position: "Jugador", number: "3" },
+  { name: "Vranken, Christian Joel", position: "Jugador", number: "4" },
+  { name: "Ayala, Emiliano Daniel", position: "Jugador", number: "5" },
+  { name: "Houssey, Agustin", position: "Jugador", number: "6" },
+  { name: "Tacone, Alejandro Ruben", position: "Jugador", number: "7" },
+  { name: "Nuske, Humberto Fredy", position: "Jugador", number: "8" },
+  { name: "Garnica, Marcelo", position: "Jugador", number: "9" },
+  { name: "Pellegrini, Alejandro Julian", position: "Jugador", number: "10" },
+  { name: "Baltazar, Alberto David", position: "Jugador", number: "11" },
+  { name: "Bischoff, Marcelo Martin", position: "Jugador", number: "12" },
+  { name: "Lopez, Pablo Daniel", position: "Jugador", number: "13" },
+  { name: "Amil, Javier Sebastian", position: "Jugador", number: "14" },
+  { name: "Blanco, Gustavo Agustin", position: "Jugador", number: "15" },
+  { name: "Costa, Sergio Daniel", position: "Jugador", number: "16" },
+  { name: "Galan, Alejandro Daniel", position: "Jugador", number: "17" },
+  { name: "Laguna, Maximiliano Luis", position: "Jugador", number: "18" },
+  { name: "Guerrero, Damian", position: "Jugador", number: "19" },
+  { name: "Conde, Ariel Fernando", position: "Jugador", number: "20" },
+  { name: "Vera, Daniel Gustavo", position: "Jugador", number: "21" },
+];
+
+// Plantel — Categoría Master (UNION EQUIPOS 2026.xlsx)
+export const PLAYERS_MASTER = [
+  { name: "Graziano, Jorge", position: "Jugador", number: "1" },
+  { name: "Agnone, Hector", position: "Jugador", number: "2" },
+  { name: "Moreno, Antonio", position: "Jugador", number: "3" },
+  { name: "Cabrera, Abel Alcide", position: "Jugador", number: "4" },
+  { name: "Payal, Leopoldo", position: "Jugador", number: "5" },
+  { name: "Astete, Guillermo", position: "Jugador", number: "6" },
+  { name: "Andrada, Alejandro", position: "Jugador", number: "7" },
+  { name: "Bravo, Argentino", position: "Jugador", number: "8" },
+  { name: "Huenteo, Domingo", position: "Jugador", number: "9" },
+  { name: "Urra Ponce, Sergio", position: "Jugador", number: "10" },
+  { name: "Cornaló, Fabian Hector", position: "Jugador", number: "11" },
+  { name: "Rodriguez, Candelario Omar", position: "Jugador", number: "12" },
+  { name: "Quintana Fica, Carlos M", position: "Jugador", number: "13" },
+  { name: "Coliluan, Ernesto", position: "Jugador", number: "14" },
+  { name: "Rimas, Adrian Horacio", position: "Jugador", number: "15" },
+  { name: "Castillo, Santiago", position: "Jugador", number: "16" },
+  { name: "Malagueño, Jose Gabriel", position: "Jugador", number: "17" },
+  { name: "Kuasñosky, Gustavo Fabian", position: "Jugador", number: "18" },
+  { name: "Cavalcanti, Jose Maria", position: "Jugador", number: "19" },
+  { name: "Lavanderos, Lindor", position: "Jugador", number: "20" },
+  { name: "Sepulveda, Modesto Honorio", position: "Jugador", number: "21" },
+  { name: "Jara, Tomas Daniel", position: "Jugador", number: "22" },
+  { name: "Saavedra, Nelson Ruben", position: "Jugador", number: "23" },
+  { name: "Fernandez, Edgar Alfredo", position: "Jugador", number: "24" },
+  { name: "Esteves, Emilio", position: "Jugador", number: "25" },
+  { name: "Batifora, Christian", position: "Jugador", number: "26" },
+  { name: "Barreiro, Cristian", position: "Jugador", number: "27" },
+  { name: "Tevez, Mario", position: "Jugador", number: "28" },
+  { name: "Valiña Lema, Javier Leonel", position: "Jugador", number: "29" },
+];
+
 // Tabla real — Apertura 2026 — Categoría Seniors
 export const STANDINGS_ZONA_A = [
   { pos: 1, name: "Frontera", pts: 33, pj: 14, g: 10, e: 3, p: 1, gf: 46, gc: 10, dif: 36, logo: "/escudo-frontera.png" },
@@ -208,8 +294,14 @@ export const FIXTURE = [
 
 export const NEWS = [
   {
-    category: "Campeón - Apertura 2026",
-    title: "¡Felicitaciones a Comunicaciones, nuevo campeón del Apertura 2026!",
+    category: "Atención - Solo este viernes",
+    title: "¡Juega la Selección Argentina! Se posterga el entrenamiento de este viernes: arranca a las 22hs.",
+    location: "Cancha Nº 2 de veteranos",
+    image: "/Entrenamiento.png"
+  },
+  {
+    category: "Campeón - Apertura 2026 (Senior)",
+    title: "¡Felicitaciones a Comunicaciones, nuevo campeón del Apertura 2026 en la categoría Senior!",
     image: TEAM_LOGOS["Comunicaciones"]
   },
   {

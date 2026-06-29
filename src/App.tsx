@@ -27,6 +27,9 @@ import {
   CLUB_INFO,
   NEXT_MATCH,
   PLAYERS,
+  PLAYERS_MAXI,
+  PLAYERS_SUPERMAXI,
+  PLAYERS_MASTER,
   STANDINGS_ZONA_A,
   STANDINGS_ZONA_B,
   FIXTURE,
@@ -367,17 +370,35 @@ export default function App() {
             >
               <button
                 onClick={() => setSelectedCategory(null)}
-                className="flex items-center gap-2 text-primary font-bold text-sm mt-2"
+                className="flex items-center gap-2 text-primary font-bold text-sm mt-2 w-full justify-end"
               >
                 <ChevronLeft className="w-4 h-4" /> Volver al inicio
               </button>
               <h2 className="font-display font-black text-2xl text-zinc-900">
                 {selectedCategory === 'maxi' ? 'Categoría Maxi' : selectedCategory === 'supermaxi' ? 'Categoría Súper Maxi' : 'Categoría Master'}
               </h2>
-              <div className="bg-zinc-50 border-2 border-dashed border-zinc-200 rounded-2xl p-10 text-center space-y-4">
-                <Trophy className="w-16 h-16 text-zinc-200 mx-auto" />
-                <p className="font-display font-bold text-lg text-zinc-400">Próximamente</p>
-                <p className="text-xs text-zinc-400">La información de esta categoría estará disponible pronto.</p>
+              <div className="space-y-2">
+                {(selectedCategory === 'maxi' ? PLAYERS_MAXI : selectedCategory === 'supermaxi' ? PLAYERS_SUPERMAXI : PLAYERS_MASTER).map((player, i) => (
+                  <div
+                    key={i}
+                    className={`flex items-center gap-4 border rounded-xl p-3 shadow-sm transition-all hover:shadow-md ${
+                      player.position === 'Director Técnico'
+                        ? 'bg-gradient-to-r from-zinc-200 to-zinc-100 border-zinc-300'
+                        : 'bg-white border-zinc-100 hover:bg-zinc-50'
+                    }`}
+                  >
+                    <div className="w-12 h-12 flex-shrink-0 bg-zinc-100 rounded-lg overflow-hidden flex items-center justify-center">
+                      <Users className="w-6 h-6 text-zinc-300" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2">
+                        <span className="bg-primary text-white text-xs font-black px-2 py-0.5 rounded-md">{player.number}</span>
+                        <h3 className="font-display font-bold text-sm text-zinc-900 truncate">{player.name}</h3>
+                      </div>
+                      <p className="text-xs text-zinc-500 font-semibold uppercase mt-1 tracking-wide">{player.position}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
             </motion.div>
           )}
@@ -640,6 +661,12 @@ export default function App() {
                   <p className="font-display font-bold text-sm text-zinc-900">Asado 24 de mayo '26</p>
                 </div>
               </div>
+              <div className="rounded-3xl overflow-hidden shadow-xl">
+                <img src="/training.jpg" alt="Listo para entrenar" className="w-full h-auto object-cover" />
+                <div className="bg-white p-4 text-center">
+                  <p className="font-display font-bold text-sm text-zinc-900">Listo para entrenar</p>
+                </div>
+              </div>
             </motion.div>
           )}
 
@@ -794,7 +821,7 @@ function NewsCard({ category, title, time, image, isFeatured, location }: { cate
       </div>
       <div className="flex flex-col justify-center">
         <span className="text-[9px] font-black text-primary uppercase tracking-widest mb-1">{category}</span>
-        <h5 className="font-display font-bold text-sm text-zinc-900 line-clamp-2">{title}</h5>
+        <h5 className="font-display font-bold text-sm text-zinc-900">{title}</h5>
         <div className="flex flex-col gap-1 mt-2">
           {time && (
             <div className="flex items-center gap-2 text-[10px] text-zinc-400">
