@@ -290,6 +290,31 @@ export const FIXTURE = [
     resultado: "3 - 2",
     logo: TEAM_LOGOS["Dínamo"],
   },
+  // Clausura 2026 — Fixture publicado (FixClau26.png)
+  {
+    rival: "El Barrio",
+    date: "Dom 06 de Septiembre",
+    time: "10:00",
+    stadium: "Albino Stadium",
+    resultado: "",
+    logo: TEAM_LOGOS["El Barrio"],
+  },
+  {
+    rival: "Vélez",
+    date: "Dom 13 de Septiembre",
+    time: "10:00",
+    stadium: "Albino Stadium",
+    resultado: "",
+    logo: TEAM_LOGOS["Vélez"],
+  },
+  {
+    rival: "Sarmiento",
+    date: "Dom 20 de Septiembre",
+    time: "13:30",
+    stadium: "Albino Stadium",
+    resultado: "",
+    logo: TEAM_LOGOS["Sarmiento"],
+  },
 ];
 
 export const NEWS = [
