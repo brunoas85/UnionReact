@@ -150,31 +150,25 @@ export const PLAYERS_MASTER = [
   { name: "Valiña Lema, Javier Leonel", position: "Jugador", number: "29" },
 ];
 
-// Tabla — Clausura 2026 — Categoría Seniors (recién arranca, todo en cero)
-export const STANDINGS_ZONA_A = [
-  { pos: 1, name: "Arenal", pts: 0, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dif: 0, logo: "/escudo-arenal.png" },
-  { pos: 2, name: "Comunicaciones", pts: 0, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dif: 0, logo: "/escudo-comunicaciones.png" },
-  { pos: 3, name: "Dinamo", pts: 0, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dif: 0, logo: "/escudo-dinamo.png" },
-  { pos: 4, name: "Frontera", pts: 0, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dif: 0, logo: "/escudo-frontera.png" },
-  { pos: 5, name: "Las Rosas", pts: 0, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dif: 0, logo: "/escudo-lasrosas.png" },
-  { pos: 6, name: "Sarmiento", pts: 0, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dif: 0, logo: "/escudo-sarmiento.png" },
-  { pos: 7, name: "Unión", pts: 0, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dif: 0, isUserTeam: true, logo: "/UnionEscudo.png" },
-  { pos: 8, name: "Vélez", pts: 0, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dif: 0, logo: "/escudo-vélez.png" },
-];
-
-export const STANDINGS_ZONA_B = [
+// Tabla — Clausura 2026 — Categoría Seniors (recién arranca, todo en cero, tabla única sin zonas)
+export const STANDINGS = [
   { pos: 1, name: "All Boys", pts: 0, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dif: 0, logo: "/escudo-allBoys.png" },
-  { pos: 2, name: "Belgrano", pts: 0, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dif: 0, logo: "/escudo-belgrano.png" },
-  { pos: 3, name: "Chapelco", pts: 0, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dif: 0, logo: "/escudo-chapelco.png" },
-  { pos: 4, name: "Dinosaurios", pts: 0, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dif: 0, logo: "/escudo-dinosaurios.png" },
-  { pos: 5, name: "El Barrio", pts: 0, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dif: 0, logo: "/escudo-elbarrio.png" },
-  { pos: 6, name: "Embajadores", pts: 0, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dif: 0, logo: "/escudo-embajadores.png" },
-  { pos: 7, name: "Lácar", pts: 0, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dif: 0, logo: "/escudo-lácar.png" },
-  { pos: 8, name: "Patagonia", pts: 0, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dif: 0, logo: "/escudo-patagonia.png" },
+  { pos: 2, name: "Arenal", pts: 0, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dif: 0, logo: "/escudo-arenal.png" },
+  { pos: 3, name: "Belgrano", pts: 0, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dif: 0, logo: "/escudo-belgrano.png" },
+  { pos: 4, name: "Chapelco", pts: 0, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dif: 0, logo: "/escudo-chapelco.png" },
+  { pos: 5, name: "Comunicaciones", pts: 0, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dif: 0, logo: "/escudo-comunicaciones.png" },
+  { pos: 6, name: "Dinamo", pts: 0, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dif: 0, logo: "/escudo-dinamo.png" },
+  { pos: 7, name: "Dinosaurios", pts: 0, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dif: 0, logo: "/escudo-dinosaurios.png" },
+  { pos: 8, name: "El Barrio", pts: 0, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dif: 0, logo: "/escudo-elbarrio.png" },
+  { pos: 9, name: "Embajadores", pts: 0, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dif: 0, logo: "/escudo-embajadores.png" },
+  { pos: 10, name: "Frontera", pts: 0, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dif: 0, logo: "/escudo-frontera.png" },
+  { pos: 11, name: "Lácar", pts: 0, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dif: 0, logo: "/escudo-lácar.png" },
+  { pos: 12, name: "Las Rosas", pts: 0, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dif: 0, logo: "/escudo-lasrosas.png" },
+  { pos: 13, name: "Patagonia", pts: 0, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dif: 0, logo: "/escudo-patagonia.png" },
+  { pos: 14, name: "Sarmiento", pts: 0, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dif: 0, logo: "/escudo-sarmiento.png" },
+  { pos: 15, name: "Unión", pts: 0, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dif: 0, isUserTeam: true, logo: "/UnionEscudo.png" },
+  { pos: 16, name: "Vélez", pts: 0, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dif: 0, logo: "/escudo-vélez.png" },
 ];
-
-// Mantenemos STANDINGS para compatibilidad con el componente original
-export const STANDINGS = [...STANDINGS_ZONA_A, ...STANDINGS_ZONA_B];
 
 export const FIXTURE = [
   {

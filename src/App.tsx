@@ -4,8 +4,7 @@ import { useState, useEffect } from 'react';
 import {
   NEXT_MATCH,
   PLAYERS,
-  STANDINGS_ZONA_A,
-  STANDINGS_ZONA_B,
+  STANDINGS,
   FIXTURE,
   MATCH_IMAGES,
   MATCH_VIDEOS,
@@ -300,39 +299,29 @@ function MatchScreen() {
 
 // ── Tabla de posiciones ────────────────────────────────────────
 function TablaScreen() {
-  const zones = [
-    { label: 'ZONA A', rows: STANDINGS_ZONA_A },
-    { label: 'ZONA B', rows: STANDINGS_ZONA_B },
-  ];
   return (
     <div>
-      {zones.map(({ label, rows }) => (
-        <div key={label} style={{ borderBottom: `2px solid ${C.dark}` }}>
-          <div style={{ padding: '16px 16px 10px', display: 'flex', flexDirection: 'column', gap: 4, borderTop: label === 'ZONA B' ? `2px solid ${C.dark}` : undefined }}>
-            <span style={{ fontWeight: 800, fontSize: 20, lineHeight: 1, letterSpacing: '.02em' }}>{label}</span>
-            <span style={{ fontWeight: 400, fontSize: 10, color: C.light }}>Clausura 2026 · Senior · Fecha 1</span>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '30px 1fr 40px 40px', padding: '8px 16px', borderTop: `2px solid ${C.dark}`, borderBottom: `2px solid ${C.dark}`, fontWeight: 800, fontSize: 8, letterSpacing: '.12em', color: C.mid }}>
-            <span>POS</span><span>EQUIPO</span>
-            <span style={{ textAlign: 'center' }}>DIF</span>
-            <span style={{ textAlign: 'right' }}>PTS</span>
-          </div>
-          {rows.map((row, i) => (
-            <div key={i} style={{
-              display: 'grid', gridTemplateColumns: '30px 1fr 40px 40px', alignItems: 'center',
-              padding: '12px 16px', borderBottom: `1px solid ${C.border}`,
-              background: (row as any).isUserTeam ? '#ffe0d9' : 'transparent',
-            }}>
-              <span style={{ fontWeight: 800, fontSize: 12, color: C.light }}>{row.pos}</span>
-              <span style={{ fontWeight: 700, fontSize: 13, lineHeight: 1, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{row.name}</span>
-              <span style={{ fontWeight: 400, fontSize: 12, textAlign: 'center', color: C.mid }}>{row.dif > 0 ? `+${row.dif}` : row.dif}</span>
-              <span style={{ fontWeight: 800, fontSize: 14, textAlign: 'right' }}>{row.pts}</span>
-            </div>
-          ))}
+      <div style={{ borderBottom: `2px solid ${C.dark}` }}>
+        <div style={{ padding: '16px 16px 10px' }}>
+          <span style={{ fontWeight: 400, fontSize: 10, color: C.light }}>Clausura 2026 · Senior · Fecha 1</span>
         </div>
-      ))}
-      <div style={{ padding: '12px 16px 24px', fontWeight: 400, fontSize: 10, lineHeight: 1.5, color: C.light }}>
-        Los primeros cuatro de cada zona clasifican a la siguiente etapa.
+        <div style={{ display: 'grid', gridTemplateColumns: '30px 1fr 40px 40px', padding: '8px 16px', borderTop: `2px solid ${C.dark}`, borderBottom: `2px solid ${C.dark}`, fontWeight: 800, fontSize: 8, letterSpacing: '.12em', color: C.mid }}>
+          <span>POS</span><span>EQUIPO</span>
+          <span style={{ textAlign: 'center' }}>DIF</span>
+          <span style={{ textAlign: 'right' }}>PTS</span>
+        </div>
+        {STANDINGS.map((row, i) => (
+          <div key={i} style={{
+            display: 'grid', gridTemplateColumns: '30px 1fr 40px 40px', alignItems: 'center',
+            padding: '12px 16px', borderBottom: `1px solid ${C.border}`,
+            background: (row as any).isUserTeam ? '#ffe0d9' : 'transparent',
+          }}>
+            <span style={{ fontWeight: 800, fontSize: 12, color: C.light }}>{row.pos}</span>
+            <span style={{ fontWeight: 700, fontSize: 13, lineHeight: 1, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{row.name}</span>
+            <span style={{ fontWeight: 400, fontSize: 12, textAlign: 'center', color: C.mid }}>{row.dif > 0 ? `+${row.dif}` : row.dif}</span>
+            <span style={{ fontWeight: 800, fontSize: 14, textAlign: 'right' }}>{row.pts}</span>
+          </div>
+        ))}
       </div>
     </div>
   );
