@@ -348,8 +348,13 @@ export const FIXTURE = [
 export const NEWS = [
   {
     category: "¡Arrancó el Clausura 2026!",
-    title: "Empieza una nueva chance de gloria. ¡Vamos Unión, a dejar todo en cada cancha!",
+    title: "Empieza una nueva chance de gloria. ¡Vamos Unión, a dejar todo en la cancha!",
     image: "/UnionPlantel-5.png"
+  },
+  {
+    category: "Recordatorio",
+    title: "Antes de cada partido: llevar dinero para pagar el arbitraje y medias negras.",
+    image: "/UnionEscudo.png"
   },
   {
     category: "Entrenamiento",

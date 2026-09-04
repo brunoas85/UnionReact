@@ -265,13 +265,6 @@ function MatchScreen() {
           <span style={{ fontWeight: 700, fontSize: 14 }}>{NEXT_MATCH.date.toUpperCase()} · {NEXT_MATCH.time}</span>
           <span style={{ fontWeight: 400, fontSize: 12, opacity: .85 }}>{NEXT_MATCH.stadium} · San Martín de los Andes</span>
         </div>
-        <button style={{
-          appearance: 'none', border: 'none', background: '#fff', color: C.dark,
-          fontWeight: 800, fontSize: 11, letterSpacing: '.14em', textAlign: 'left',
-          padding: '13px 14px', cursor: 'pointer', fontFamily: FONT,
-        }}>
-          CÓMO LLEGAR →
-        </button>
       </div>
 
       <div style={{ padding: '16px 16px', fontWeight: 400, fontSize: 12, lineHeight: 1.6, color: C.mid }}>
