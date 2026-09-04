@@ -184,6 +184,7 @@ export const FIXTURE = [
     stadium: "Albino Stadium",
     resultado: "1 - 2",
     logo: TEAM_LOGOS["Frontera"],
+    torneo: "Apertura 2026",
   },
   {
     rival: "Las Rosas",
@@ -192,6 +193,7 @@ export const FIXTURE = [
     stadium: "Albino Stadium",
     resultado: "1 - 1",
     logo: TEAM_LOGOS["Las Rosas"],
+    torneo: "Apertura 2026",
   },
   {
     rival: "Sarmiento",
@@ -200,6 +202,7 @@ export const FIXTURE = [
     stadium: "Albino Stadium",
     resultado: "2 - 3",
     logo: TEAM_LOGOS["Sarmiento"],
+    torneo: "Apertura 2026",
   },
   {
     rival: "Vélez",
@@ -208,6 +211,7 @@ export const FIXTURE = [
     stadium: "Albino Stadium",
     resultado: "1 - 1",
     logo: TEAM_LOGOS["Vélez"],
+    torneo: "Apertura 2026",
   },
   {
     rival: "Arenal",
@@ -216,6 +220,7 @@ export const FIXTURE = [
     stadium: "Albino Stadium",
     resultado: "1 - 4",
     logo: TEAM_LOGOS["Arenal"],
+    torneo: "Apertura 2026",
   },
   {
     rival: "Comunicaciones",
@@ -224,6 +229,7 @@ export const FIXTURE = [
     stadium: "Albino Stadium",
     resultado: "3 - 2",
     logo: TEAM_LOGOS["Comunicaciones"],
+    torneo: "Apertura 2026",
   },
   {
     rival: "Dínamo",
@@ -232,6 +238,7 @@ export const FIXTURE = [
     stadium: "Albino Stadium",
     resultado: "8 - 6",
     logo: TEAM_LOGOS["Dínamo"],
+    torneo: "Apertura 2026",
   },
   {
     rival: "Frontera",
@@ -240,6 +247,7 @@ export const FIXTURE = [
     stadium: "Albino Stadium",
     resultado: "1 - 7",
     logo: TEAM_LOGOS["Frontera"],
+    torneo: "Apertura 2026",
   },
   {
     rival: "Sarmiento",
@@ -248,6 +256,7 @@ export const FIXTURE = [
     stadium: "Albino Stadium",
     resultado: "1 - 4",
     logo: TEAM_LOGOS["Sarmiento"],
+    torneo: "Apertura 2026",
   },
   {
     rival: "Vélez",
@@ -256,6 +265,7 @@ export const FIXTURE = [
     stadium: "Albino Stadium",
     resultado: "0 - 1",
     logo: TEAM_LOGOS["Vélez"],
+    torneo: "Apertura 2026",
   },
   {
     rival: "Arenal",
@@ -264,6 +274,7 @@ export const FIXTURE = [
     stadium: "Albino Stadium",
     resultado: "1 - 3",
     logo: TEAM_LOGOS["Arenal"],
+    torneo: "Apertura 2026",
   },
   {
     rival: "Las Rosas",
@@ -272,6 +283,7 @@ export const FIXTURE = [
     stadium: "Albino Stadium",
     resultado: "2 - 3",
     logo: TEAM_LOGOS["Las Rosas"],
+    torneo: "Apertura 2026",
   },
   // Próximos — sin resultado
   {
@@ -281,6 +293,7 @@ export const FIXTURE = [
     stadium: "Albino Stadium",
     resultado: "",
     logo: TEAM_LOGOS["Comunicaciones"],
+    torneo: "Apertura 2026",
   },
   {
     rival: "Dínamo",
@@ -289,6 +302,7 @@ export const FIXTURE = [
     stadium: "Albino Stadium",
     resultado: "3 - 2",
     logo: TEAM_LOGOS["Dínamo"],
+    torneo: "Apertura 2026",
   },
   // Clausura 2026 — Fixture publicado (FixClau26.png)
   {
@@ -298,6 +312,7 @@ export const FIXTURE = [
     stadium: "Albino Stadium",
     resultado: "",
     logo: TEAM_LOGOS["El Barrio"],
+    torneo: "Clausura 2026",
   },
   {
     rival: "Vélez",
@@ -306,6 +321,7 @@ export const FIXTURE = [
     stadium: "Albino Stadium",
     resultado: "",
     logo: TEAM_LOGOS["Vélez"],
+    torneo: "Clausura 2026",
   },
   {
     rival: "Sarmiento",
@@ -314,6 +330,7 @@ export const FIXTURE = [
     stadium: "Albino Stadium",
     resultado: "",
     logo: TEAM_LOGOS["Sarmiento"],
+    torneo: "Clausura 2026",
   },
 ];
 

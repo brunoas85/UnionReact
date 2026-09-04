@@ -362,12 +362,27 @@ function PlantelScreen({ players, loading }: { players: any[]; loading: boolean 
 
 // ── Fixture ────────────────────────────────────────────────────
 function FixtureScreen({ fixture, loading }: { fixture: any[]; loading: boolean }) {
+  const [torneo, setTorneo] = useState<'Clausura 2026' | 'Apertura 2026'>('Clausura 2026');
   if (loading) {
     return <div style={{ padding: '40px 16px', fontWeight: 400, fontSize: 12, color: C.light, textAlign: 'center' }}>Cargando fixture...</div>;
   }
-  const list = fixture.length > 0 ? fixture : FIXTURE.map((f, i) => ({ ...f, match_number: i + 1 }));
+  const all = fixture.length > 0 ? fixture : FIXTURE.map((f, i) => ({ ...f, match_number: i + 1 }));
+  const list = all.filter((f: any) => (f.torneo ?? 'Apertura 2026') === torneo);
   return (
     <div>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 16px 14px' }}>
+        <span style={{ fontWeight: 800, fontSize: 11, letterSpacing: '.1em', color: C.mid }}>{torneo.toUpperCase()}</span>
+        <button
+          onClick={() => setTorneo(t => t === 'Clausura 2026' ? 'Apertura 2026' : 'Clausura 2026')}
+          style={{
+            appearance: 'none', border: `2px solid ${C.dark}`, background: 'none',
+            padding: '7px 10px', fontWeight: 800, fontSize: 9, letterSpacing: '.08em',
+            cursor: 'pointer', fontFamily: FONT, color: C.dark,
+          }}
+        >
+          {torneo === 'Clausura 2026' ? 'VER APERTURA 2026 →' : '← VOLVER A CLAUSURA 2026'}
+        </button>
+      </div>
       {list.map((f: any, i: number) => {
         const score = f.resultado || f.result || '';
         return (
