@@ -31,12 +31,12 @@ export const CLUB_INFO = {
 };
 
 export const NEXT_MATCH = {
-  opponent: "Dínamo",
-  opponentLogo: TEAM_LOGOS["Dínamo"],
-  date: "Dom 31 de Mayo",
-  time: "11:45 HS",
+  opponent: "El Barrio",
+  opponentLogo: TEAM_LOGOS["El Barrio"],
+  date: "Dom 06 de Septiembre",
+  time: "10:00 HS",
   stadium: "Albino Stadium",
-  round: "FECHA 14",
+  round: "CLAUSURA 2026 · FECHA 1",
   isLocal: true,
 };
 
