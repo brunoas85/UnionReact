@@ -197,7 +197,7 @@ function IndexScreen({ go }: { go: (s: Screen) => void }) {
         />
         <div style={{ position: 'absolute', left: 16, bottom: 18, right: 16, display: 'flex', flexDirection: 'column', gap: 6, color: '#fff' }}>
           <span style={{ fontWeight: 800, fontSize: 9, letterSpacing: '.2em', background: C.red, padding: '5px 7px', alignSelf: 'flex-start' }}>
-            APERTURA 2026 · SENIOR
+            CLAUSURA 2026 · SENIOR
           </span>
           <span style={{ fontWeight: 900, fontSize: 42, lineHeight: .92, letterSpacing: '-.02em' }}>
             UNIÓN<br />S.M.A.
