@@ -102,7 +102,7 @@ export default function App() {
         if (error) throw error;
         if (data) setFixtureList(data);
       } catch {
-        setFixtureList(FIXTURE.map((f, i) => ({ ...f, match_number: i + 1 })));
+        setFixtureList(FIXTURE);
       } finally {
         setLoadingFixture(false);
       }
@@ -276,7 +276,7 @@ function MatchScreen() {
       </div>
 
       <div style={{ padding: '16px 16px', fontWeight: 400, fontSize: 12, lineHeight: 1.6, color: C.mid }}>
-        En la ida Unión ganó 8 a 6, el partido con más goles del torneo.
+        Arranca el Clausura 2026: primer partido de Unión en la fase regular.
       </div>
 
       {/* Noticias */}
@@ -310,7 +310,7 @@ function TablaScreen() {
         <div key={label} style={{ borderBottom: `2px solid ${C.dark}` }}>
           <div style={{ padding: '16px 16px 10px', display: 'flex', flexDirection: 'column', gap: 4, borderTop: label === 'ZONA B' ? `2px solid ${C.dark}` : undefined }}>
             <span style={{ fontWeight: 800, fontSize: 20, lineHeight: 1, letterSpacing: '.02em' }}>{label}</span>
-            <span style={{ fontWeight: 400, fontSize: 10, color: C.light }}>Apertura 2026 · Senior · Fecha 14</span>
+            <span style={{ fontWeight: 400, fontSize: 10, color: C.light }}>Clausura 2026 · Senior · Fecha 1</span>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: '30px 1fr 40px 40px', padding: '8px 16px', borderTop: `2px solid ${C.dark}`, borderBottom: `2px solid ${C.dark}`, fontWeight: 800, fontSize: 8, letterSpacing: '.12em', color: C.mid }}>
             <span>POS</span><span>EQUIPO</span>
@@ -366,7 +366,7 @@ function FixtureScreen({ fixture, loading }: { fixture: any[]; loading: boolean 
   if (loading) {
     return <div style={{ padding: '40px 16px', fontWeight: 400, fontSize: 12, color: C.light, textAlign: 'center' }}>Cargando fixture...</div>;
   }
-  const all = fixture.length > 0 ? fixture : FIXTURE.map((f, i) => ({ ...f, match_number: i + 1 }));
+  const all = fixture.length > 0 ? fixture : FIXTURE;
   const list = all.filter((f: any) => (f.torneo ?? 'Apertura 2026') === torneo);
   return (
     <div>

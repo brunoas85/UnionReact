@@ -150,27 +150,27 @@ export const PLAYERS_MASTER = [
   { name: "Valiña Lema, Javier Leonel", position: "Jugador", number: "29" },
 ];
 
-// Tabla real — Apertura 2026 — Categoría Seniors
+// Tabla — Clausura 2026 — Categoría Seniors (recién arranca, todo en cero)
 export const STANDINGS_ZONA_A = [
-  { pos: 1, name: "Frontera", pts: 33, pj: 14, g: 10, e: 3, p: 1, gf: 46, gc: 10, dif: 36, logo: "/escudo-frontera.png" },
-  { pos: 2, name: "Comunicaciones", pts: 27, pj: 14, g: 9, e: 0, p: 5, gf: 40, gc: 23, dif: 17, logo: "/escudo-comunicaciones.png" },
-  { pos: 3, name: "Las Rosas", pts: 24, pj: 14, g: 6, e: 6, p: 2, gf: 33, gc:  20, dif: 13, logo: "/escudo-lasrosas.png" },
-  { pos: 4, name: "Arenal", pts: 24, pj: 14, g: 7, e: 2, p: 5, gf: 33, gc: 36, dif: -3, logo: "/escudo-arenal.png" },
-  { pos: 5, name: "Sarmiento", pts: 22, pj: 14, g: 6, e: 4, p: 4, gf: 32, gc: 18, dif: 14, logo: "/escudo-sarmiento.png" },
-  { pos: 6, name: "Vélez", pts: 18, pj: 14, g: 5, e: 3, p: 5, gf: 26, gc: 42, dif: -16, logo: "/escudo-vélez.png" },
-  { pos: 7, name: "Unión", pts: 11, pj: 14, g: 3, e: 2, p: 9, gf: 27, gc: 42, dif: -15, isUserTeam: true, logo: "/UnionEscudo.png" },
-  { pos: 8, name: "Dinamo", pts: 0, pj: 14, g: 0, e: 0, p: 14, gf: 12, gc: 58, dif: -46, logo: "/escudo-dinamo.png" },
+  { pos: 1, name: "Arenal", pts: 0, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dif: 0, logo: "/escudo-arenal.png" },
+  { pos: 2, name: "Comunicaciones", pts: 0, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dif: 0, logo: "/escudo-comunicaciones.png" },
+  { pos: 3, name: "Dinamo", pts: 0, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dif: 0, logo: "/escudo-dinamo.png" },
+  { pos: 4, name: "Frontera", pts: 0, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dif: 0, logo: "/escudo-frontera.png" },
+  { pos: 5, name: "Las Rosas", pts: 0, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dif: 0, logo: "/escudo-lasrosas.png" },
+  { pos: 6, name: "Sarmiento", pts: 0, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dif: 0, logo: "/escudo-sarmiento.png" },
+  { pos: 7, name: "Unión", pts: 0, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dif: 0, isUserTeam: true, logo: "/UnionEscudo.png" },
+  { pos: 8, name: "Vélez", pts: 0, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dif: 0, logo: "/escudo-vélez.png" },
 ];
 
 export const STANDINGS_ZONA_B = [
-  { pos: 1, name: "Embajadores", pts: 31, pj: 14, g: 9, e: 4, p: 1, gf: 36, gc: 12, dif: 24, logo: "/escudo-embajadores.png" },
-  { pos: 2, name: "Chapelco", pts: 28, pj: 14, g: 8, e: 4, p: 2, gf: 37, gc: 8, dif: 29, logo: "/escudo-chapelco.png" },
-  { pos: 3, name: "Lácar", pts: 28, pj: 14, g: 8, e: 4, p: 2, gf: 25, gc: 15, dif: 10, logo: "/escudo-lácar.png" },
-  { pos: 4, name: "Patagonia", pts: 24, pj: 14, g: 6, e: 1, p: 2, gf: 27, gc: 13, dif: 14, logo: "/escudo-patagonia.png" },
-  { pos: 5, name: "El Barrio", pts: 19, pj: 14, g: 6, e: 1, p: 7, gf: 26, gc: 23, dif: 3, logo: "/escudo-elbarrio.png" },
-  { pos: 6, name: "All Boys", pts: 10, pj: 14, g: 2, e: 4, p: 8, gf: 20, gc: 33, dif: -13, logo: "/escudo-allBoys.png" },
-  { pos: 7, name: "Belgrano", pts: 8, pj: 14, g: 2, e: 2, p: 10, gf: 12, gc: 46, dif: -34, logo: "/escudo-belgrano.png" },
-  { pos: 8, name: "Dinosaurios", pts: 6, pj: 14, g: 1, e: 3, p: 10, gf: 4, gc: 37, dif: -33, logo: "/escudo-dinosaurios.png" },
+  { pos: 1, name: "All Boys", pts: 0, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dif: 0, logo: "/escudo-allBoys.png" },
+  { pos: 2, name: "Belgrano", pts: 0, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dif: 0, logo: "/escudo-belgrano.png" },
+  { pos: 3, name: "Chapelco", pts: 0, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dif: 0, logo: "/escudo-chapelco.png" },
+  { pos: 4, name: "Dinosaurios", pts: 0, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dif: 0, logo: "/escudo-dinosaurios.png" },
+  { pos: 5, name: "El Barrio", pts: 0, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dif: 0, logo: "/escudo-elbarrio.png" },
+  { pos: 6, name: "Embajadores", pts: 0, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dif: 0, logo: "/escudo-embajadores.png" },
+  { pos: 7, name: "Lácar", pts: 0, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dif: 0, logo: "/escudo-lácar.png" },
+  { pos: 8, name: "Patagonia", pts: 0, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dif: 0, logo: "/escudo-patagonia.png" },
 ];
 
 // Mantenemos STANDINGS para compatibilidad con el componente original
@@ -178,6 +178,7 @@ export const STANDINGS = [...STANDINGS_ZONA_A, ...STANDINGS_ZONA_B];
 
 export const FIXTURE = [
   {
+    match_number: 1,
     rival: "Frontera",
     date: "Dom 08 de Marzo",
     time: "10:00",
@@ -187,6 +188,7 @@ export const FIXTURE = [
     torneo: "Apertura 2026",
   },
   {
+    match_number: 2,
     rival: "Las Rosas",
     date: "Mar 10 de Marzo",
     time: "21:30",
@@ -196,6 +198,7 @@ export const FIXTURE = [
     torneo: "Apertura 2026",
   },
   {
+    match_number: 3,
     rival: "Sarmiento",
     date: "Dom 15 de Marzo",
     time: "13:30",
@@ -205,6 +208,7 @@ export const FIXTURE = [
     torneo: "Apertura 2026",
   },
   {
+    match_number: 4,
     rival: "Vélez",
     date: "Lun 23 de Marzo",
     time: "21:30",
@@ -214,6 +218,7 @@ export const FIXTURE = [
     torneo: "Apertura 2026",
   },
   {
+    match_number: 5,
     rival: "Arenal",
     date: "Dom 29 de Marzo",
     time: "13:30",
@@ -223,6 +228,7 @@ export const FIXTURE = [
     torneo: "Apertura 2026",
   },
   {
+    match_number: 6,
     rival: "Comunicaciones",
     date: "Dom 12 de Abril",
     time: "19:45",
@@ -232,6 +238,7 @@ export const FIXTURE = [
     torneo: "Apertura 2026",
   },
   {
+    match_number: 7,
     rival: "Dínamo",
     date: "Dom 19 de Abril",
     time: "11:45",
@@ -241,6 +248,7 @@ export const FIXTURE = [
     torneo: "Apertura 2026",
   },
   {
+    match_number: 8,
     rival: "Frontera",
     date: "Dom 26 de Abril",
     time: "17:00",
@@ -250,6 +258,7 @@ export const FIXTURE = [
     torneo: "Apertura 2026",
   },
   {
+    match_number: 9,
     rival: "Sarmiento",
     date: "Vie 01 de Mayo",
     time: "21:30",
@@ -259,6 +268,7 @@ export const FIXTURE = [
     torneo: "Apertura 2026",
   },
   {
+    match_number: 10,
     rival: "Vélez",
     date: "Vie 08 de Mayo",
     time: "21:30",
@@ -268,6 +278,7 @@ export const FIXTURE = [
     torneo: "Apertura 2026",
   },
   {
+    match_number: 11,
     rival: "Arenal",
     date: "Dom 17 de Mayo",
     time: "13:30",
@@ -277,6 +288,7 @@ export const FIXTURE = [
     torneo: "Apertura 2026",
   },
   {
+    match_number: 12,
     rival: "Las Rosas",
     date: "Mié 08 de Abril",
     time: "21:30",
@@ -287,6 +299,7 @@ export const FIXTURE = [
   },
   // Próximos — sin resultado
   {
+    match_number: 13,
     rival: "Comunicaciones",
     date: "Dom 24 de Mayo",
     time: "18:45",
@@ -296,6 +309,7 @@ export const FIXTURE = [
     torneo: "Apertura 2026",
   },
   {
+    match_number: 14,
     rival: "Dínamo",
     date: "Dom 31 de Mayo",
     time: "11:45",
@@ -304,8 +318,9 @@ export const FIXTURE = [
     logo: TEAM_LOGOS["Dínamo"],
     torneo: "Apertura 2026",
   },
-  // Clausura 2026 — Fixture publicado (FixClau26.png)
+  // Clausura 2026 — Fixture publicado (FixClau26.png) — numeración propia desde F1
   {
+    match_number: 1,
     rival: "El Barrio",
     date: "Dom 06 de Septiembre",
     time: "10:00",
@@ -315,6 +330,7 @@ export const FIXTURE = [
     torneo: "Clausura 2026",
   },
   {
+    match_number: 2,
     rival: "Vélez",
     date: "Dom 13 de Septiembre",
     time: "10:00",
@@ -324,6 +340,7 @@ export const FIXTURE = [
     torneo: "Clausura 2026",
   },
   {
+    match_number: 3,
     rival: "Sarmiento",
     date: "Dom 20 de Septiembre",
     time: "13:30",
@@ -336,20 +353,14 @@ export const FIXTURE = [
 
 export const NEWS = [
   {
-    category: "Atención - Solo este viernes",
-    title: "¡Juega la Selección Argentina! Se posterga el entrenamiento de este viernes: arranca a las 22hs.",
-    location: "Cancha Nº 2 de veteranos",
-    image: "/Entrenamiento.png"
+    category: "¡Arrancó el Clausura 2026!",
+    title: "Empieza una nueva chance de gloria. ¡Vamos Unión, a dejar todo en cada cancha!",
+    image: "/UnionPlantel-5.png"
   },
   {
-    category: "Campeón - Apertura 2026 (Senior)",
-    title: "¡Felicitaciones a Comunicaciones, nuevo campeón del Apertura 2026 en la categoría Senior!",
-    image: TEAM_LOGOS["Comunicaciones"]
-  },
-  {
-    category: "Entrenamiento - NUEVO DÍA Y HORARIO!",
-    title: "Entrenamientos todos los viernes de 21hs a 22hs en todas las categorías de Unión.",
-    location: "Cancha Nº 2 de veteranos",
+    category: "Entrenamiento",
+    title: "Entrenamientos todos los martes de 21hs a 23hs.",
+    location: "Cancha Chango Soria",
     image: "/Entrenamiento.png"
   },
 ];
