@@ -31,9 +31,9 @@ export const CLUB_INFO = {
 };
 
 export const NEXT_MATCH = {
-  opponent: "El Barrio",
-  opponentLogo: TEAM_LOGOS["El Barrio"],
-  date: "Dom 06 de Septiembre",
+  opponent: "Vélez",
+  opponentLogo: TEAM_LOGOS["Vélez"],
+  date: "Dom 13 de Septiembre",
   time: "10:00 HS",
   stadium: "Albino Stadium",
   round: "CLAUSURA 2026 · FECHA 1",

@@ -268,7 +268,7 @@ function MatchScreen() {
       </div>
 
       <div style={{ padding: '16px 16px', fontWeight: 400, fontSize: 12, lineHeight: 1.6, color: C.mid }}>
-        Arranca el Clausura 2026: primer partido de Unión en la fase regular.
+        Arranca el Clausura 2026: 2do encuentro de Unión en el Clausura 2026.
       </div>
 
       {/* Noticias */}
