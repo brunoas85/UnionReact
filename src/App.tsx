@@ -4,11 +4,13 @@ import { useState, useEffect } from 'react';
 import {
   NEXT_MATCH,
   PLAYERS,
-  STANDINGS,
   FIXTURE,
+  computeStandings,
   MATCH_IMAGES,
   MATCH_VIDEOS,
   NEWS,
+  TEAM_LOGOS,
+  OTHER_MATCHES,
 } from './data';
 import { supabase } from './supabaseClient';
 
@@ -30,15 +32,6 @@ const FONT = 'Archivo, system-ui, sans-serif';
 type Screen = 'index' | 'match' | 'tabla' | 'plantel' | 'fixture' | 'galeria' | 'tercer';
 
 // ── Helpers ────────────────────────────────────────────────────
-function posAbbr(pos: string) {
-  const map: Record<string, string> = {
-    'Delantero': 'DEL', 'Mediocampista': 'MED', 'Defensor': 'DEF',
-    'Arquero': 'ARQ', 'Director Técnico': 'DT', 'D.T.': 'DT',
-    'Ayudante de Campo': 'AC', 'Jugador': 'JUG',
-  };
-  return map[pos] ?? pos.slice(0, 3).toUpperCase();
-}
-
 function outcome(score: string): 'g' | 'e' | 'p' | 'none' {
   if (!score || score.trim() === '' || score === '—') return 'none';
   const parts = score.split(' - ');
@@ -67,6 +60,8 @@ export default function App() {
   const [loadingPlayers, setLoadingPlayers] = useState(true);
   const [fixtureList, setFixtureList] = useState<any[]>([]);
   const [loadingFixture, setLoadingFixture] = useState(true);
+  const [otherMatches, setOtherMatches] = useState<any[]>([]);
+  const [loadingOtherMatches, setLoadingOtherMatches] = useState(true);
 
   useEffect(() => {
     async function fetchPlayers() {
@@ -107,6 +102,22 @@ export default function App() {
       }
     }
     fetchFixture();
+  }, []);
+
+  useEffect(() => {
+    async function fetchOtherMatches() {
+      try {
+        const { data, error } = await supabase
+          .from('other_matches').select('*').order('fecha', { ascending: true });
+        if (error) throw error;
+        if (data) setOtherMatches(data);
+      } catch {
+        setOtherMatches(OTHER_MATCHES);
+      } finally {
+        setLoadingOtherMatches(false);
+      }
+    }
+    fetchOtherMatches();
   }, []);
 
   const go = (s: Screen) => setScreen(s);
@@ -157,9 +168,9 @@ export default function App() {
 
             {/* Screen content */}
             {screen === 'match'   && <MatchScreen />}
-            {screen === 'tabla'   && <TablaScreen />}
+            {screen === 'tabla'   && <TablaScreen fixture={fixtureList} otherMatches={otherMatches} />}
             {screen === 'plantel' && <PlantelScreen players={playersList} loading={loadingPlayers} />}
-            {screen === 'fixture' && <FixtureScreen fixture={fixtureList} loading={loadingFixture} />}
+            {screen === 'fixture' && <FixtureScreen fixture={fixtureList} loading={loadingFixture} otherMatches={otherMatches} />}
             {screen === 'galeria' && <GaleriaScreen />}
             {screen === 'tercer'  && <TercerScreen />}
           </motion.div>
@@ -185,20 +196,20 @@ function IndexScreen({ go }: { go: (s: Screen) => void }) {
       {/* Hero */}
       <div style={{ position: 'relative', height: 330, background: C.dark, overflow: 'hidden' }}>
         <img
-          src="/UnionPlantel-9.png"
+          src="/1º FECHA CLAU26(3).jpeg"
           alt="Plantel Unión"
-          style={{ width: '100%', height: 330, objectFit: 'cover', display: 'block', filter: 'grayscale(1) contrast(1.12) brightness(.82)' }}
+          style={{ width: '100%', height: 330, objectFit: 'cover', objectPosition: '25% center', display: 'block', filter: 'grayscale(1) contrast(1.12) brightness(.82)' }}
         />
         <img
           src="/UnionEscudo.png"
           alt="Escudo Unión"
           style={{ position: 'absolute', top: 18, left: 16, height: 66, width: 'auto' }}
         />
-        <div style={{ position: 'absolute', left: 16, bottom: 18, right: 16, display: 'flex', flexDirection: 'column', gap: 6, color: '#fff' }}>
-          <span style={{ fontWeight: 800, fontSize: 9, letterSpacing: '.2em', background: C.red, padding: '5px 7px', alignSelf: 'flex-start' }}>
-            CLAUSURA 2026 · SENIOR
+        <div style={{ position: 'absolute', left: 16, bottom: 18, right: 16, display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 6, color: '#fff' }}>
+          <span style={{ fontWeight: 800, fontSize: 9, letterSpacing: '.2em', background: C.red, padding: '5px 7px' }}>
+            SENIOR
           </span>
-          <span style={{ fontWeight: 900, fontSize: 42, lineHeight: .92, letterSpacing: '-.02em' }}>
+          <span style={{ fontWeight: 900, fontSize: 42, lineHeight: .92, letterSpacing: '-.02em', textAlign: 'right' }}>
             UNIÓN<br />S.M.A.
           </span>
         </div>
@@ -243,7 +254,7 @@ function IndexScreen({ go }: { go: (s: Screen) => void }) {
       {/* Footer */}
       <div style={{ padding: '18px 16px 30px', fontWeight: 600, fontSize: 9, lineHeight: 1.6, letterSpacing: '.14em', color: C.vLight }}>
         UNIÓN SAN MARTÍN DE LOS ANDES<br />
-        LIGA DE VETERANOS · SENIOR · MAXI · SÚPER MAXI · MASTER<br />
+        LIGA DE VETERANOS · SENIOR<br />
         <span style={{ fontWeight: 400, letterSpacing: '.06em' }}>Desarrollado por bRuno´s</span>
       </div>
     </div>
@@ -268,7 +279,7 @@ function MatchScreen() {
       </div>
 
       <div style={{ padding: '16px 16px', fontWeight: 400, fontSize: 12, lineHeight: 1.6, color: C.mid }}>
-        Arranca el Clausura 2026: 2do encuentro de Unión en el Clausura 2026.
+        2do encuentro de Unión en el Clausura 2026.
       </div>
 
       {/* Noticias */}
@@ -291,19 +302,22 @@ function MatchScreen() {
 }
 
 // ── Tabla de posiciones ────────────────────────────────────────
-function TablaScreen() {
+function TablaScreen({ fixture, otherMatches }: { fixture: any[]; otherMatches: any[] }) {
+  const all = fixture.length > 0 ? fixture : FIXTURE;
+  const others = otherMatches.length > 0 ? otherMatches : OTHER_MATCHES;
+  const standings = computeStandings(all, 'Clausura 2026', others);
   return (
     <div>
       <div style={{ borderBottom: `2px solid ${C.dark}` }}>
         <div style={{ padding: '16px 16px 10px' }}>
-          <span style={{ fontWeight: 400, fontSize: 10, color: C.light }}>Clausura 2026 · Senior · Fecha 1</span>
+          <span style={{ fontWeight: 400, fontSize: 10, color: C.light }}>Clausura 2026 · Senior</span>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: '30px 1fr 40px 40px', padding: '8px 16px', borderTop: `2px solid ${C.dark}`, borderBottom: `2px solid ${C.dark}`, fontWeight: 800, fontSize: 8, letterSpacing: '.12em', color: C.mid }}>
           <span>POS</span><span>EQUIPO</span>
           <span style={{ textAlign: 'center' }}>DIF</span>
           <span style={{ textAlign: 'right' }}>PTS</span>
         </div>
-        {STANDINGS.map((row, i) => (
+        {standings.map((row, i) => (
           <div key={i} style={{
             display: 'grid', gridTemplateColumns: '30px 1fr 40px 40px', alignItems: 'center',
             padding: '12px 16px', borderBottom: `1px solid ${C.border}`,
@@ -334,7 +348,6 @@ function PlantelScreen({ players, loading }: { players: any[]; loading: boolean 
         <div key={i} style={{ display: 'flex', alignItems: 'baseline', gap: 12, padding: '13px 16px', borderBottom: `1px solid ${C.border}` }}>
           <span style={{ flexShrink: 0, width: 28, fontWeight: 800, fontSize: 15, color: C.red }}>{p.number}</span>
           <span style={{ flex: 1, fontWeight: 700, fontSize: 14, lineHeight: 1.2, minWidth: 0 }}>{p.name}</span>
-          <span style={{ fontWeight: 600, fontSize: 8, letterSpacing: '.14em', color: C.light }}>{posAbbr(p.position)}</span>
         </div>
       ))}
       <div style={{ height: 24 }} />
@@ -342,14 +355,44 @@ function PlantelScreen({ players, loading }: { players: any[]; loading: boolean 
   );
 }
 
+// ── Card de cruce (estilo example1.png) ─────────────────────────
+function CruceCard({ home, away, date, time, resultado, torneo }: { home: string; away: string; date: string; time: string; resultado?: string; torneo: string }) {
+  const Team = ({ name }: { name: string }) => (
+    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, minWidth: 0 }}>
+      <img src={TEAM_LOGOS[name] ?? ''} alt={name} style={{ width: 56, height: 56, objectFit: 'contain' }} />
+      <span style={{ fontWeight: 800, fontSize: 12, textAlign: 'center', lineHeight: 1.2 }}>{name}</span>
+    </div>
+  );
+  return (
+    <div style={{ background: '#fff', border: `2px solid ${C.red}`, borderRadius: 14, padding: '18px 14px', display: 'flex', flexDirection: 'column', gap: 16 }}>
+      <span style={{ textAlign: 'center', fontWeight: 700, fontSize: 10, letterSpacing: '.08em', color: C.mid }}>{torneo.toUpperCase()}</span>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Team name={home} />
+        {resultado
+          ? <ScoreBox score={resultado} />
+          : <span style={{ flexShrink: 0, fontWeight: 800, fontSize: 12, color: C.light, padding: '0 8px' }}>VS</span>}
+        <Team name={away} />
+      </div>
+      <div style={{ borderTop: `1px solid ${C.border}`, paddingTop: 12, display: 'flex', justifyContent: 'space-between' }}>
+        <span style={{ fontWeight: 700, fontSize: 12 }}>{date}</span>
+        <span style={{ fontWeight: 700, fontSize: 12 }}>{time} HS</span>
+      </div>
+    </div>
+  );
+}
+
 // ── Fixture ────────────────────────────────────────────────────
-function FixtureScreen({ fixture, loading }: { fixture: any[]; loading: boolean }) {
+function FixtureScreen({ fixture, loading, otherMatches }: { fixture: any[]; loading: boolean; otherMatches: any[] }) {
   const [torneo, setTorneo] = useState<'Clausura 2026' | 'Apertura 2026'>('Clausura 2026');
+  const [crucesFecha, setCrucesFecha] = useState<number | null>(null);
   if (loading) {
     return <div style={{ padding: '40px 16px', fontWeight: 400, fontSize: 12, color: C.light, textAlign: 'center' }}>Cargando fixture...</div>;
   }
   const all = fixture.length > 0 ? fixture : FIXTURE;
+  const others = otherMatches.length > 0 ? otherMatches : OTHER_MATCHES;
   const list = all.filter((f: any) => (f.torneo ?? 'Apertura 2026') === torneo);
+  const crucesFor = (fecha: number) => others.filter((m: any) => (m.torneo ?? 'Apertura 2026') === torneo && m.fecha === fecha);
+  const cruces = crucesFecha != null ? crucesFor(crucesFecha) : undefined;
   return (
     <div>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 16px 14px' }}>
@@ -367,18 +410,52 @@ function FixtureScreen({ fixture, loading }: { fixture: any[]; loading: boolean 
       </div>
       {list.map((f: any, i: number) => {
         const score = f.resultado || f.result || '';
+        const hasCruces = crucesFor(f.match_number).length > 0;
         return (
           <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '13px 16px', borderBottom: `1px solid ${C.border}` }}>
             <span style={{ flexShrink: 0, width: 34, fontWeight: 600, fontSize: 8, letterSpacing: '.1em', color: C.vLight }}>F{f.match_number}</span>
+            <img src={TEAM_LOGOS[f.rival] ?? f.logo ?? ''} alt={f.rival} style={{ flexShrink: 0, width: 30, height: 30, objectFit: 'contain' }} />
             <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 3, minWidth: 0 }}>
               <span style={{ fontWeight: 700, fontSize: 13, lineHeight: 1.2 }}>Unión — {f.rival}</span>
               <span style={{ fontWeight: 400, fontSize: 10, color: C.light }}>{f.date}</span>
+              {hasCruces && (
+                <span
+                  onClick={() => setCrucesFecha(f.match_number)}
+                  style={{ fontWeight: 800, fontSize: 9, letterSpacing: '.06em', color: C.darkRed, cursor: 'pointer', marginTop: 2 }}
+                >
+                  VER OTROS CRUCES →
+                </span>
+              )}
             </div>
             <ScoreBox score={score} />
           </div>
         );
       })}
       <div style={{ height: 24 }} />
+
+      {cruces && (
+        <div
+          onClick={() => setCrucesFecha(null)}
+          style={{ position: 'fixed', inset: 0, background: 'rgba(32,30,29,.92)', zIndex: 50, display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: 16, overflowY: 'auto' }}
+        >
+          <div onClick={e => e.stopPropagation()} style={{ width: '100%', maxWidth: 400, display: 'flex', flexDirection: 'column', gap: 12, margin: '24px 0' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <span style={{ fontWeight: 800, fontSize: 13, letterSpacing: '.1em', color: '#fff' }}>FECHA {crucesFecha}</span>
+              <button
+                onClick={() => setCrucesFecha(null)}
+                style={{ appearance: 'none', border: 'none', background: 'none', color: '#fff', fontWeight: 800, fontSize: 20, cursor: 'pointer', lineHeight: 1 }}
+              >
+                ×
+              </button>
+            </div>
+            {cruces.map((m, i) => (
+              <div key={i}>
+                <CruceCard home={m.home} away={m.away} date={m.date} time={m.time} resultado={m.resultado} torneo={torneo} />
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -422,12 +499,12 @@ function TercerScreen() {
   return (
     <div>
       <img
-        src="/Entrenamiento.png"
-        alt="Entrenamiento"
+        src="/tercerTiempo2.png"
+        alt="Asado"
         style={{ width: '100%', height: 200, objectFit: 'cover', display: 'block', filter: 'grayscale(1) contrast(1.06)' }}
       />
       <div style={{ background: C.red, color: '#fff', padding: '14px 16px', display: 'flex', flexDirection: 'column', gap: 6 }}>
-        <span style={{ fontWeight: 800, fontSize: 9, letterSpacing: '.18em' }}>TERCER TIEMPO · SÁBADO</span>
+        <span style={{ fontWeight: 800, fontSize: 9, letterSpacing: '.18em' }}>TERCER TIEMPO</span>
         <span style={{ fontWeight: 800, fontSize: 19, lineHeight: 1.15 }}>Asado después del partido de los máximos</span>
         <span style={{ fontWeight: 400, fontSize: 11, lineHeight: 1.4, opacity: .85 }}>Todos invitados a compartir.</span>
       </div>
@@ -437,16 +514,6 @@ function TercerScreen() {
         <span style={{ fontWeight: 400, fontSize: 11, lineHeight: 1.4, color: C.mid }}>Todas las categorías de Unión.</span>
       </div>
       <div style={{ borderTop: `2px solid ${C.dark}` }}>
-        {['INSTAGRAM', 'GRUPO DE WHATSAPP', 'FACEBOOK'].map(l => (
-          <button key={l} style={{
-            appearance: 'none', border: 'none', borderBottom: `1px solid ${C.border}`,
-            background: 'none', width: '100%', textAlign: 'left', padding: '15px 16px',
-            fontWeight: 800, fontSize: 11, letterSpacing: '.12em', cursor: 'pointer',
-            display: 'flex', justifyContent: 'space-between', fontFamily: FONT, color: C.dark,
-          }}>
-            {l}<span>→</span>
-          </button>
-        ))}
       </div>
       <div style={{ padding: '16px 16px 24px', fontWeight: 400, fontSize: 9, color: C.vLight }}>
         Desarrollado por bRuno´s

@@ -4,7 +4,7 @@
  */
 
 // Mapeo de nombres de equipos a logos
-const TEAM_LOGOS: Record<string, string> = {
+export const TEAM_LOGOS: Record<string, string> = {
   "Frontera": "/escudo-frontera.png",
   "Comunicaciones": "/escudo-comunicaciones.png",
   "Las Rosas": "/escudo-lasrosas.png",
@@ -13,6 +13,7 @@ const TEAM_LOGOS: Record<string, string> = {
   "Vélez": "/escudo-vélez.png",
   "Unión": "/UnionEscudo.png",
   "Dinamo": "/escudo-dinamo.png",
+  "Dínamo": "/escudo-dinamo.png",
   "Embajadores": "/escudo-embajadores.png",
   "Chapelco": "/escudo-chapelco.png",
   "Lácar": "/escudo-lácar.png",
@@ -27,7 +28,7 @@ export const CLUB_INFO = {
   name: "Unión",
   location: "San Martín de los Andes",
   logo: "/UnionEscudo.png",
-  heroImage: "/UnionPlantel-5.png",
+  heroImage: "/1º FECHA CLAU26(3).jpeg",
 };
 
 export const NEXT_MATCH = {
@@ -36,7 +37,7 @@ export const NEXT_MATCH = {
   date: "Dom 13 de Septiembre",
   time: "10:00 HS",
   stadium: "Albino Stadium",
-  round: "CLAUSURA 2026 · FECHA 1",
+  round: "CLAUSURA 2026 · FECHA 2",
   isLocal: true,
 };
 
@@ -169,6 +170,46 @@ export const STANDINGS = [
   { pos: 15, name: "Unión", pts: 0, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dif: 0, isUserTeam: true, logo: "/UnionEscudo.png" },
   { pos: 16, name: "Vélez", pts: 0, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dif: 0, logo: "/escudo-vélez.png" },
 ];
+
+// Aplica un resultado "goles local - goles visitante" a los dos equipos involucrados.
+function applyResult(byName: Map<string, any>, home: string, away: string, resultado: string) {
+  if (!resultado) return;
+  const goles = resultado.split("-").map((n: string) => parseInt(n.trim(), 10));
+  if (goles.length !== 2 || goles.some(Number.isNaN)) return;
+  const [gHome, gAway] = goles;
+  const teamHome = byName.get(home);
+  const teamAway = byName.get(away);
+  if (!teamHome || !teamAway) return;
+
+  teamHome.pj += 1; teamAway.pj += 1;
+  teamHome.gf += gHome; teamHome.gc += gAway;
+  teamAway.gf += gAway; teamAway.gc += gHome;
+
+  if (gHome > gAway) { teamHome.g += 1; teamHome.pts += 3; teamAway.p += 1; }
+  else if (gHome < gAway) { teamAway.g += 1; teamAway.pts += 3; teamHome.p += 1; }
+  else { teamHome.e += 1; teamAway.e += 1; teamHome.pts += 1; teamAway.pts += 1; }
+}
+
+// Calcula la tabla de posiciones a partir del fixture de Unión (formato "goles Unión - goles rival")
+// y de los cruces de los demás equipos (formato "goles local - goles visitante").
+export function computeStandings(fixture: any[] = FIXTURE, torneo: string = "Clausura 2026", otherMatches: any[] = OTHER_MATCHES) {
+  const table = STANDINGS.map(t => ({ ...t, pts: 0, pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0, dif: 0 }));
+  const byName = new Map(table.map(t => [t.name, t]));
+
+  fixture
+    .filter((m: any) => (m.torneo ?? "Apertura 2026") === torneo && m.resultado)
+    .forEach((m: any) => applyResult(byName, "Unión", m.rival, m.resultado));
+
+  otherMatches
+    .filter((m: any) => (m.torneo ?? torneo) === torneo && m.resultado)
+    .forEach((m: any) => applyResult(byName, m.home, m.away, m.resultado));
+
+  table.forEach(t => { t.dif = t.gf - t.gc; });
+  table.sort((a, b) => b.pts - a.pts || b.dif - a.dif || b.gf - a.gf || a.name.localeCompare(b.name));
+  table.forEach((t, i) => { t.pos = i + 1; });
+
+  return table;
+}
 
 export const FIXTURE = [
   {
@@ -319,7 +360,7 @@ export const FIXTURE = [
     date: "Dom 06 de Septiembre",
     time: "10:00",
     stadium: "Albino Stadium",
-    resultado: "",
+    resultado: "3 - 1",
     logo: TEAM_LOGOS["El Barrio"],
     torneo: "Clausura 2026",
   },
@@ -345,16 +386,40 @@ export const FIXTURE = [
   },
 ];
 
+// Cruces de los otros equipos en cada fecha (no incluye a Unión, que ya está en FIXTURE).
+// Se puede cargar el resultado ("goles local - goles visitante") a mano acá, o mejor
+// todavía, en la tabla "other_matches" de Supabase — ver computeStandings más abajo.
+export const OTHER_MATCHES = [
+  { torneo: "Clausura 2026", fecha: 1, home: "Las Rosas", away: "Lácar", date: "4/9/2026", time: "21:30", resultado: "" },
+  { torneo: "Clausura 2026", fecha: 1, home: "Dinamo", away: "Embajadores", date: "5/9/2026", time: "20:00", resultado: "" },
+  { torneo: "Clausura 2026", fecha: 1, home: "Patagonia", away: "Comunicaciones", date: "6/9/2026", time: "11:45", resultado: "" },
+  { torneo: "Clausura 2026", fecha: 1, home: "Frontera", away: "Vélez", date: "6/9/2026", time: "13:30", resultado: "" },
+  { torneo: "Clausura 2026", fecha: 1, home: "All Boys", away: "Chapelco", date: "6/9/2026", time: "15:15", resultado: "" },
+  { torneo: "Clausura 2026", fecha: 1, home: "Arenal", away: "Sarmiento", date: "6/9/2026", time: "17:00", resultado: "" },
+  { torneo: "Clausura 2026", fecha: 1, home: "Belgrano", away: "Dinosaurios", date: "6/9/2026", time: "18:45", resultado: "" },
+
+  { torneo: "Clausura 2026", fecha: 2, home: "Lácar", away: "El Barrio", date: "11/9/2026", time: "21:30", resultado: "" },
+  { torneo: "Clausura 2026", fecha: 2, home: "Dinamo", away: "Comunicaciones", date: "12/9/2026", time: "19:00", resultado: "" },
+  { torneo: "Clausura 2026", fecha: 2, home: "Patagonia", away: "Chapelco", date: "13/9/2026", time: "11:45", resultado: "" },
+  { torneo: "Clausura 2026", fecha: 2, home: "Frontera", away: "Sarmiento", date: "13/9/2026", time: "13:30", resultado: "" },
+  { torneo: "Clausura 2026", fecha: 2, home: "All Boys", away: "Dinosaurios", date: "13/9/2026", time: "15:15", resultado: "" },
+  { torneo: "Clausura 2026", fecha: 2, home: "Arenal", away: "Belgrano", date: "13/9/2026", time: "17:00", resultado: "" },
+  { torneo: "Clausura 2026", fecha: 2, home: "Las Rosas", away: "Embajadores", date: "13/9/2026", time: "18:45", resultado: "" },
+
+  { torneo: "Clausura 2026", fecha: 3, home: "Embajadores", away: "Comunicaciones", date: "18/9/2026", time: "21:30", resultado: "" },
+  { torneo: "Clausura 2026", fecha: 3, home: "Las Rosas", away: "El Barrio", date: "19/9/2026", time: "19:00", resultado: "" },
+  { torneo: "Clausura 2026", fecha: 3, home: "Lácar", away: "Vélez", date: "20/9/2026", time: "10:00", resultado: "" },
+  { torneo: "Clausura 2026", fecha: 3, home: "Dinamo", away: "Chapelco", date: "20/9/2026", time: "11:45", resultado: "" },
+  { torneo: "Clausura 2026", fecha: 3, home: "Patagonia", away: "Dinosaurios", date: "20/9/2026", time: "15:15", resultado: "" },
+  { torneo: "Clausura 2026", fecha: 3, home: "Frontera", away: "Belgrano", date: "20/9/2026", time: "17:00", resultado: "" },
+  { torneo: "Clausura 2026", fecha: 3, home: "All Boys", away: "Arenal", date: "20/9/2026", time: "18:45", resultado: "" },
+];
+
 export const NEWS = [
   {
     category: "Clausura 2026",
-    title: "Y arrancó el torne... Y Unión metió sus primeros 3 puntos ¡Vamos Unión carajo!",
+    title: "Y arrancó el torneo... Y Unión metió sus primeros 3 puntos ¡Vamos Unión carajo!",
     image: "/UnionPlantel-5.png"
-  },
-  {
-    category: "Recordatorio",
-    title: "Antes de cada partido: llevar dinero para pagar el arbitraje y medias negras.",
-    image: "/UnionEscudo.png"
   },
   {
     category: "Entrenamiento",
@@ -374,6 +439,7 @@ export const MATCH_VIDEOS = [
   "1.mp4",
   "2.mp4",
   "3.mp4",
+  "1º FECHA Clau26 (4).mp4",
 ];
 
 export const MATCH_IMAGES = [
@@ -392,5 +458,13 @@ export const MATCH_IMAGES = [
   "UnionPlantel-12.png",
   "UnionPlantel-13.png",
   "UnionPlantel-14.png",
-  "UnionPlantel-15.png"
+  "UnionPlantel-15.png",
+  "1º FECHA CLAU26.png.jpeg",
+  "1º FECHA CLAU26(2).jpeg",
+  "1º FECHA CLAU26(3).jpeg",
+  "1º FECHA CLAU26(5).jpeg",
+  "1º FECHA CLAU26(6).jpeg",
+  "1º FECHA CLAU26(7).jpeg",
+  "1º FECHA CLAU26(8).jpeg",
+  "1º FECHA CLAU26(9).jpeg",
 ];
