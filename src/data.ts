@@ -347,8 +347,8 @@ export const FIXTURE = [
 
 export const NEWS = [
   {
-    category: "¡Arrancó el Clausura 2026!",
-    title: "Empieza una nueva chance de gloria. ¡Vamos Unión, a dejar todo en la cancha!",
+    category: "Clausura 2026",
+    title: "Y arrancó el torne... Y Unión metió sus primeros 3 puntos ¡Vamos Unión carajo!",
     image: "/UnionPlantel-5.png"
   },
   {
@@ -365,9 +365,9 @@ export const NEWS = [
 ];
 
 export const SOCIAL_EVENT = {
-  title: "Asado después del partido",
-  time: "Sábado",
-  description: "Después del partido de los máximos, hay asado. ¡Todos invitados a compartir!"
+  title: "",
+  time: "",
+  description: ""
 };
 
 export const MATCH_VIDEOS = [
