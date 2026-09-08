@@ -273,7 +273,7 @@ function MatchScreen() {
         <span style={{ fontWeight: 800, fontSize: 9, letterSpacing: '.2em' }}>{NEXT_MATCH.round} · LOCAL</span>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            <img src={CLUB_INFO.logo} alt="Unión" style={{ width: 40, height: 40, objectFit: 'contain', border: `2px solid ${C.mid}`, borderRadius: 6, flexShrink: 0 }} />
+            <img src="/uniónFire-transparent.png" alt="Unión" style={{ width: 40, height: 40, objectFit: 'contain', flexShrink: 0 }} />
             <span style={{ fontWeight: 900, fontSize: 46, lineHeight: .9, letterSpacing: '-.03em' }}>UNIÓN</span>
           </div>
           <span style={{ fontWeight: 600, fontSize: 13, letterSpacing: '.14em', opacity: .8 }}>VS</span>
