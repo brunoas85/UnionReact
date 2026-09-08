@@ -11,6 +11,7 @@ import {
   NEWS,
   TEAM_LOGOS,
   OTHER_MATCHES,
+  CLUB_INFO,
 } from './data';
 import { supabase } from './supabaseClient';
 
@@ -203,7 +204,7 @@ function IndexScreen({ go }: { go: (s: Screen) => void }) {
         <img
           src="/UnionEscudo.png"
           alt="Escudo Unión"
-          style={{ position: 'absolute', top: 18, left: 16, height: 66, width: 'auto' }}
+          style={{ position: 'absolute', top: 18, left: 16, height: 100, width: 'auto' }}
         />
         <div style={{ position: 'absolute', left: 16, bottom: 18, right: 16, display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 6, color: '#fff' }}>
           <span style={{ fontWeight: 800, fontSize: 9, letterSpacing: '.2em', background: C.red, padding: '5px 7px' }}>
@@ -211,6 +212,9 @@ function IndexScreen({ go }: { go: (s: Screen) => void }) {
           </span>
           <span style={{ fontWeight: 900, fontSize: 42, lineHeight: .92, letterSpacing: '-.02em', textAlign: 'right' }}>
             UNIÓN<br />S.M.A.
+          </span>
+          <span style={{ fontWeight: 600, fontSize: 11, letterSpacing: '.02em', textAlign: 'right', opacity: .9 }}>
+            El equipo lo hacemos entre todos
           </span>
         </div>
       </div>
@@ -267,10 +271,16 @@ function MatchScreen() {
     <div>
       <div style={{ background: C.red, color: '#fff', padding: '24px 16px 26px', display: 'flex', flexDirection: 'column', gap: 18 }}>
         <span style={{ fontWeight: 800, fontSize: 9, letterSpacing: '.2em' }}>{NEXT_MATCH.round} · LOCAL</span>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-          <span style={{ fontWeight: 900, fontSize: 46, lineHeight: .9, letterSpacing: '-.03em' }}>UNIÓN</span>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+            <img src={CLUB_INFO.logo} alt="Unión" style={{ width: 40, height: 40, objectFit: 'contain', border: `2px solid ${C.mid}`, borderRadius: 6, flexShrink: 0 }} />
+            <span style={{ fontWeight: 900, fontSize: 46, lineHeight: .9, letterSpacing: '-.03em' }}>UNIÓN</span>
+          </div>
           <span style={{ fontWeight: 600, fontSize: 13, letterSpacing: '.14em', opacity: .8 }}>VS</span>
-          <span style={{ fontWeight: 900, fontSize: 46, lineHeight: .9, letterSpacing: '-.03em' }}>{NEXT_MATCH.opponent.toUpperCase()}</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+            <img src={NEXT_MATCH.opponentLogo} alt={NEXT_MATCH.opponent} style={{ width: 40, height: 40, objectFit: 'contain', flexShrink: 0 }} />
+            <span style={{ fontWeight: 900, fontSize: 46, lineHeight: .9, letterSpacing: '-.03em' }}>{NEXT_MATCH.opponent.toUpperCase()}</span>
+          </div>
         </div>
         <div style={{ borderTop: '2px solid #fff', paddingTop: 12, display: 'flex', flexDirection: 'column', gap: 8 }}>
           <span style={{ fontWeight: 700, fontSize: 14 }}>{NEXT_MATCH.date.toUpperCase()} · {NEXT_MATCH.time}</span>
@@ -336,21 +346,9 @@ function TablaScreen({ fixture, otherMatches }: { fixture: any[]; otherMatches: 
 
 // ── Plantel Senior ─────────────────────────────────────────────
 function PlantelScreen({ players, loading }: { players: any[]; loading: boolean }) {
-  if (loading) {
-    return <div style={{ padding: '40px 16px', fontWeight: 400, fontSize: 12, color: C.light, textAlign: 'center' }}>Cargando plantel...</div>;
-  }
   return (
-    <div>
-      <div style={{ padding: '12px 16px', fontWeight: 600, fontSize: 9, letterSpacing: '.14em', color: C.light }}>
-        {players.length} INTEGRANTES
-      </div>
-      {players.map((p, i) => (
-        <div key={i} style={{ display: 'flex', alignItems: 'baseline', gap: 12, padding: '13px 16px', borderBottom: `1px solid ${C.border}` }}>
-          <span style={{ flexShrink: 0, width: 28, fontWeight: 800, fontSize: 15, color: C.red }}>{p.number}</span>
-          <span style={{ flex: 1, fontWeight: 700, fontSize: 14, lineHeight: 1.2, minWidth: 0 }}>{p.name}</span>
-        </div>
-      ))}
-      <div style={{ height: 24 }} />
+    <div style={{ padding: '60px 16px', fontWeight: 800, fontSize: 14, letterSpacing: '.08em', color: C.light, textAlign: 'center' }}>
+      EN CONSTRUCCIÓN
     </div>
   );
 }
@@ -359,7 +357,7 @@ function PlantelScreen({ players, loading }: { players: any[]; loading: boolean 
 function CruceCard({ home, away, date, time, resultado, torneo }: { home: string; away: string; date: string; time: string; resultado?: string; torneo: string }) {
   const Team = ({ name }: { name: string }) => (
     <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, minWidth: 0 }}>
-      <img src={TEAM_LOGOS[name] ?? ''} alt={name} style={{ width: 56, height: 56, objectFit: 'contain' }} />
+      <img src={TEAM_LOGOS[name] ?? ''} alt={name} style={{ width: 40, height: 40, objectFit: 'contain' }} />
       <span style={{ fontWeight: 800, fontSize: 12, textAlign: 'center', lineHeight: 1.2 }}>{name}</span>
     </div>
   );
@@ -412,22 +410,26 @@ function FixtureScreen({ fixture, loading, otherMatches }: { fixture: any[]; loa
         const score = f.resultado || f.result || '';
         const hasCruces = crucesFor(f.match_number).length > 0;
         return (
-          <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '13px 16px', borderBottom: `1px solid ${C.border}` }}>
-            <span style={{ flexShrink: 0, width: 34, fontWeight: 600, fontSize: 8, letterSpacing: '.1em', color: C.vLight }}>F{f.match_number}</span>
-            <img src={TEAM_LOGOS[f.rival] ?? f.logo ?? ''} alt={f.rival} style={{ flexShrink: 0, width: 30, height: 30, objectFit: 'contain' }} />
-            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 3, minWidth: 0 }}>
-              <span style={{ fontWeight: 700, fontSize: 13, lineHeight: 1.2 }}>Unión — {f.rival}</span>
+          <div key={i} style={{ display: 'flex', flexDirection: 'column', gap: 8, padding: '13px 16px', borderBottom: `1px solid ${C.border}` }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+              <span style={{ flexShrink: 0, width: 18, fontWeight: 600, fontSize: 8, letterSpacing: '.1em', color: C.vLight }}>F{f.match_number}</span>
+              <img src={CLUB_INFO.logo} alt="Unión" style={{ flexShrink: 0, width: 40, height: 40, objectFit: 'contain' }} />
+              <span style={{ flex: 1, fontWeight: 700, fontSize: 13, lineHeight: 1.2, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>Unión</span>
+              <ScoreBox score={score} />
+              <span style={{ flex: 1, fontWeight: 700, fontSize: 13, lineHeight: 1.2, textAlign: 'right', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{f.rival}</span>
+              <img src={TEAM_LOGOS[f.rival] ?? f.logo ?? ''} alt={f.rival} style={{ flexShrink: 0, width: 40, height: 40, objectFit: 'contain' }} />
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 28 }}>
               <span style={{ fontWeight: 400, fontSize: 10, color: C.light }}>{f.date}</span>
               {hasCruces && (
                 <span
                   onClick={() => setCrucesFecha(f.match_number)}
-                  style={{ fontWeight: 800, fontSize: 9, letterSpacing: '.06em', color: C.darkRed, cursor: 'pointer', marginTop: 2 }}
+                  style={{ fontWeight: 800, fontSize: 9, letterSpacing: '.06em', color: C.darkRed, cursor: 'pointer' }}
                 >
                   VER OTROS CRUCES →
                 </span>
               )}
             </div>
-            <ScoreBox score={score} />
           </div>
         );
       })}
@@ -496,28 +498,37 @@ function GaleriaScreen() {
 
 // ── Tercer Tiempo ──────────────────────────────────────────────
 function TercerScreen() {
+  const [selected, setSelected] = useState<string | null>(null);
+  const images = ['/tercerTiempo.png', '/tercerTiempo2.png'];
   return (
     <div>
-      <img
-        src="/tercerTiempo2.png"
-        alt="Asado"
-        style={{ width: '100%', height: 200, objectFit: 'cover', display: 'block', filter: 'grayscale(1) contrast(1.06)' }}
-      />
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+        {images.map((img, i) => (
+          <img
+            key={i}
+            src={img}
+            alt="Asado"
+            onClick={() => setSelected(img)}
+            style={{ width: '100%', height: 230, objectFit: 'cover', display: 'block', filter: 'grayscale(1) contrast(1.06)', cursor: 'pointer' }}
+          />
+        ))}
+      </div>
       <div style={{ background: C.red, color: '#fff', padding: '14px 16px', display: 'flex', flexDirection: 'column', gap: 6 }}>
         <span style={{ fontWeight: 800, fontSize: 9, letterSpacing: '.18em' }}>TERCER TIEMPO</span>
-        <span style={{ fontWeight: 800, fontSize: 19, lineHeight: 1.15 }}>Asado después del partido de los máximos</span>
-        <span style={{ fontWeight: 400, fontSize: 11, lineHeight: 1.4, opacity: .85 }}>Todos invitados a compartir.</span>
-      </div>
-      <div style={{ borderTop: `2px solid ${C.dark}`, padding: '14px 16px', display: 'flex', flexDirection: 'column', gap: 6 }}>
-        <span style={{ fontWeight: 600, fontSize: 8, letterSpacing: '.14em', color: C.light }}>ENTRENAMIENTOS</span>
-        <span style={{ fontWeight: 800, fontSize: 16, lineHeight: 1.2 }}>Viernes 21 a 22 HS · Cancha Nº 2</span>
-        <span style={{ fontWeight: 400, fontSize: 11, lineHeight: 1.4, color: C.mid }}>Todas las categorías de Unión.</span>
-      </div>
-      <div style={{ borderTop: `2px solid ${C.dark}` }}>
+        <span style={{ fontWeight: 400, fontSize: 11, lineHeight: 1.4, opacity: .85 }}>La charla, el abrazo y el compartir: donde el partido no se termina.</span>
       </div>
       <div style={{ padding: '16px 16px 24px', fontWeight: 400, fontSize: 9, color: C.vLight }}>
         Desarrollado por bRuno´s
       </div>
+
+      {selected && (
+        <div
+          onClick={() => setSelected(null)}
+          style={{ position: 'fixed', inset: 0, background: 'rgba(32,30,29,.92)', zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16 }}
+        >
+          <img src={selected} alt="" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} onClick={e => e.stopPropagation()} />
+        </div>
+      )}
     </div>
   );
 }
