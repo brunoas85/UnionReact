@@ -12,6 +12,7 @@ import {
   TEAM_LOGOS,
   OTHER_MATCHES,
   CLUB_INFO,
+  WHATSAPP_GROUP_LINK,
 } from './data';
 import { supabase } from './supabaseClient';
 
@@ -269,11 +270,11 @@ function IndexScreen({ go }: { go: (s: Screen) => void }) {
 function MatchScreen() {
   return (
     <div>
-      <div style={{ background: C.red, color: '#fff', padding: '24px 16px 26px', display: 'flex', flexDirection: 'column', gap: 18 }}>
+      <div style={{ background: '#3a3736', color: '#fff', padding: '24px 16px 26px', display: 'flex', flexDirection: 'column', gap: 18 }}>
         <span style={{ fontWeight: 800, fontSize: 9, letterSpacing: '.2em' }}>{NEXT_MATCH.round} · LOCAL</span>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            <img src="/UnionDark.png" alt="Unión" style={{ width: 40, height: 40, objectFit: 'contain', flexShrink: 0 }} />
+            <img src="/UnionEscudoNext.png" alt="Unión" style={{ width: 40, height: 40, objectFit: 'contain', flexShrink: 0 }} />
             <span style={{ fontWeight: 900, fontSize: 46, lineHeight: .9, letterSpacing: '-.03em' }}>UNIÓN</span>
           </div>
           <span style={{ fontWeight: 600, fontSize: 13, letterSpacing: '.14em', opacity: .8 }}>VS</span>
@@ -286,6 +287,19 @@ function MatchScreen() {
           <span style={{ fontWeight: 700, fontSize: 14 }}>{NEXT_MATCH.date.toUpperCase()} · {NEXT_MATCH.time}</span>
           <span style={{ fontWeight: 400, fontSize: 12, opacity: .85 }}>{NEXT_MATCH.stadium} · San Martín de los Andes</span>
         </div>
+        <a
+          href={WHATSAPP_GROUP_LINK}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            appearance: 'none', border: 'none', background: '#fff', color: C.darkRed,
+            padding: '13px 16px', fontWeight: 800, fontSize: 12, letterSpacing: '.1em',
+            textAlign: 'center', textDecoration: 'none', textTransform: 'uppercase',
+            fontFamily: FONT,
+          }}
+        >
+          Confirmar asistencia
+        </a>
       </div>
 
       <div style={{ padding: '16px 16px', fontWeight: 400, fontSize: 12, lineHeight: 1.6, color: C.mid }}>
@@ -297,7 +311,7 @@ function MatchScreen() {
         <div style={{ padding: '12px 16px 8px', fontWeight: 800, fontSize: 13, letterSpacing: '.12em' }}>NOTICIAS</div>
         {NEWS.map((n, i) => (
           <div key={i} style={{ display: 'flex', gap: 12, padding: '14px 16px', borderTop: `1px solid ${C.border}`, alignItems: 'flex-start' }}>
-            <img src={n.image} alt="" style={{ width: 76, height: 76, objectFit: 'cover', flexShrink: 0, display: 'block', filter: 'grayscale(1) contrast(1.06)' }} />
+            <img src={n.image} alt="" style={{ width: 76, height: 76, objectFit: 'cover', flexShrink: 0, display: 'block' }} />
             <div style={{ display: 'flex', flexDirection: 'column', gap: 5, minWidth: 0 }}>
               <span style={{ fontWeight: 800, fontSize: 8, lineHeight: 1.2, letterSpacing: '.14em', color: C.darkRed, textTransform: 'uppercase' }}>{n.category}</span>
               <span style={{ fontWeight: 700, fontSize: 13, lineHeight: 1.3 }}>{n.title}</span>
@@ -334,7 +348,10 @@ function TablaScreen({ fixture, otherMatches }: { fixture: any[]; otherMatches: 
             background: (row as any).isUserTeam ? '#ffe0d9' : 'transparent',
           }}>
             <span style={{ fontWeight: 800, fontSize: 12, color: C.light }}>{row.pos}</span>
-            <span style={{ fontWeight: 700, fontSize: 13, lineHeight: 1, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{row.name}</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8, minWidth: 0 }}>
+              <img src={(row as any).logo} alt="" style={{ width: 20, height: 20, objectFit: 'contain', flexShrink: 0 }} />
+              <span style={{ fontWeight: 700, fontSize: 13, lineHeight: 1, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{row.name}</span>
+            </div>
             <span style={{ fontWeight: 400, fontSize: 12, textAlign: 'center', color: C.mid }}>{row.dif > 0 ? `+${row.dif}` : row.dif}</span>
             <span style={{ fontWeight: 800, fontSize: 14, textAlign: 'right' }}>{row.pts}</span>
           </div>
@@ -468,7 +485,7 @@ function GaleriaScreen() {
   return (
     <div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 2, paddingBottom: 24 }}>
-        {MATCH_IMAGES.map((img, i) => (
+        {[...MATCH_IMAGES].reverse().map((img, i) => (
           <img
             key={`img-${i}`}
             src={img}
@@ -503,7 +520,7 @@ function TercerScreen() {
   return (
     <div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-        {images.map((img, i) => (
+        {[...images].reverse().map((img, i) => (
           <img
             key={i}
             src={img}

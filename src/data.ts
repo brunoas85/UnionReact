@@ -31,6 +31,9 @@ export const CLUB_INFO = {
   heroImage: "/1º FECHA CLAU26(3).jpeg",
 };
 
+// Link de invitación al grupo de WhatsApp del equipo (WhatsApp > grupo > Datos del grupo > Invitar mediante enlace > Copiar enlace)
+export const WHATSAPP_GROUP_LINK = "https://chat.whatsapp.com/TU-CODIGO-DE-INVITACION";
+
 export const NEXT_MATCH = {
   opponent: "Vélez",
   opponentLogo: TEAM_LOGOS["Vélez"],
@@ -442,6 +445,7 @@ export const MATCH_VIDEOS = [
   "1º FECHA Clau26 (4).mp4",
 ];
 
+// Agregar fotos nuevas al final del array (la galería las muestra con las más recientes primero)
 export const MATCH_IMAGES = [
   "UnionPlantel.png",
   "UnionPlantel-1.png",
@@ -467,4 +471,5 @@ export const MATCH_IMAGES = [
   "1º FECHA CLAU26(7).jpeg",
   "1º FECHA CLAU26(8).jpeg",
   "1º FECHA CLAU26(9).jpeg",
+  "Entrenamiento1.png",
 ];
